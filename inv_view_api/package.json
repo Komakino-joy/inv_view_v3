@@ -1,0 +1,34 @@
+{
+  "name": "inventory-view",
+  "version": "1.0.0",
+  "description": "Breakdowns and reports of local inventory",
+  "scripts": {
+    "chg-file-server": "nodemon src/chg/file-server.js",
+    "chg-data-server": "nodemon src/chg/data-server.js",
+    "fsc-file-server": "nodemon src/fsc/file-server.js",
+    "fsc-data-server": "nodemon src/fsc/data-server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node js",
+    "upload",
+    "import",
+    "download",
+    "excel",
+    "files",
+    "mysql",
+    "database"
+  ],
+  "author": "Bryan Alvarez",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.95.4",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.7",
+    "pg": "^8.5.1",
+    "read-excel-file": "^4.0.6",
+    "sequelize": "^5.21.13"
+  }
+}

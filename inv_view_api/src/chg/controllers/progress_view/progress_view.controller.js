@@ -1,3 +1,5 @@
+
+const db = require('../../models/knex.db');
 const sequelize = require('../../models/index');
 
 const handleGetOccupiedCounted = (req, res) => {
@@ -110,7 +112,7 @@ const handleGetAbsTotalVariance = (req, res) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNotPutawayZero = (req, res, db) => {
+const handleGetNotPutawayZero = (req, res) => {
     db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_0_DAYS
@@ -121,7 +123,7 @@ const handleGetNotPutawayZero = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNotPutawayOne = (req, res, db) => {
+const handleGetNotPutawayOne = (req, res) => {
     db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_1_DAY
@@ -132,7 +134,7 @@ const handleGetNotPutawayOne = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNotPutawayTwo = (req, res, db) => {
+const handleGetNotPutawayTwo = (req, res) => {
     db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_2_DAY
@@ -143,7 +145,7 @@ const handleGetNotPutawayTwo = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNotPutawayThree = (req, res, db) => {
+const handleGetNotPutawayThree = (req, res) => {
     db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_3_DAY
@@ -154,7 +156,7 @@ const handleGetNotPutawayThree = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNotPutawayFour = (req, res, db) => {
+const handleGetNotPutawayFour = (req, res) => {
     db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_4_DAY
@@ -165,7 +167,7 @@ const handleGetNotPutawayFour = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNotPutawayFive = (req, res, db) => {
+const handleGetNotPutawayFive = (req, res) => {
     db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_5_DAY
@@ -176,7 +178,7 @@ const handleGetNotPutawayFive = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNotPutawaySix = (req, res, db) => {
+const handleGetNotPutawaySix = (req, res) => {
     db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_6_DAY
@@ -187,7 +189,7 @@ const handleGetNotPutawaySix = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNotPutawaySeven = (req, res, db) => {
+const handleGetNotPutawaySeven = (req, res) => {
     db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_7_DAY
@@ -198,7 +200,7 @@ const handleGetNotPutawaySeven = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNotPutawayOverSeven = (req, res, db) => {
+const handleGetNotPutawayOverSeven = (req, res) => {
     db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_OLDER_THAN_7_DAYS
@@ -209,7 +211,7 @@ const handleGetNotPutawayOverSeven = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetTransitionalZero = (req, res, db) => {
+const handleGetTransitionalZero = (req, res) => {
     db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0) AS "onHandQty",
@@ -221,7 +223,7 @@ const handleGetTransitionalZero = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetTransitionalOne = (req, res, db) => {
+const handleGetTransitionalOne = (req, res) => {
     db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
@@ -233,7 +235,7 @@ const handleGetTransitionalOne = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetTransitionalTwo = (req, res, db) => {
+const handleGetTransitionalTwo = (req, res) => {
     db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
@@ -245,7 +247,7 @@ const handleGetTransitionalTwo = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetTransitionalThree = (req, res, db) => {
+const handleGetTransitionalThree = (req, res) => {
     db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
@@ -257,7 +259,7 @@ const handleGetTransitionalThree = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetTransitionalFour = (req, res, db) => {
+const handleGetTransitionalFour = (req, res) => {
     db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
@@ -269,7 +271,7 @@ const handleGetTransitionalFour = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetTransitionalFive = (req, res, db) => {
+const handleGetTransitionalFive = (req, res) => {
     db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
@@ -281,7 +283,7 @@ const handleGetTransitionalFive = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetTransitionalSix = (req, res, db) => {
+const handleGetTransitionalSix = (req, res) => {
     db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
@@ -293,7 +295,7 @@ const handleGetTransitionalSix = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetTransitionalSeven = (req, res, db) => {
+const handleGetTransitionalSeven = (req, res) => {
     db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
@@ -305,7 +307,7 @@ const handleGetTransitionalSeven = (req, res, db) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetTransitionalOverSeven = (req, res, db) => {
+const handleGetTransitionalOverSeven = (req, res) => {
     db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
@@ -361,7 +363,7 @@ const handleGetProblemResolve = (req, res) => {
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetLatestCountData = (req, res, db) => {
+const handleGetLatestCountData = (req, res) => {
     db.raw(`
         select 
         counted_dttm::date as counted_date_time, 

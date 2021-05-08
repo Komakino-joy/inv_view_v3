@@ -1,4 +1,3 @@
-const db = require("../../models");
 const sequelize = require('../../models/index');
 
 const handleGetDailyOnHand= (req, res) => {

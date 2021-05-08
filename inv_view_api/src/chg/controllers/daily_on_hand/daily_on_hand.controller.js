@@ -34,8 +34,6 @@ const insertNewDailyOnHand = (req, res) => {
 }
 
 const deleteDailyOnHand = (req, res) => {
-    console.log('I WANNA DESTROY!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    console.log(req.body)
     return sequelize.on_hand_inventory_by_day.destroy({
         where: { id : req.body.id }
     }).then(count => {

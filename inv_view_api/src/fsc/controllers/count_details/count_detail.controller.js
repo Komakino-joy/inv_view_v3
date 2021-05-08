@@ -1,5 +1,5 @@
-
 const sequelize = require('../../models/index');
+const db = require('../../models/knex.db');
 
 const handleGetCountsByDay = (req, res) => {
     sequelize.sequelize.query(`
@@ -32,7 +32,7 @@ const handleGetCountsByUser = (req, res) => {
         .catch(error => res.status(400).send('Something went wrong.'));
     };
   
-const handleGetCountsByUserByDay = (req, res, db) => {
+const handleGetCountsByUserByDay = (req, res) => {
     db.raw(`
     SELECT 
         DATE(counted_dttm), 

@@ -10,22 +10,13 @@ module.exports = (sequelize, Sequelize) => {
       lpn: {
         type: Sequelize.STRING
       },
-      pallet: {
-        type: Sequelize.STRING
-      },
-      previous_location: {
-        type: Sequelize.STRING
-      },
       item_name: {
         type: Sequelize.STRING
-      },      
-      serial_number: {
+      },
+      company: {
         type: Sequelize.STRING
       },
-      description: {
-        type: Sequelize.STRING
-      },
-      inv_lock_code: {
+      origin: {
         type: Sequelize.STRING
       },
       created_src: {

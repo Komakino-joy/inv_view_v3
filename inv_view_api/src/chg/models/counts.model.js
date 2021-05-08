@@ -7,25 +7,10 @@ module.exports = (sequelize, Sequelize) => {
       loc_type: {
         type: Sequelize.STRING
       },
-      count_type: {
-        type: Sequelize.STRING
-      },
-      count_description: {
-        type: Sequelize.STRING
-      },
       task: {
-        type: Sequelize.STRING
-      },
-      lpn: {
         type: Sequelize.STRING
       },      
       item: {
-        type: Sequelize.STRING
-      },
-      item_description: {
-        type: Sequelize.STRING
-      },
-      item_velocity: {
         type: Sequelize.STRING
       },
       expected_qty: {
@@ -51,13 +36,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       counted_by: {
         type: Sequelize.STRING
-      },     
-      reason_code: {
-        type: Sequelize.STRING
-      },     
-      status: {
-        type: Sequelize.STRING
-      }
+      },
     }, 
     {
       freezeTableName: true

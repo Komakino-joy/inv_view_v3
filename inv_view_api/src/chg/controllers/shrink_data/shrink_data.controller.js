@@ -1,4 +1,6 @@
-const handleGetDailyShrink = (req, res, db) => {
+const db = require('../../models/knex.db');
+
+const handleGetDailyShrink = (req, res) => {
     db.raw(`
     SELECT 
     on_hand_inventory_by_day.date_recorded, 
@@ -28,10 +30,10 @@ const handleGetDailyShrink = (req, res, db) => {
         on_hand_inventory_by_day.date_recorded; 
 `)
 .then(results => res.status(200).send(results.rows))
-.catch(error => res.status(400).send('Something went wrong.'));
+.catch(error => res.status(400).send(error));
 };
 
-const handleGetWeeklyShrink = (req, res, db) => {
+const handleGetWeeklyShrink = (req, res) => {
     db.raw(`
     SELECT 
     to_char(date_time::date, 'IYYY') AS "year", 
@@ -64,7 +66,7 @@ const handleGetWeeklyShrink = (req, res, db) => {
 };
 
 
-const handleGetMonthlyShrink = (req, res, db) => {
+const handleGetMonthlyShrink = (req, res) => {
     db.raw(`
     SELECT 
 	DATE_PART('year',date_time::timestamp::date) AS year, 
@@ -101,7 +103,7 @@ const handleGetMonthlyShrink = (req, res, db) => {
     .catch(err => console.log(err))
 }
  
-const handleGetYearlyShrink = (req, res, db) => {
+const handleGetYearlyShrink = (req, res) => {
     db.raw(`
     SELECT
     date_part('year', date_time)                                  AS year,

@@ -4,12 +4,10 @@ const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const chgDataRouter = require('./routes/data_fetching.routes');
-const chgFileRouter = require('./routes/file_upload.routes');
+const chgDataRouter = require('./routes/data.router');
+const chgFileRouter = require('./routes/fileUpload.router');
 
 const app = express();
-
-global.__basedir = __dirname + "/..";
 
 app.use(cors());
 app.use(helmet());
@@ -25,4 +23,4 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..' , 'public', 'build', 'index.html'));
 });
 
-module.exprots = app;
+module.exports = app;

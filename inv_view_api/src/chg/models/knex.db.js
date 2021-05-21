@@ -1,6 +1,6 @@
 const knex = require('knex');
 
-const db = knex({
+const knex_db = knex({
     client: 'pg',
     connection: {
       host: 'localhost',
@@ -11,4 +11,4 @@ const db = knex({
     useNullAsDefault: true
   });
 
-module.exports = db;
+module.exports = knex_db;

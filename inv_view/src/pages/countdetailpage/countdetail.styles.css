@@ -1,0 +1,125 @@
+.countpage > nav {
+  padding-top: 8px;
+}
+
+.table-border {
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.table-title {
+  padding: 4px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: rgb(0, 42, 105);
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #008000;
+  color: white;
+  width: 100px;
+  height: 28px;
+  border-radius: 3px;
+  box-shadow: 2px darkgray;
+  cursor: pointer;
+}
+
+.download {
+  position: absolute;
+  right: 0;
+  padding-right: 5em;
+  padding-top: 0.8em;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+}
+
+#count-page-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "main-count-container";
+}
+
+.main-count-container {
+  padding: 2em 2em 1em 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.02fr 1fr;
+  gap: 0px 10px;
+  grid-template-areas:
+    "daily-count-by-user-header user-count-header"
+    "daily-count-by-user-container user-count-container"
+    "daily-count-header daily-count-header"
+    "daily-count-container daily-count-container";
+  grid-area: main-count-container;
+}
+
+.daily-count-header {
+  margin-top: 1.5em;
+  grid-area: daily-count-header;
+}
+
+.user-count-header {
+  grid-area: user-count-header;
+}
+
+.daily-count-by-user-header {
+  grid-area: daily-count-by-user-header;
+}
+
+.daily-count-container {
+  grid-area: daily-count-container;
+  height: 37vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.user-count-container {
+  grid-area: user-count-container;
+  height: 37vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.daily-count-by-user-container {
+  grid-area: daily-count-by-user-container;
+  height: 37vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  .main-count-container {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 760px;
+  }
+
+  .daily-count-header,
+  .daily-count-container,
+  .user-count-header,
+  .user-count-container,
+  .daily-count-by-user-header,
+  .daily-count-by-user-container {
+    width: 75%;
+  }
+
+  .daily-count-header,
+  .user-count-header,
+  .daily-count-by-user-header {
+    margin-top: 1.5em;
+  }
+
+  .daily-count-container,
+  .user-count-container,
+  .daily-count-by-user-container {
+    max-height: 500px;
+  }
+}

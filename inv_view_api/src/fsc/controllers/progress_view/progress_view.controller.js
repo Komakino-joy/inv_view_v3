@@ -1,9 +1,8 @@
 
-const db = require('../../models/knex.db');
-const sequelize = require('../../models/index');
+const knex_db = require('../../models/knex.db');
 
 const handleGetOccupiedCounted = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT Count(*) AS OCCUPIED_LOCATIONS_COUNTED
     FROM (SELECT locn_hdr.dsp_locn 
         FROM (locn_hdr 
@@ -14,12 +13,12 @@ const handleGetOccupiedCounted = (req, res) => {
         WHERE (((empty_active_locations.display_location) IS Null) 
         AND ((counts.location) IS NOT Null)) GROUP BY locn_hdr.dsp_locn)  AS "Alias";
 `)
-.then(results => res.status(200).send(results[1].rows[0].occupied_locations_counted))
+.then(results => res.status(200).send(results.rows[0].occupied_locations_counted))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetOccupiedNotCounted = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT 
     Count(locn_hdr.dsp_locn) AS OCCUPIED_LOCATIONS_UNCOUNTED
     FROM (locn_hdr 
@@ -29,12 +28,12 @@ const handleGetOccupiedNotCounted = (req, res) => {
     GROUP BY empty_active_locations.display_location, counts.location
     HAVING (((empty_active_locations.display_location) Is Null) And ((counts.location) Is Null));
 `)
-.then(results => res.status(200).send(results[1].rows[0].occupied_locations_uncounted))
+.then(results => res.status(200).send(results.rows[0].occupied_locations_uncounted))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetEmptyCounted = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT 
     Count(*) AS EMPTY_LOCATIONS_COUNTED
     FROM (
@@ -46,12 +45,12 @@ const handleGetEmptyCounted = (req, res) => {
         AND ((counts.location) Is Not Null)) 
         GROUP BY locn_hdr.dsp_locn)  AS foo;
 `)
-.then(results => res.status(200).send(results[1].rows[0].empty_locations_counted))
+.then(results => res.status(200).send(results.rows[0].empty_locations_counted))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetEmptyNotCounted = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT COUNT
     (empty_active_locations.display_location) AS EMPTY_LOCATIONS_UNCOUNTED
     FROM 
@@ -61,59 +60,59 @@ const handleGetEmptyNotCounted = (req, res) => {
     LEFT JOIN counts ON locn_hdr.dsp_locn= counts.location
     WHERE counts.location Is Null;
 `)
-.then(results => res.status(200).send(results[1].rows[0].empty_locations_uncounted))
+.then(results => res.status(200).send(results.rows[0].empty_locations_uncounted))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetUniqueLocationsCounted = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT Count(*) AS DISTINCT_LOCATIONS_COUNTED
     FROM (SELECT DISTINCT counts.location FROM counts GROUP BY counts.location)  AS foo;
 `)
-.then(results => res.status(200).send(results[1].rows[0].distinct_locations_counted))
+.then(results => res.status(200).send(results.rows[0].distinct_locations_counted))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetCountVariances = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT Count(*) AS VARIANCES
     FROM (SELECT counts.variance_qty FROM counts WHERE counts.variance_qty != 0)  AS foo;
 `)
-.then(results => res.status(200).send(results[1].rows[0].variances))
+.then(results => res.status(200).send(results.rows[0].variances))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetTotalExpectedQty = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT DISTINCT(SUM(counts.expected_qty)) AS "SumOfExpectedQTY"
     FROM counts
     WHERE location like '%SH%';
 `)
-.then(results => res.status(200).send(results[1].rows[0].SumOfExpectedQTY))
+.then(results => res.status(200).send(results.rows[0].SumOfExpectedQTY))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetNeTotalVariance = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT DISTINCT Sum(counts.variance_qty) AS "SumOfVarianceQTY"
     FROM counts WHERE counts.location like '%SH%'; 
 `)
-.then(results => res.status(200).send(results[1].rows[0].SumOfVarianceQTY))
+.then(results => res.status(200).send(results.rows[0].SumOfVarianceQTY))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetAbsTotalVariance = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT DISTINCT Sum(Abs(counts.variance_qty)) AS "SumOfVarianceQTY"
     FROM counts
     WHERE counts.location Like '%SH%';
 `)
-.then(results => res.status(200).send(results[1].rows[0].SumOfVarianceQTY))
+.then(results => res.status(200).send(results.rows[0].SumOfVarianceQTY))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetNotPutawayZero = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_0_DAYS
     FROM not_putaway
@@ -124,7 +123,7 @@ const handleGetNotPutawayZero = (req, res) => {
 };
 
 const handleGetNotPutawayOne = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_1_DAY
     FROM not_putaway
@@ -135,7 +134,7 @@ const handleGetNotPutawayOne = (req, res) => {
 };
 
 const handleGetNotPutawayTwo = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_2_DAY
     FROM not_putaway
@@ -146,7 +145,7 @@ const handleGetNotPutawayTwo = (req, res) => {
 };
 
 const handleGetNotPutawayThree = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_3_DAY
     FROM not_putaway
@@ -157,7 +156,7 @@ const handleGetNotPutawayThree = (req, res) => {
 };
 
 const handleGetNotPutawayFour = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_4_DAY
     FROM not_putaway
@@ -168,7 +167,7 @@ const handleGetNotPutawayFour = (req, res) => {
 };
 
 const handleGetNotPutawayFive = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_5_DAY
     FROM not_putaway
@@ -179,7 +178,7 @@ const handleGetNotPutawayFive = (req, res) => {
 };
 
 const handleGetNotPutawaySix = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_6_DAY
     FROM not_putaway
@@ -190,7 +189,7 @@ const handleGetNotPutawaySix = (req, res) => {
 };
 
 const handleGetNotPutawaySeven = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_7_DAY
     FROM not_putaway
@@ -201,7 +200,7 @@ const handleGetNotPutawaySeven = (req, res) => {
 };
 
 const handleGetNotPutawayOverSeven = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY_OLDER_THAN_7_DAYS
     FROM not_putaway
@@ -212,7 +211,7 @@ const handleGetNotPutawayOverSeven = (req, res) => {
 };
 
 const handleGetTransitionalZero = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0) AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
@@ -224,7 +223,7 @@ const handleGetTransitionalZero = (req, res) => {
 };
 
 const handleGetTransitionalOne = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
@@ -236,7 +235,7 @@ const handleGetTransitionalOne = (req, res) => {
 };
 
 const handleGetTransitionalTwo = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
@@ -248,7 +247,7 @@ const handleGetTransitionalTwo = (req, res) => {
 };
 
 const handleGetTransitionalThree = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
@@ -260,7 +259,7 @@ const handleGetTransitionalThree = (req, res) => {
 };
 
 const handleGetTransitionalFour = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
@@ -272,7 +271,7 @@ const handleGetTransitionalFour = (req, res) => {
 };
 
 const handleGetTransitionalFive = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
@@ -284,7 +283,7 @@ const handleGetTransitionalFive = (req, res) => {
 };
 
 const handleGetTransitionalSix = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
@@ -296,7 +295,7 @@ const handleGetTransitionalSix = (req, res) => {
 };
 
 const handleGetTransitionalSeven = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
@@ -308,7 +307,7 @@ const handleGetTransitionalSeven = (req, res) => {
 };
 
 const handleGetTransitionalOverSeven = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
@@ -320,51 +319,51 @@ const handleGetTransitionalOverSeven = (req, res) => {
 };
 
 const handleGetTransitionalTotal = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT 
     COALESCE( Sum(transitional_inventory.on_hand_qty),0)  AS "onHandQty",
     Count(transitional_inventory.article) AS "countOfArticle"
     FROM transitional_inventory;
 `)
-.then(results => res.status(200).send(results[1].rows))
+.then(results => res.status(200).send(results.rows))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetNotPutawayTotal = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT
     Count(not_putaway.lpn) AS TOTAL_LPNS_NOT_PUTAWAY
     FROM not_putaway;  
 `)
-.then(results => res.status(200).send(results[1].rows))
+.then(results => res.status(200).send(results.rows))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetDamages = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT
     damages as damage
     FROM on_hand_inventory_by_day
     WHERE date_recorded::date = (SELECT MAX(date_recorded) FROM on_hand_inventory_by_day WHERE damages > 0)::date;
 `)
-.then(results => res.status(200).send(results[1].rows))
+.then(results => res.status(200).send(results.rows))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetProblemResolve = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     SELECT
     transfer_pr, 
     return_pr
     FROM on_hand_inventory_by_day
     WHERE date_recorded::date = (SELECT MAX(date_recorded) FROM on_hand_inventory_by_day WHERE transfer_pr > 0 OR return_Pr > 0)::date;
 `)
-.then(results => res.status(200).send(results[1].rows))
+.then(results => res.status(200).send(results.rows))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetLatestCountData = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
         select 
         counted_dttm::date as counted_date_time, 
         count("id") as total_counts_performed, 

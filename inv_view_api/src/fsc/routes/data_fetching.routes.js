@@ -48,12 +48,12 @@ fscDataRouter.delete("/delete-daily-on-hand", dailyOnHandController.deleteDailyO
 //Count detail data
 fscDataRouter.get("/counts-by-day", countDetails.handleGetCountsByDay);
 fscDataRouter.get("/counts-by-user", countDetails.handleGetCountsByUser);
-fscDataRouter.get("/counts-by-user-by-day", (req, res) => {countDetails.handleGetCountsByUserByDay(req, res, db)})
+fscDataRouter.get("/counts-by-user-by-day", countDetails.handleGetCountsByUserByDay)
 //Shrink view data
-fscDataRouter.get("/on-hand-inventory-by-day", (req, res) => {shrinkView.handleGetDailyShrink(req,res,db)});
-fscDataRouter.get("/on-hand-inventory-by-week", (req, res) =>  {shrinkView.handleGetWeeklyShrink(req, res, db)});
-fscDataRouter.get("/on-hand-inventory-by-month", (req, res) => {shrinkView.handleGetMonthlyShrink(req, res, db)});
-fscDataRouter.get("/on-hand-inventory-by-year", (req, res) => {shrinkView.handleGetYearlyShrink(req, res, db)});
+fscDataRouter.get("/on-hand-inventory-by-day", shrinkView.handleGetDailyShrink);
+fscDataRouter.get("/on-hand-inventory-by-week",shrinkView.handleGetWeeklyShrink);
+fscDataRouter.get("/on-hand-inventory-by-month", shrinkView.handleGetMonthlyShrink);
+fscDataRouter.get("/on-hand-inventory-by-year", shrinkView.handleGetYearlyShrink);
 //Progress view data
 fscDataRouter.get("/count-unique-locations-counted", progressView.handleGetUniqueLocationsCounted);
 fscDataRouter.get("/empty-locations-counted", progressView.handleGetEmptyCounted);
@@ -66,25 +66,25 @@ fscDataRouter.get("/absolute-total-variance-sum", progressView.handleGetAbsTotal
 fscDataRouter.get("/total-expected-qty-sum", progressView.handleGetTotalExpectedQty);
 fscDataRouter.get("/damages", progressView.handleGetDamages);
 fscDataRouter.get("/pr", progressView.handleGetProblemResolve);
-fscDataRouter.get("/not-putaway-0-days-count", (req, res) => {progressView.handleGetNotPutawayZero(req, res, db)});
-fscDataRouter.get("/not-putaway-1-day-count", (req, res) => {progressView.handleGetNotPutawayOne(req, res, db)});
-fscDataRouter.get("/not-putaway-2-day-count", (req, res) => {progressView.handleGetNotPutawayTwo(req, res, db)});
-fscDataRouter.get("/not-putaway-3-day-count", (req, res) => {progressView.handleGetNotPutawayThree(req, res, db)});
-fscDataRouter.get("/not-putaway-4-day-count", (req, res) => {progressView.handleGetNotPutawayFour(req, res, db)});
-fscDataRouter.get("/not-putaway-5-day-count", (req, res) => {progressView.handleGetNotPutawayFive(req, res, db)});
-fscDataRouter.get("/not-putaway-6-day-count", (req, res) => {progressView.handleGetNotPutawaySix(req, res, db)});
-fscDataRouter.get("/not-putaway-7-day-count", (req, res) => {progressView.handleGetNotPutawaySeven(req, res, db)});
-fscDataRouter.get("/not-putaway-over-7-days-count", (req, res) => {progressView.handleGetNotPutawayOverSeven(req, res, db)});
-fscDataRouter.get("/transitional-inv-0-days-count", (req, res) => {progressView.handleGetTransitionalZero(req, res, db)});
-fscDataRouter.get("/transitional-inv-1-day-count", (req, res) => {progressView.handleGetTransitionalOne(req, res, db)});
-fscDataRouter.get("/transitional-inv-2-day-count", (req, res) => {progressView.handleGetTransitionalTwo(req, res, db)});
-fscDataRouter.get("/transitional-inv-3-day-count", (req, res) => {progressView.handleGetTransitionalThree(req, res, db)});
-fscDataRouter.get("/transitional-inv-4-day-count", (req, res) => {progressView.handleGetTransitionalFour(req, res, db)});
-fscDataRouter.get("/transitional-inv-5-day-count", (req, res) => {progressView.handleGetTransitionalFive(req, res, db)});
-fscDataRouter.get("/transitional-inv-6-day-count", (req, res) => {progressView.handleGetTransitionalSix(req, res, db)});
-fscDataRouter.get("/transitional-inv-7-day-count", (req, res) => {progressView.handleGetTransitionalSeven(req, res, db)});
-fscDataRouter.get("/transitional-inv-over-7-days-count", (req, res) => {progressView.handleGetTransitionalOverSeven(req, res, db)});
+fscDataRouter.get("/not-putaway-0-days-count", progressView.handleGetNotPutawayZero);
+fscDataRouter.get("/not-putaway-1-day-count", progressView.handleGetNotPutawayOne);
+fscDataRouter.get("/not-putaway-2-day-count", progressView.handleGetNotPutawayTwo);
+fscDataRouter.get("/not-putaway-3-day-count", progressView.handleGetNotPutawayThree);
+fscDataRouter.get("/not-putaway-4-day-count", progressView.handleGetNotPutawayFour);
+fscDataRouter.get("/not-putaway-5-day-count", progressView.handleGetNotPutawayFive);
+fscDataRouter.get("/not-putaway-6-day-count", progressView.handleGetNotPutawaySix);
+fscDataRouter.get("/not-putaway-7-day-count", progressView.handleGetNotPutawaySeven);
+fscDataRouter.get("/not-putaway-over-7-days-count", progressView.handleGetNotPutawayOverSeven);
+fscDataRouter.get("/transitional-inv-0-days-count", progressView.handleGetTransitionalZero);
+fscDataRouter.get("/transitional-inv-1-day-count", progressView.handleGetTransitionalOne);
+fscDataRouter.get("/transitional-inv-2-day-count", progressView.handleGetTransitionalTwo);
+fscDataRouter.get("/transitional-inv-3-day-count", progressView.handleGetTransitionalThree);
+fscDataRouter.get("/transitional-inv-4-day-count", progressView.handleGetTransitionalFour);
+fscDataRouter.get("/transitional-inv-5-day-count", progressView.handleGetTransitionalFive);
+fscDataRouter.get("/transitional-inv-6-day-count", progressView.handleGetTransitionalSix);
+fscDataRouter.get("/transitional-inv-7-day-count", progressView.handleGetTransitionalSeven);
+fscDataRouter.get("/transitional-inv-over-7-days-count", progressView.handleGetTransitionalOverSeven);
 fscDataRouter.get("/transitional-inv-total-count", progressView.handleGetTransitionalTotal);
-fscDataRouter.get("/latest-count-data", (req, res) => {progressView.handleGetLatestCountData(req, res, db)});
+fscDataRouter.get("/latest-count-data", progressView.handleGetLatestCountData);
 
 module.exports = fscDataRouter;

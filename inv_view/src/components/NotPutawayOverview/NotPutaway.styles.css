@@ -1,0 +1,40 @@
+.not-putaway-container {
+  margin-top: 1em;
+  margin-left: 2.5em;
+  width: 250px;
+}
+
+.not-putaway-header {
+  color: whitesmoke;
+  font-size: 18px;
+}
+
+.not-putaway-totals-container {
+  padding-top: 1px;
+  display: flex;
+  justify-content: center;
+  padding-left: 9%;
+}
+
+.age-header {
+  position: relative;
+  right: 20px;
+  bottom: 2px;
+}
+
+.not-putaway-container .not-putaway-totals-container :nth-child(2) .total {
+  height: 20px;
+  margin-top: 3px;
+}
+
+@media screen and (max-width: 1000px) {
+  .not-putaway-container {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 2em;
+  }
+  .not-putaway-totals-container {
+    padding: 5px;
+    justify-content: flex-start;
+  }
+}

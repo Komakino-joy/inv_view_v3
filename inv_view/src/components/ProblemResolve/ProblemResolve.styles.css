@@ -1,0 +1,46 @@
+.problem-resolve-container {
+  padding-top: 2em;
+  margin-left: 2.5em;
+  width: 250px;
+}
+
+.problem-resolve-header {
+  color: whitesmoke;
+  font-size: 18px;
+}
+
+.problem-resolve-totals-container {
+  padding-top: 1px;
+  display: flex;
+  justify-content: center;
+}
+
+.problem-resolve-container
+  .problem-resolve-totals-container
+  :nth-child(2)
+  .total {
+  height: 20px;
+  margin-top: 3px;
+}
+
+@media screen and (max-width: 1000px) {
+  .problem-resolve-container {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 2em;
+  }
+
+  .problem-resolve-totals-container {
+    padding: 5px;
+    justify-content: flex-start;
+  }
+
+  .problem-resolve-totals-container .totals-labels:first-child {
+    min-width: 200px;
+    margin-left: 5px;
+  }
+
+  .breakdown-labels > label {
+    min-width: 200px;
+  }
+}

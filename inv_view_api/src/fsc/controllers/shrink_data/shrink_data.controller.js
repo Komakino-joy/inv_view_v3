@@ -1,7 +1,7 @@
-const db = require('../../models/knex.db');
+const knex_db = require('../../models/knex.db');
 
 const handleGetDailyShrink = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT 
     on_hand_inventory_by_day.date_recorded, 
     on_hand_inventory_by_day.units_on_hand AS Units_On_Hand, 
@@ -34,7 +34,7 @@ const handleGetDailyShrink = (req, res) => {
 };
 
 const handleGetWeeklyShrink = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT 
     to_char(date_time::date, 'IYYY') AS "year", 
     to_char(date_time::date, 'IW') AS "week", 
@@ -67,7 +67,7 @@ const handleGetWeeklyShrink = (req, res) => {
 
 
 const handleGetMonthlyShrink = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT 
 	DATE_PART('year',date_time::timestamp::date) AS year, 
 	DATE_PART('month',date_time::timestamp::date) AS month, 
@@ -104,7 +104,7 @@ const handleGetMonthlyShrink = (req, res) => {
 }
  
 const handleGetYearlyShrink = (req, res) => {
-    db.raw(`
+    knex_db.raw(`
     SELECT
     date_part('year', date_time)                                  AS year,
     round(AVG(on_hand_inventory_by_day.units_on_hand), 2)           AS units_on_hand,

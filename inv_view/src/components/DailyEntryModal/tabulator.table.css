@@ -1,0 +1,37 @@
+.tabulator {
+  width: 100%;
+}
+
+.tabulator-row .tabulator-selectable .tabulator-row-even {
+  background-color: red;
+}
+
+.tabulator-row:first-child {
+  padding-top: 1.5em;
+}
+
+.tabulator-row-odd,
+.tabulator-row-even,
+.tabulator-headers {
+  display: flex;
+  text-align: center;
+  padding: 2px;
+}
+
+.tabulator-row-even {
+  background-color: rgb(233, 233, 233);
+}
+
+.tabulator-headers {
+  font-weight: 500;
+  position: absolute;
+  background-color: white;
+}
+
+.remove-button {
+  color: black;
+  background-color: rgba(255, 37, 37, 0.342);
+  border: 1px solid rgba(128, 0, 0, 0.692);
+  height: auto;
+  width: auto;
+}

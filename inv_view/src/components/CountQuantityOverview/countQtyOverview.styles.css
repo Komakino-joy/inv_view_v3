@@ -1,0 +1,46 @@
+p {
+  margin: 0;
+  text-decoration: underline;
+  font-size: 12px;
+  height: 16px;
+}
+
+.count-qty-container {
+  padding-left: 2em;
+  min-width: 300px;
+  max-width: 100%;
+}
+
+.count-qty-header {
+  color: whitesmoke;
+  font-size: 18px;
+}
+
+.count-qty-totals-container {
+  padding-top: 1px;
+  display: flex;
+  justify-content: center;
+}
+
+.count-qty-totals-container .totals-labels {
+  width: 90px;
+}
+
+@media screen and (max-width: 1000px) {
+  .count-qty-container {
+    width: 100%;
+    padding-left: 0;
+    margin-bottom: 2em;
+  }
+  .count-qty-totals-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .count-qty-totals-container .totals-labels {
+    width: auto;
+  }
+}

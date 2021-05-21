@@ -1,0 +1,127 @@
+label {
+  border-radius: 2px;
+  height: 22px;
+  font-size: 14px;
+}
+
+.txt-label {
+  background-color: white;
+}
+
+.breakdown-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.breakdown-labels,
+.breakdown-percentage,
+.breakdown-qty,
+.totals-labels,
+.totals-percentage,
+.totals-qty {
+  display: flex;
+  flex-direction: column;
+  min-width: 80px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.breakdown-labels,
+.totals-labels {
+  text-align: right;
+  height: 100%;
+}
+.breakdown-labels > label,
+.totals-labels > label {
+  padding: 2px;
+}
+.breakdown-percentage,
+.breakdown-qty,
+.totals-percentage,
+.totals-qty {
+  text-align: center;
+}
+.orange-border {
+  border: 1px solid rgb (255, 123, 0) !important;
+}
+.purple-border {
+  border: 1px solid #472f91 !important;
+}
+.breakdown-percentage > label,
+.breakdown-qty > label,
+.totals-percentage > label,
+.totals-qty > label {
+  border: 1px solid black;
+  margin-top: 2.2px;
+}
+.header-border {
+  border: 1px solid gray;
+  border-radius: 5px 5px 0 0;
+}
+.body-border {
+  border: 1px solid gray;
+  border-radius: 0 0 5px 5px;
+}
+
+.green-fill {
+  border: 1px solid black !important;
+  background-color: rgb(117, 252, 117);
+  text-align: center;
+}
+.red-fill {
+  border: 1px solid black !important;
+  background-color: rgb(245, 112, 112);
+  text-align: center;
+}
+
+.purple-border {
+  border: 1px solid #472f91 !important;
+}
+
+.goal,
+.total {
+  text-align: center;
+  margin-top: 1px;
+  border: 1px solid black;
+}
+
+.goal {
+  background-color: rgb(230, 230, 230);
+  height: 20px;
+}
+
+.panel-header {
+  text-align: left;
+  padding-left: 5%;
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: rgba(32, 32, 95, 0.877);
+}
+
+span {
+  text-decoration: underline;
+  position: relative;
+  left: 42%;
+}
+
+span:hover {
+  color: lightgrey;
+  cursor: pointer;
+}
+
+.space {
+  text-decoration: none;
+  cursor: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .txt-label {
+    background-color: white;
+    min-width: 200px;
+  }
+
+  .breakdown-container {
+    justify-content: flex-start;
+  }
+}

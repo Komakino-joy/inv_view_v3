@@ -1,0 +1,27 @@
+{
+  "name": "inv_view_v3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "chegg-server": "nodemon inv_view_api/src/chg/chg-server",
+    "fulfillment-server": "nodemon inv_view_api/src/fsc/fsc-server",
+    "client": "npm start --prefix inv_view",
+    "dev": "concurrently \"npm run chegg-server\" \"npm run fulfillment-server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Komakino-joy/inv_view_v3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Komakino-joy/inv_view_v3/issues"
+  },
+  "homepage": "https://github.com/Komakino-joy/inv_view_v3#readme",
+  "dependencies": {
+    "concurrently": "^6.1.0",
+    "nodemon": "^2.0.7"
+  }
+}

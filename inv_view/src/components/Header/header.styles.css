@@ -1,0 +1,28 @@
+.page-header {
+  color: white;
+  background-color: #4751a3;
+  font-size: 2.2em;
+  text-align: left;
+  padding-left: 1em;
+  padding-bottom: 0.5em;
+  margin-right: -4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.fsc-page-header {
+  color: rgb(29, 29, 29);
+  background-color: #b3b3b3c5;
+  font-size: 2.2em;
+  text-align: left;
+  padding-left: 1em;
+  padding-bottom: 0.5em;
+}
+
+img {
+  height: 30px;
+  width: 30px;
+  margin-right: 10%;
+  cursor: pointer;
+}

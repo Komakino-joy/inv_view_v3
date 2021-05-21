@@ -15,17 +15,14 @@ const uploadAdjustments = async (req, res) => {
       return res.status(400).send("Please upload an excel file!");
     }
 
-    let path = __basedir + "/temp/uploads/" + req.file.filename;
-    
-    readXlsxFile(path).then((rows) => {
+    let path = await __basedir + "/temp/uploads/" + req.file.filename;
+
+    readXlsxFile(fs.createReadStream(path)).then((rows) => {
 
       if (rows[0][0] === 'Inventory Adjustment'){
         return;
-      } else if (rows[0][0] === 'Customer'){
-        rows.shift();
-
-        removeLastRow = false;
-
+      } else if(rows[0][0] === 'Customer'){
+        
         cellPos = {
           customer: 0,
           sku: 1,
@@ -59,24 +56,7 @@ const uploadAdjustments = async (req, res) => {
 
         adjustment_data.push(adjustments);
       });
-        //Exclude empty cells from upload if removeLastRow is true.
-        removeLastRow ? Adjustments.bulkCreate(adjustment_data.slice(0,-1)) 
-
-        //Delete the file from temp folder afeter data has been updated.
-        .then(() => {unlinkAsync(req.file.path)})
-        .then(() => {
-          res.status(200).send({
-            message: "Uploaded the file successfully: " + req.file.originalname,
-          });
-        })
-        .catch((error) => {
-          res.status(500).send({
-            message: "Fail to import data into database!",
-            error: error.message,
-          });
-        })
-        
-        : Adjustments.bulkCreate(adjustment_data)
+        Adjustments.bulkCreate(adjustment_data)
         //Delete the file from temp folder afeter data has been updated.
         .then(() => {unlinkAsync(req.file.path)})
         .then(() => {
@@ -93,7 +73,6 @@ const uploadAdjustments = async (req, res) => {
     })
     .catch(err => res.status(400).json(console.log(err)));
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       message: "Could not upload the file: " + req.file.originalname,
     });
@@ -102,22 +81,22 @@ const uploadAdjustments = async (req, res) => {
 
 const handleGetDuplicateAdjustments = (req, res) => {
   sequelize.sequelize.query(`
-    SELECT 
-      COUNT(a.*) 
+  SELECT 
+	COUNT(a.*) 
     FROM (
       SELECT
-        adjustment_data.ilpn, 
-        adjustment_data.serial_number, 
-        adjustment_data.tran_number, 
+        adjustment_data.user_id, 
+        adjustment_data.qty, 
         adjustment_data.sku, 
+        adjustment_data.customer, 
         adjustment_data.date_time, 
         COUNT(*)
       FROM adjustment_data
       GROUP BY
-        adjustment_data.ilpn, 
-        adjustment_data.serial_number, 
-        adjustment_data.tran_number, 
+        adjustment_data.user_id, 
+        adjustment_data.qty, 
         adjustment_data.sku, 
+        adjustment_data.customer, 
         adjustment_data.date_time
       HAVING COUNT (*) > 1) a; 
     `)
@@ -154,18 +133,18 @@ const handlePostLastUpdate= (req, res) => {
 
 const handleDeleteDuplicates= (req, res) => {
   sequelize.sequelize.query(`
-      DELETE 
-      FROM adjustment_data
-      WHERE adjustment_data.id NOT IN (SELECT 
-      MAX(ID)
-      FROM adjustment_data 
-      GROUP BY
-      adjustment_data.ilpn, 
-      adjustment_data.serial_number, 
-      adjustment_data.tran_number, 
+    DELETE 
+    FROM adjustment_data
+    WHERE adjustment_data.id NOT IN (SELECT 
+    MAX(ID)
+    FROM adjustment_data 
+    GROUP BY
+      adjustment_data.user_id, 
+      adjustment_data.qty, 
       adjustment_data.sku, 
+      adjustment_data.customer, 
       adjustment_data.date_time
-      );
+    );
     `)
 .then(results => res.status(200).send(results[1].command))
 .catch(error => res.status(400).send("Something went wrong"));

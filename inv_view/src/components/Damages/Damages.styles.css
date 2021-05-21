@@ -1,0 +1,22 @@
+.damages-container {
+  padding-top: 2em;
+  margin-left: 0;
+  padding-left: 0;
+  width: 70%;
+}
+
+.damages-header {
+  color: whitesmoke;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1000px) {
+  .damages-container {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 2em;
+  }
+  .damages-totals-container {
+    padding-right: 4%;
+  }
+}

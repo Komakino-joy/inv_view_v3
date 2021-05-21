@@ -1,0 +1,130 @@
+.shrinkpage > nav {
+  padding-top: 8px;
+}
+
+.table-border {
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.table-title {
+  padding: 4px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: rgb(0, 42, 105);
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #008000;
+  color: white;
+  width: 100px;
+  height: 28px;
+  border-radius: 3px;
+  box-shadow: 2px darkgray;
+}
+
+.download {
+  position: absolute;
+  right: 0;
+  padding-right: 3em;
+  padding-top: 0.8em;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+}
+
+#shrink-page-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "main-container";
+}
+
+.main-container {
+  padding: 2em 2em 1em 2em;
+  height: 82vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.02fr 1.5fr 0.02fr 1fr 0.02fr 0.4fr;
+  gap: 0px 10px;
+  grid-template-areas:
+    "daily-shrink-header weekly-shrink-header"
+    "daily-shrink-container weekly-shrink-container"
+    "daily-shrink-container monthly-shrink-header"
+    "daily-shrink-container monthly-shrink-container"
+    "daily-shrink-container yearly-shrink-header"
+    "daily-shrink-container yearly-shrink-container";
+  grid-area: main-container;
+}
+
+.daily-shrink-header {
+  grid-area: daily-shrink-header;
+}
+
+.weekly-shrink-header {
+  grid-area: weekly-shrink-header;
+}
+
+.daily-shrink-container {
+  grid-area: daily-shrink-container;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.weekly-shrink-container {
+  grid-area: weekly-shrink-container;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.monthly-shrink-header {
+  grid-area: monthly-shrink-header;
+}
+
+.monthly-shrink-container {
+  grid-area: monthly-shrink-container;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.yearly-shrink-header {
+  grid-area: yearly-shrink-header;
+}
+
+.yearly-shrink-container {
+  grid-area: yearly-shrink-container;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  .main-container {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 760px;
+  }
+
+  .daily-shrink-header,
+  .daily-shrink-container,
+  .weekly-shrink-header,
+  .weekly-shrink-container,
+  .monthly-shrink-header,
+  .monthly-shrink-container,
+  .yearly-shrink-header,
+  .yearly-shrink-container {
+    width: 75%;
+  }
+
+  .daily-shrink-container,
+  .weekly-shrink-container,
+  .monthly-shrink-container,
+  .yearly-shrink-container {
+    max-height: 500px;
+  }
+}

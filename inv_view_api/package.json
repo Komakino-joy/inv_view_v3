@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "Breakdowns and reports of local inventory",
   "scripts": {
-    "chg-file-server": "nodemon src/chg/file-server.js",
-    "chg-data-server": "nodemon src/chg/data-server.js",
-    "fsc-file-server": "nodemon src/fsc/file-server.js",
-    "fsc-data-server": "nodemon src/fsc/data-server.js",
+    "chg-server": "nodemon src/chg/chg-server.js",
+    "fsc-server": "nodemon src/fsc/fsc-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -24,6 +22,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "helmet": "^4.6.0",
     "knex": "^0.95.4",
     "multer": "^1.4.2",
     "nodemon": "^2.0.7",

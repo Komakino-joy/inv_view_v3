@@ -1,0 +1,18 @@
+th {
+  padding: 2px;
+  font-weight: 500;
+  font-size: 14px;
+  background: white;
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+
+td {
+  padding: 2px;
+  border: 1px solid lightgrey;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(231, 230, 230);
+}

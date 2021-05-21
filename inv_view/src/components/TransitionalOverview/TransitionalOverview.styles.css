@@ -1,0 +1,35 @@
+.transitional-container {
+  margin-top: 1em;
+  width: 284px;
+}
+
+.transitional-header {
+  color: whitesmoke;
+  font-size: 18px;
+}
+
+.transitional-totals-container {
+  padding-top: 1px;
+  display: flex;
+  justify-content: center;
+}
+
+.transitional-totals-container .totals-labels {
+  width: 106px;
+}
+
+@media screen and (max-width: 1000px) {
+  .transitional-container {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 2em;
+  }
+  .transitional-totals-container {
+    padding: 5px;
+    justify-content: flex-start;
+  }
+
+  .transitional-totals-container .totals-labels {
+    width: auto;
+  }
+}

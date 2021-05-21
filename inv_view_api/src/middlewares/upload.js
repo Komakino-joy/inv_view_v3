@@ -1,7 +1,6 @@
 const multer = require("multer");
 
 const excelFilter = (req, file, cb) => {
-  console.log(req)
   if (
     file.mimetype.includes("excel") ||
     file.mimetype.includes("spreadsheetml")
@@ -18,7 +17,7 @@ var storage = multer.diskStorage({
     cb(null, __basedir + "/temp/uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    cb(null, `${Date.now()}-${file.originalname.replace(/[ –]/g,'').replace(' ','')}`);
   },
 });
 

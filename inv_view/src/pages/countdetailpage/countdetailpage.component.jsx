@@ -5,19 +5,19 @@ import CountsByUser from '../../components/CountQuantityDetail/countsbyuser';
 import CountsByUserByDay from '../../components/CountQuantityDetail/counts-by-user-by-day';
 import Download from './export';
 
-import {requestDailyCountData, requestUserCountData, requestUserCountByDay} from '../../redux/countdetailpage/countdetailpage.actions'
+import {CHG_requestDailyCountData, CHG_requestUserCountData, CHG_requestUserCountByDay} from '../../redux/countdetailpage/countdetailpage.actions'
 
 import './countdetail.styles.css'
 
 const CountDetailPage = ({ 
-    history, dailyCountData, requestDailyCountData, userCountData, userCountByDayData, requestUserCountData,requestUserCountByDay}) => {
+    history, dailyCountData, CHG_requestDailyCountData, userCountData, userCountByDayData, CHG_requestUserCountData,CHG_requestUserCountByDay}) => {
 
     
 
     useEffect(() => {
-        requestDailyCountData()
-        requestUserCountData()
-        requestUserCountByDay()
+        CHG_requestDailyCountData()
+        CHG_requestUserCountData()
+        CHG_requestUserCountByDay()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -65,9 +65,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    requestDailyCountData: () => {dispatch(requestDailyCountData())},
-    requestUserCountData: () => {dispatch(requestUserCountData())},
-    requestUserCountByDay: () => {dispatch(requestUserCountByDay())}
+    CHG_requestDailyCountData: () => {dispatch(CHG_requestDailyCountData())},
+    CHG_requestUserCountData: () => {dispatch(CHG_requestUserCountData())},
+    CHG_requestUserCountByDay: () => {dispatch(CHG_requestUserCountByDay())}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CountDetailPage);

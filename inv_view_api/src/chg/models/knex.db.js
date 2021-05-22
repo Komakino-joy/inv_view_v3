@@ -5,7 +5,7 @@ const knex_db = knex({
     connection: {
       host: 'localhost',
       user: 'postgres',
-      password: 'postgres',
+      password: 'Abn0rmal',
       database: 'chegg_inventory'
     },
     useNullAsDefault: true

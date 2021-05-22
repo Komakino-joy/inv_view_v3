@@ -1,35 +1,39 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { 
+    CHG_requestOccupiedLocations,
+    CHG_requestOccupiedLocationsUncounted,
+    CHG_requestEmptyLocationsCounted,
+    CHG_requestEmptyLocationsUncounted,
+} from '../../redux/progress.page/progress.page.actions'
 
 import './activeLocs.styles.css';
 import '../styles/styles.css';
 
-import {fetchData } from "../../api/api";
-
-
-const ActiveLocs = ({ apiUrl, businessUnit, headerColor }) => {
-
-    const [occupiedLocsCounted, setOccupiedLocsCounted] = useState(0);
-    const [occupiedLocsUncounted, setOccupiedLocsUncounted] = useState(0);
-    const [emptyLocsCounted, setEmptyLocsCounted] = useState(0);
-    const [emptyLocsUncounted, setEmptyLocsUncounted] = useState(0);
+const ActiveLocs = ({ headerColor }) => {
+    const dispatch = useDispatch();
+    const occupiedLocsCounted = useSelector(state => state.progressData.CHG_occupiedLocCounted);
+    const occupiedLocsUncounted = useSelector(state => state.progressData.CHG_occupiedLocUnCounted);
+    const emptyLocsCounted = useSelector(state => state.progressData.CHG_emptyLocCounted);
+    const emptyLocsUncounted = useSelector(state => state.progressData.CHG_emptyLocUncounted);
     const locTotal  = occupiedLocsCounted + occupiedLocsUncounted + emptyLocsCounted + emptyLocsUncounted;
 
     useEffect(() => {
         let mounted = true;
         
         if (mounted){
-            fetchData(`${apiUrl}${businessUnit}/data/occupied-locations-counted`, setOccupiedLocsCounted)
-            fetchData(`${apiUrl}${businessUnit}/data/occupied-locations-uncounted`, setOccupiedLocsUncounted)
-            fetchData(`${apiUrl}${businessUnit}/data/empty-locations-counted`, setEmptyLocsCounted)
-            fetchData(`${apiUrl}${businessUnit}/data/empty-locations-uncounted`, setEmptyLocsUncounted)
+            dispatch(CHG_requestOccupiedLocations());
+            dispatch(CHG_requestOccupiedLocationsUncounted());
+            dispatch(CHG_requestEmptyLocationsCounted());
+            dispatch(CHG_requestEmptyLocationsUncounted());
         };
 
         return () => {
             mounted = false;
         };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [dispatch]);
 
     return (
     <div className='active-container '>

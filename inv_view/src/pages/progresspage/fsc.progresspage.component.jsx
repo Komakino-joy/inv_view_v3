@@ -22,8 +22,8 @@ function ProgressPage({ history }) {
         <nav className='secondary-nav' onClick = {() => history.push('/fnt-fsc-report-upload')}>Report Uploads</nav>
     <div className="App">
       
-        <div className='active-locs'>
-          <ActiveLocs apiUrl={FSC_API_URL} businessUnit='fsc' headerColor= {`${fscColor}`}/>
+        <div apiUrl={FSC_API_URL} businessUnit='fsc' className='active-locs'>
+          <ActiveLocs headerColor= {`${fscColor}`}/>
         </div>
       
         <div className='qty-overview'>

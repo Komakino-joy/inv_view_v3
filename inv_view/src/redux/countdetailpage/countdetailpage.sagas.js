@@ -1,91 +1,100 @@
-import {call, put, takeLatest, all, takeEvery} from 'redux-saga/effects';
+import {call, put, takeLatest, all} from 'redux-saga/effects';
 
 import CountDetailActionTypes from './countdetailpage.types';
 
 import { 
-    fetchDailyCount, 
-    fetchUserCount, 
-    fetchUserCountByDay,
+    CHG_fetchDailyCount, 
+    CHG_fetchUserCount, 
+    CHG_fetchUserCountByDay,
+    
     FSC_fetchDailyCount, 
     FSC_fetchUserCount, 
     FSC_fetchUserCountByDay,
-     } from '../../api/api'
+     } from '../../api/api';
 
 import { 
-    receiveDailyCountData,
-    receiveUserCountData,
-    receiveUserCountByDay,
+    CHG_receiveDailyCountData,
+    CHG_receiveUserCountData,
+    CHG_receiveUserCountByDay,
+    CHG_dailyCountDataFailure,
+    CHG_userCountDataFailure,
+    CHG_userCountByDayFailure,
+
     FSC_receiveDailyCountData,
     FSC_receiveUserCountData,
     FSC_receiveUserCountByDay,
+    FSC_dailyCountDataFailure,
+    FSC_userCountDataFailure,
+    FSC_userCountByDayFailure,
 } from './countdetailpage.actions';
 
 
-function* getDailyCount(){
+function* CHG_getDailyCount(){
     try{
-        const dailyCount = yield fetchDailyCount();
-        console.log('I have been breached', dailyCount)
-        yield put(receiveDailyCountData(dailyCount))
+        const dailyCount = yield CHG_fetchDailyCount();
+        yield put(CHG_receiveDailyCountData(dailyCount));
     } catch (error) {
-        yield put(receiveDailyCountData(error));
+        yield put(CHG_dailyCountDataFailure(error));
     }
 };
 
-function* getUserCount(userCountData){
+function* CHG_getUserCount(){
     try{
-        const userCount = yield call(fetchUserCount, userCountData)
-        yield put(receiveUserCountData(userCount))
+        const userCount = yield CHG_fetchUserCount();
+        yield put(CHG_receiveUserCountData(userCount))
     } catch (error) {
-        console.log(error);
+        yield put(CHG_userCountDataFailure(error));
     }
 };
 
-function* getUserCountByDay(userCountByDayData){
+function* CHG_getUserCountByDay(){
     try{
-        const userCountByDay = yield call(fetchUserCountByDay, userCountByDayData)
-        yield put(receiveUserCountByDay(userCountByDay))
+        const userCountByDay = yield CHG_fetchUserCountByDay();
+        yield put(CHG_receiveUserCountByDay(userCountByDay));
     } catch (error) {
-        console.log(error);
+        yield put(CHG_userCountByDayFailure(error));
     }
 };
 
-function* FSC_getDailyCount(FSC_dailyCountData){
+
+
+function* FSC_getDailyCount(){
     try{
-        const FSC_dailyCount = yield call(FSC_fetchDailyCount, FSC_dailyCountData)
-        yield put(FSC_receiveDailyCountData(FSC_dailyCount))
+        const FSC_dailyCount = yield FSC_fetchDailyCount();
+        yield put(FSC_receiveDailyCountData(FSC_dailyCount));
     } catch (error) {
-        console.log(error);
+        yield put(FSC_dailyCountDataFailure(error));
+    };
+};
+
+function* FSC_getUserCount(){
+    try{
+        const FSC_userCount = yield FSC_fetchUserCount();
+        yield put(FSC_receiveUserCountData(FSC_userCount));
+    } catch (error) {
+        yield put(FSC_userCountDataFailure(error));
+    };
+};
+
+function* FSC_getUserCountByDay(){
+    try{
+        const FSC_userCountByDay = yield FSC_fetchUserCountByDay();
+        yield put(FSC_receiveUserCountByDay(FSC_userCountByDay));
+    } catch (error) {
+        yield put(FSC_userCountByDayFailure(error));
     }
 };
 
-function* FSC_getUserCount(FSC_userCountData){
-    try{
-        const FSC_userCount = yield call(FSC_fetchUserCount, FSC_userCountData)
-        yield put(FSC_receiveUserCountData(FSC_userCount))
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-function* FSC_getUserCountByDay(FSC_userCountByDayData){
-    try{
-        const FSC_userCountByDay = yield call(FSC_fetchUserCountByDay, FSC_userCountByDayData)
-        yield put(FSC_receiveUserCountByDay(FSC_userCountByDay))
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-export function* requestDailyCountSaga(){
-    yield takeEvery(CountDetailActionTypes.REQUEST_DAILY_COUNT_DATA, getDailyCount)
+export function* CHG_requestDailyCountSaga(){
+    yield takeLatest(CountDetailActionTypes.CHG_REQUEST_DAILY_COUNT_DATA, CHG_getDailyCount)
 }
 
-export function* requestUserCountSaga(){
-    yield takeLatest(CountDetailActionTypes.REQUEST_USER_COUNT_DATA, getUserCount)
+export function* CHG_requestUserCountSaga(){
+    yield takeLatest(CountDetailActionTypes.CHG_REQUEST_USER_COUNT_DATA, CHG_getUserCount)
 }
 
-export function* requestUserCountByDaySaga(){
-    yield takeLatest(CountDetailActionTypes.REQUEST_USER_COUNT_BY_DAY_DATA, getUserCountByDay)
+export function* CHG_requestUserCountByDaySaga(){
+    yield takeLatest(CountDetailActionTypes.CHG_REQUEST_USER_COUNT_BY_DAY_DATA, CHG_getUserCountByDay)
 }
 
 export function* FSC_requestDailyCountSaga(){
@@ -100,13 +109,11 @@ export function* FSC_requestUserCountByDaySaga(){
     yield takeLatest(CountDetailActionTypes.FSC_REQUEST_USER_COUNT_BY_DAY_DATA, FSC_getUserCountByDay)
 }
 
-
-
 export function* countSagas(){
     yield all([
-        call(requestDailyCountSaga),
-        call(requestUserCountSaga),
-        call(requestUserCountByDaySaga),
+        call(CHG_requestDailyCountSaga),
+        call(CHG_requestUserCountSaga),
+        call(CHG_requestUserCountByDaySaga),
         call(FSC_requestDailyCountSaga),
         call(FSC_requestUserCountSaga),
         call(FSC_requestUserCountByDaySaga),

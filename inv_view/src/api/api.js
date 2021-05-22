@@ -7,6 +7,7 @@ export const fetchData = (url, setStateFunction ) => {
     .then(data => setStateFunction(data))
 };
 
+// ^ --------------------------CHG API CALLS ------------------------
 
 export const fetchDailyShrink = async() => {
     try{
@@ -15,7 +16,7 @@ export const fetchDailyShrink = async() => {
         return dailyShrink
     } catch(err) {
         console.log(err)
-    }
+    };
 };
 
 export const fetchWeeklyShrink = async() => {
@@ -25,7 +26,7 @@ export const fetchWeeklyShrink = async() => {
         return weeklyShrink
     } catch(err) {
         console.log(err)
-    }
+    };
 };
 
 export const fetchMonthlyShrink = async() => {
@@ -35,9 +36,8 @@ export const fetchMonthlyShrink = async() => {
         return monthlyShrink
     } catch(err) {
         console.log(err)
-    }
+    };
 };
-
 
 export const fetchYearlyShrink = async() => {
     try{
@@ -46,38 +46,102 @@ export const fetchYearlyShrink = async() => {
         return yearlyShrink
     } catch(err) {
         console.log(err)
-    }
+    };
 };
 
-export const fetchDailyCount = async() => {
+export const CHG_fetchDailyCount = async() => {
     try{
         const response = await fetch(`${CHG_API_URL}chg/data/counts-by-day`);
         const dailyCount = await response.json();
         return dailyCount
     } catch(err) {
         console.log(err)
-    }
+    };
 };
 
 
-export const fetchUserCount = async() => {
+export const CHG_fetchUserCount = async() => {
     try{
         const response = await fetch(`${CHG_API_URL}chg/data/counts-by-user`);
         const userCount = await response.json();
         return userCount
     } catch(err) {
         console.log(err)
-    }
+    };
 };
 
-export const fetchUserCountByDay = async() => {
+export const CHG_fetchUserCountByDay = async() => {
     try{
         const response = await fetch(`${CHG_API_URL}chg/data/counts-by-user-by-day`);
         const userCount = await response.json();
         return userCount
     } catch(err) {
         console.log(err)
-    }
+    };
+};
+
+
+export const CHG_fetchOccupiedLocsUncounted = async() => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/occupied-locations-uncounted`);
+        const occupiedLocsUncounted = await response.json();
+        return occupiedLocsUncounted
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+export const CHG_fetchOccupiedLocsCounted = async() => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/occupied-locations-counted`);
+        const occupiedLocsCounted = await response.json();
+        return occupiedLocsCounted
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+
+export const CHG_fetchEmptyLocsCounted = async() => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/empty-locations-counted`);
+        const emptyLocsCounted = await response.json();
+        return emptyLocsCounted
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+
+export const CHG_fetchEmptyLocsUncounted = async() => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/empty-locations-uncounted`);
+        const emptyLocsUncounted = await response.json();
+        return emptyLocsUncounted
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+
+export const CHG_fetchTotalExpectedQty = async() => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/total-expected-qty-sum`);
+        const sum = await response.json();
+        return sum
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+export const CHG_fetchTotalVarianceQty = async() => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/total-variance-sum`);
+        const sum = await response.json();
+        return sum
+    } catch (error) {
+        console.log(error);
+    };
 };
 
 

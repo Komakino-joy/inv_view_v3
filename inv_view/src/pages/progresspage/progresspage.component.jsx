@@ -19,7 +19,7 @@ function ProgressPage({ history }) {
     <div className="App">
       
         <div className='active-locs' >
-          <ActiveLocs apiUrl={CHG_API_URL} businessUnit='chg' headerColor='#472f91'/>
+          <ActiveLocs headerColor='#472f91'/>
         </div>
       
         <div className='qty-overview' >

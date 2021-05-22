@@ -11,7 +11,8 @@ import {
     CHG_fetchTotalVarianceQty,
     CHG_fetchUniqueLocsCounted,
     CHG_fetchTotalCountsWithVariance,
-    CHG_fetchPR
+    CHG_fetchPR,
+    CHG_fetchDmg,
     } from '../../api/api';
 
 import {
@@ -33,8 +34,10 @@ import {
     CHG_locsWithVarianceCountFailure,
     CHG_receivePR,
     CHG_prFailure,
-
+    CHG_receiveDmg,
+    CHG_dmgFailure,
     } from './progress.page.actions';
+    
 
 function* CHG_getOccupiedLocsCounted(){
     try{
@@ -116,6 +119,15 @@ function* CHG_getPr() {
         yield put(CHG_prFailure(error))
     };
    };
+
+function* CHG_getDmg(){
+    try{
+        const damages = yield CHG_fetchDmg();
+        yield put(CHG_receiveDmg(damages));
+    } catch (error) {
+        yield put(CHG_dmgFailure(error));
+    }
+};
    
 export function* CHG_requestOccupiedLocsSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_START, CHG_getOccupiedLocsCounted)
@@ -153,6 +165,10 @@ function* CHG_getPrSaga() {
     yield takeLatest(ProgressPageActionTypes.CHG_PR_START, CHG_getPr)
 }
 
+function* CHG_getDmgSaga() {
+    yield takeLatest(ProgressPageActionTypes.CHG_PR_START, CHG_getDmg)
+}
+
 
 export function* progressPageSagas(){
     yield all([
@@ -165,5 +181,6 @@ export function* progressPageSagas(){
         call(CHG_requestUniqueLocsCountedSaga),
         call(CHG_requestTotalCountsWithVarianceSaga),
         call(CHG_getPrSaga),
+        call(CHG_getDmgSaga),
     ]);
 };

@@ -1,28 +1,33 @@
-import React, {useEffect, useState} from 'react';
-import { fetchData } from "../../api/api";
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { CHG_requestDmg } from '../../redux/progress.page/progress.page.actions';
+
 import '../styles/styles.css';
 import './Damages.styles.css';
 
-const ProblemResolve = ({ apiUrl, businessUnit, headerColor }) => {
+const ProblemResolve = ({ headerColor }) => {
    
-    const [damages, setDamages] = useState(0);
+    const dispatch = useDispatch();
+    const damages = useSelector(state => state.progressData.damages[0].damage)
 
     useEffect(() => {
         let mounted = true;
 
         if (mounted){
-            fetchData(`${apiUrl}${businessUnit}/data/damages`, setDamages);
+            dispatch(CHG_requestDmg());
         };
 
         return () => {
             mounted = false;
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps    
-    }, []);
+  
+    }, [dispatch]);
 
 
     return (
     <div className='damages-container'>
+    <button onClick={() => console.log(damages)} >CLick me</button>
         <header className='panel-header'>DAMAGES</header>
         <header className='damages-header header-border' style={{backgroundColor: `${headerColor}`}}>Damages Overview</header>
         <div className='breakdown-container body-border'>
@@ -30,7 +35,7 @@ const ProblemResolve = ({ apiUrl, businessUnit, headerColor }) => {
                 <label>Total Damages: </label>
             </div>
             <div className='breakdown-qty'>
-                <label>{damages ? damages[0].damage : 0}</label>
+                <label>{damages ? damages : 0}</label>
             </div>
         </div>
     </div>

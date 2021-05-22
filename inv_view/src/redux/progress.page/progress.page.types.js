@@ -33,6 +33,11 @@ const ProgressPageActionTypes = {
     CHG_PR_START:"CHG_PR_START",
     CHG_PR_SUCCESS:"CHG_PR_SUCCESS",
     CHG_PR_FAILURE:"CHG_PR_FAILURE",
+
+    //Damages overview 
+    CHG_DMG_START : 'CHG_DMG_START',
+    CHG_DMG_SUCCESS :'CHG_DMG_SUCCESS',
+    CHG_DMG_FAILURE: 'CHG_DMG_FAILURE',
 };
 
 export default ProgressPageActionTypes;

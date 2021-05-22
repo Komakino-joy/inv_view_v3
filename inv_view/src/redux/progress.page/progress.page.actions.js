@@ -106,7 +106,7 @@ export const CHG_locsWithVarianceCountFailure = (error) => ({
     payload: error, 
 });
 
-
+// Actions for PR component
 export const CHG_requestPr = () => ({
     type: ProgressPageActionTypes.CHG_PR_START, 
 });
@@ -119,4 +119,19 @@ export const CHG_receivePR = (pr) => ({
 export const CHG_prFailure = (error) => ({
     type: ProgressPageActionTypes.CHG_PR_FAILURE,
     payload: error,
+});
+
+// Actions for damages component
+export const CHG_requestDmg = () => ({
+    type: ProgressPageActionTypes.CHG_DMG_START,
+});
+
+export const CHG_receiveDmg =(damages) => ({
+    type: ProgressPageActionTypes.CHG_DMG_SUCCESS,
+    payload: damages,
+});
+
+export const CHG_dmgFailure = (error) => ({
+    type: ProgressPageActionTypes.CHG_DMG_FAILURE,
+    error: error,
 });

@@ -169,7 +169,17 @@ export const CHG_fetchPR = async() => {
     try {
         const response = await fetch(`${CHG_API_URL}chg/data/pr`);
         const count = await response.json();
-        return count
+        return count;
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+export const CHG_fetchDmg = async () => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/damages`);
+        const count = await response.json();
+        return count;
     } catch (error) {
         console.log(error);
     };

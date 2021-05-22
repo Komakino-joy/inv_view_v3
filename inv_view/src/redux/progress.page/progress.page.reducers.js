@@ -10,6 +10,7 @@ const INITIAL_STATE = {
     CHG_uniqueLocsCounted: 0,
     CHG_locsWithVarianceCount: 0,
     CHG_pr: 0,
+    CHG_damages: 0,
     error: null,
 }
 
@@ -76,7 +77,14 @@ const progressData = (state = INITIAL_STATE, action) => {
                 ...state,
                 CHG_pr: action.payload,
                 error: null,
-            }
+            };
+        
+        case ProgressPageActionTypes.CHG_DMG_SUCCESS:
+            return {
+                ...state,
+                CHG_damages: action.payload,
+                error: null
+            };
 
         case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_UNCOUNTED_FAILURE:
@@ -87,6 +95,7 @@ const progressData = (state = INITIAL_STATE, action) => {
         case ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_FAILURE:
         case ProgressPageActionTypes.CHG_PR_FAILURE:
+        case ProgressPageActionTypes.CHG_DMG_FAILURE:
             return {
                 ...state,
                 error: action.payload,

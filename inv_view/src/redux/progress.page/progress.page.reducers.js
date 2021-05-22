@@ -1,12 +1,15 @@
 import ProgressPageActionTypes  from './progress.page.types';
 
 const INITIAL_STATE = {
-    CHG_occupiedLocCounted : [],
-    CHG_occupiedLocUnCounted: [],
-    CHG_emptyLocCounted: [],
-    CHG_emptyLocUncounted: [],
-    CHG_expectedQty: [],
-    CHG_varianceQty: [],
+    CHG_occupiedLocCounted : 0,
+    CHG_occupiedLocUnCounted: 0,
+    CHG_emptyLocCounted: 0,
+    CHG_emptyLocUncounted: 0,
+    CHG_expectedQty: 0,
+    CHG_varianceQty: 0,
+    CHG_uniqueLocsCounted: 0,
+    CHG_locsWithVarianceCount: 0,
+    CHG_pr: 0,
     error: null,
 }
 
@@ -54,12 +57,36 @@ const progressData = (state = INITIAL_STATE, action) => {
                 error: null,
             };
 
+        case ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_SUCCESS:
+            return {
+                ...state, 
+                CHG_uniqueLocsCounted : action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_SUCCESS:
+            return {
+                ...state, 
+                CHG_locsWithVarianceCount : action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_PR_SUCCESS:
+            return{
+                ...state,
+                CHG_pr: action.payload,
+                error: null,
+            }
+
         case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_UNCOUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_EMPTY_LOCS_COUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_EMPTY_LOCS_UNCOUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_EXPECTED_QTY_FAILURE:
         case ProgressPageActionTypes.CHG_VARIANCE_QTY_FAILURE:
+        case ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_FAILURE:
+        case ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_FAILURE:
+        case ProgressPageActionTypes.CHG_PR_FAILURE:
             return {
                 ...state,
                 error: action.payload,

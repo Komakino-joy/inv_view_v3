@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { 
-    CHG_requestOccupiedLocations,
+    CHG_requestOccupiedLocationsCounted,
     CHG_requestOccupiedLocationsUncounted,
     CHG_requestEmptyLocationsCounted,
     CHG_requestEmptyLocationsUncounted,
@@ -23,7 +23,7 @@ const ActiveLocs = ({ headerColor }) => {
         let mounted = true;
         
         if (mounted){
-            dispatch(CHG_requestOccupiedLocations());
+            dispatch(CHG_requestOccupiedLocationsCounted());
             dispatch(CHG_requestOccupiedLocationsUncounted());
             dispatch(CHG_requestEmptyLocationsCounted());
             dispatch(CHG_requestEmptyLocationsUncounted());

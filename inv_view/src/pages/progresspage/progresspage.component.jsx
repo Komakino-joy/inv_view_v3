@@ -23,11 +23,11 @@ function ProgressPage({ history }) {
         </div>
       
         <div className='qty-overview' >
-         <CountQtyOverview apiUrl={CHG_API_URL} businessUnit='chg' headerColor='#472f91'/>
+         <CountQtyOverview headerColor='#472f91'/>
         </div>
 
         <div className='variance' > 
-          <CountVarianceOverview apiUrl={CHG_API_URL} businessUnit='chg' headerColor='#472f91'/>
+          <CountVarianceOverview headerColor='#472f91'/>
         </div>
 
         <div className='latest-count' >

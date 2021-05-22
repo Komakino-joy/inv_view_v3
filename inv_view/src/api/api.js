@@ -145,6 +145,37 @@ export const CHG_fetchTotalVarianceQty = async() => {
 };
 
 
+export const CHG_fetchUniqueLocsCounted = async() => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/count-unique-locations-counted`);
+        const count = await response.json();
+        return count
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+export const CHG_fetchTotalCountsWithVariance = async() => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/count-variances`);
+        const count = await response.json();
+        return count
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+export const CHG_fetchPR = async() => {
+    try {
+        const response = await fetch(`${CHG_API_URL}chg/data/pr`);
+        const count = await response.json();
+        return count
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+
 // ^ --------------------------FSC API CALLS ------------------------
 
 export const FSC_fetchDailyShrink = async() => {

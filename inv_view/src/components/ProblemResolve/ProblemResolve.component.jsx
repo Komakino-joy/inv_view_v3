@@ -1,27 +1,29 @@
-import React, {useEffect, useState} from 'react';
-import { fetchData } from "../../api/api";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { CHG_requestPr } from '../../redux/progress.page/progress.page.actions';
+
 import '../styles/styles.css';
 import './ProblemResolve.styles.css';
 
-const ProblemResolve = ({ apiUrl, businessUnit, headerColor }
+const ProblemResolve = ({ headerColor }
     ) => {
-    
-    const [problemResolve, setProblemResolve] = useState(0);
+    const dispatch = useDispatch();
+    const problemResolve = useSelector(state => state.progressData.CHG_pr)
 
     useEffect(() => {
         let mounted = true;
 
         if (mounted){
-            fetchData(`${apiUrl}${businessUnit}/data/pr`, setProblemResolve);
+            dispatch(CHG_requestPr());
         };
 
         return () => {
             mounted = false;
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
-    // const total = problemResolve[0].transfer_pr + problemResolve[0].return_pr;
+    }, [dispatch]);
+
         return (
         <div className='problem-resolve-container'>
             <header className='panel-header'>PROBLEM RESOLVE</header>

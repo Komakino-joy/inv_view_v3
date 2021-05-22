@@ -1,31 +1,40 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import '../styles/styles.css';
 import './CountVarianceOverview.styles.css';
 
-import { fetchData } from "../../api/api";
+import { 
+    CHG_requestOccupiedLocationsCounted,
+    CHG_requestEmptyLocationsCounted,
+    CHG_requestUniqueLocs,
+    CHG_requestLocsWithVarianceCount,
+ } from '../../redux/progress.page/progress.page.actions';
 
-const CountVarianceOverview = ({apiUrl, businessUnit, headerColor }) => {
-    
-    const [locsVisited, setLocsVisited] = useState(0);
-    const [occupiedLocsCounted, setOccupiedLocsCounted] = useState(0);
-    const [emptyLocsCounted, setEmptyLocsCounted] = useState(0);
-    const [totalVariances, setTotalVariances] = useState(0);
+const CountVarianceOverview = ({ headerColor }) => {
+
+    const dispatch = useDispatch();
+    const occupiedLocsCounted = useSelector(state => state.progressData.CHG_occupiedLocCounted);
+    const emptyLocsCounted = useSelector(state => state.progressData.CHG_emptyLocCounted);
+    const locsVisited = useSelector(state => state.progressData.CHG_uniqueLocsCounted);
+    const totalVariances = useSelector(state => state.progressData.CHG_locsWithVarianceCount);
 
     useEffect(() => {
         let mounted = true;
 
         if (mounted){
-            fetchData(`${apiUrl}${businessUnit}/data/count-unique-locations-counted`, setLocsVisited);
-            fetchData(`${apiUrl}${businessUnit}/data/occupied-locations-counted`, setOccupiedLocsCounted);
-            fetchData(`${apiUrl}${businessUnit}/data/empty-locations-counted`, setEmptyLocsCounted);
-            fetchData(`${apiUrl}${businessUnit}/data/count-variances`, setTotalVariances);
+            dispatch(CHG_requestOccupiedLocationsCounted());
+            dispatch(CHG_requestEmptyLocationsCounted());
+            dispatch(CHG_requestUniqueLocs());
+            dispatch(CHG_requestLocsWithVarianceCount());
         };
 
         return () => {
             mounted = false;
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps    
-    }, []);
+
+    }, [dispatch]);
 
     const countGoal = 98.50;
     const totalLocsCounted = occupiedLocsCounted + emptyLocsCounted;

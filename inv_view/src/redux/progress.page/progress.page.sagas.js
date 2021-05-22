@@ -9,26 +9,30 @@ import {
     CHG_fetchEmptyLocsUncounted,
     CHG_fetchTotalExpectedQty,
     CHG_fetchTotalVarianceQty,
+    CHG_fetchUniqueLocsCounted,
+    CHG_fetchTotalCountsWithVariance,
+    CHG_fetchPR
     } from '../../api/api';
 
 import {
     CHG_receiveOccupiedLocations,
     CHG_occupiedLocationsFailure,
-
     CHG_receiveOccupiedLocationsUncounted,
     CHG_occupiedLocationsUncountedFailure,
-
     CHG_receiveEmptyLocationsCounted,
     CHG_emptyLocationsCountedFailure,
-
     CHG_receiveEmptyLocationsUncounted,
     CHG_emptyLocationsUncountedFailure,
-
     CHG_receiveExpectedQty,
     CHG_expectedQtyFailure,
-
     CHG_receivevarianceQty,
     CHG_varianceQtyFailure,
+    CHG_receiveUniqueLocs,
+    CHG_uniqueLocsFailure,
+    CHG_receiveLocsWithVarianceCount,
+    CHG_locsWithVarianceCountFailure,
+    CHG_receivePR,
+    CHG_prFailure,
 
     } from './progress.page.actions';
 
@@ -86,6 +90,33 @@ function* CHG_getVarianceQty(){
     }
 };
 
+function* CHG_getUniqueLocsCounted(){
+    try{
+        const count = yield CHG_fetchUniqueLocsCounted();
+        yield put(CHG_receiveUniqueLocs(count));
+    } catch (error) {
+        yield put(CHG_uniqueLocsFailure(error));
+    }
+};
+
+function* CHG_getTotalCountsWithVariance(){
+    try{
+        const locationsCount = yield CHG_fetchTotalCountsWithVariance();
+        yield put(CHG_receiveLocsWithVarianceCount(locationsCount));
+    } catch (error) {
+        yield put(CHG_locsWithVarianceCountFailure(error));
+    }
+};
+
+function* CHG_getPr() {
+    try {
+        const pr = yield CHG_fetchPR();
+        yield put(CHG_receivePR(pr));
+    } catch (error) {
+        yield put(CHG_prFailure(error))
+    };
+   };
+   
 export function* CHG_requestOccupiedLocsSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_START, CHG_getOccupiedLocsCounted)
 };
@@ -110,6 +141,17 @@ export function* CHG_requestVarianceQtySaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_VARIANCE_QTY_START, CHG_getVarianceQty)
 };
 
+export function* CHG_requestUniqueLocsCountedSaga(){
+    yield takeLatest(ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_START, CHG_getUniqueLocsCounted)
+};
+
+export function* CHG_requestTotalCountsWithVarianceSaga(){
+    yield takeLatest(ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_START, CHG_getTotalCountsWithVariance)
+};
+
+function* CHG_getPrSaga() {
+    yield takeLatest(ProgressPageActionTypes.CHG_PR_START, CHG_getPr)
+}
 
 
 export function* progressPageSagas(){
@@ -120,6 +162,8 @@ export function* progressPageSagas(){
         call(CHG_requestEmptyLocsUncountedSaga),
         call(CHG_requestExpectedQtySaga),
         call(CHG_requestVarianceQtySaga),
-
-    ])
-}
+        call(CHG_requestUniqueLocsCountedSaga),
+        call(CHG_requestTotalCountsWithVarianceSaga),
+        call(CHG_getPrSaga),
+    ]);
+};

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { 
+    CHG_requestTransitional0,
     CHG_requestTransitional1,
     CHG_requestTransitional2,
     CHG_requestTransitional3,
@@ -34,6 +35,7 @@ const TransitionalOverview = ({ headerColor }) => {
         let mounted = true;
 
         if (mounted){
+            dispatch(CHG_requestTransitional0());
             dispatch(CHG_requestTransitional1());
             dispatch(CHG_requestTransitional2());
             dispatch(CHG_requestTransitional3());

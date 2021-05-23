@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { 
+    CHG_requestNotPutaway0,
     CHG_requestNotPutaway1,
     CHG_requestNotPutaway2,
     CHG_requestNotPutaway3,
@@ -33,6 +34,7 @@ const NotPutaway = ({ headerColor }) => {
         let mounted = true;
 
         if (mounted){
+            dispatch(CHG_requestNotPutaway0());
             dispatch(CHG_requestNotPutaway1());
             dispatch(CHG_requestNotPutaway2());
             dispatch(CHG_requestNotPutaway3());

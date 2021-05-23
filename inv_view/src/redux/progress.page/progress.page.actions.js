@@ -140,6 +140,19 @@ export const CHG_dmgFailure = (error) => ({
 });
 
 // Actions for not putaway component
+export const CHG_requestNotPutaway0 = () => ({
+    type: ProgressPageActionTypes.CHG_NOT_PUTAWAY_0_START,
+});
+
+export const CHG_receiveNotPutaway0 =(notPutaway) => ({
+    type: ProgressPageActionTypes.CHG_NOT_PUTAWAY_0_SUCCESS,
+    payload: notPutaway,
+});
+
+export const CHG_notPutaway0Failure = (error) => ({
+    type: ProgressPageActionTypes.CHG_NOT_PUTAWAY_0_FAILURE,
+    error: error,
+});
 
 export const CHG_requestNotPutaway1 = () => ({
     type: ProgressPageActionTypes.CHG_NOT_PUTAWAY_1_START,
@@ -254,6 +267,19 @@ export const CHG_notPutawayOver7Failure = (error) => ({
 });
 
 // Transitional component actions 
+export const CHG_requestTransitional0 = () => ({
+    type: ProgressPageActionTypes.CHG_TRANSITIONAL_0_START,
+});
+
+export const CHG_receiveTransitional0 =(transitional) => ({
+    type: ProgressPageActionTypes.CHG_TRANSITIONAL_0_SUCCESS,
+    payload: transitional,
+});
+
+export const CHG_transitional0Failure = (error) => ({
+    type: ProgressPageActionTypes.CHG_TRANSITIONAL_0_FAILURE,
+    error: error,
+});
 
 export const CHG_requestTransitional1 = () => ({
     type: ProgressPageActionTypes.CHG_TRANSITIONAL_1_START,

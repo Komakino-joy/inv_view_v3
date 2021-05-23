@@ -39,6 +39,8 @@ import {
     CHG_prFailure,
     CHG_receiveDmg,
     CHG_dmgFailure,
+    CHG_receiveNotPutaway0,
+    CHG_notPutaway0Failure,
     CHG_receiveNotPutaway1,
     CHG_notPutaway1Failure,
     CHG_receiveNotPutaway2,
@@ -55,6 +57,8 @@ import {
     CHG_notPutaway7Failure,
     CHG_receiveNotPutawayOver7,
     CHG_notPutawayOver7Failure,
+    CHG_receiveTransitional0,
+    CHG_transitional0Failure,
     CHG_receiveTransitional1,
     CHG_transitional1Failure,
     CHG_receiveTransitional2,
@@ -163,9 +167,17 @@ function* CHG_getDmg(){
     }
 };
 
+function* CHG_getNotPutAway0Day(){
+    try{
+        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'0');
+        yield put(CHG_receiveNotPutaway0(damages));
+    } catch (error) {
+        yield put(CHG_notPutaway0Failure(error));
+    }
+};
+
 function* CHG_getNotPutAway1Day(){
     try{
-        console.log('HELLLLLLLLLLLOOOOOOOOOOOO')
         const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'1');
         yield put(CHG_receiveNotPutaway1(damages));
     } catch (error) {
@@ -218,7 +230,8 @@ function* CHG_getNotPutAway6Day(){
     } catch (error) {
         yield put(CHG_notPutaway6Failure(error));
     }
-};
+}; 
+
 function* CHG_getNotPutAway7Day(){
     try{
         const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'7');
@@ -238,6 +251,14 @@ function* CHG_getNotPutAwayOver7Day(){
     }
 };
 
+function* CHG_getTransitional0Day(){
+    try{
+        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'0');
+        yield put(CHG_receiveTransitional0(damages));
+    } catch (error) {
+        yield put(CHG_transitional0Failure(error));
+    }
+};
 
 function* CHG_getTransitional1Day(){
     try{
@@ -354,6 +375,10 @@ function* CHG_getDmgSaga() {
     yield takeLatest(ProgressPageActionTypes.CHG_PR_START, CHG_getDmg)
 };
 
+function* CHG_getNotPutAway0DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.CHG_NOT_PUTAWAY_0_START, CHG_getNotPutAway0Day)
+};
+
 function* CHG_getNotPutAway1DaySaga() {
     yield takeLatest(ProgressPageActionTypes.CHG_NOT_PUTAWAY_1_START, CHG_getNotPutAway1Day)
 };
@@ -384,6 +409,10 @@ function* CHG_getNotPutAway7DaySaga() {
   
 function* CHG_getNotPutAwayOver7DaySaga() {
     yield takeLatest(ProgressPageActionTypes.CHG_NOT_PUTAWAY_7_START, CHG_getNotPutAwayOver7Day)
+};
+
+function* CHG_getTransitional0DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.CHG_NOT_PUTAWAY_1_START, CHG_getTransitional1Day)
 };
 
 function* CHG_getTransitional1DaySaga() {
@@ -430,6 +459,7 @@ export function* progressPageSagas(){
         call(CHG_requestTotalCountsWithVarianceSaga),
         call(CHG_getPrSaga),
         call(CHG_getDmgSaga),
+        call(CHG_getNotPutAway0DaySaga),
         call(CHG_getNotPutAway1DaySaga),
         call(CHG_getNotPutAway2DaySaga),
         call(CHG_getNotPutAway3DaySaga),
@@ -438,6 +468,7 @@ export function* progressPageSagas(){
         call(CHG_getNotPutAway6DaySaga),
         call(CHG_getNotPutAway7DaySaga),
         call(CHG_getNotPutAwayOver7DaySaga),
+        call(CHG_getTransitional0DaySaga),
         call(CHG_getTransitional1DaySaga),
         call(CHG_getTransitional2DaySaga),
         call(CHG_getTransitional3DaySaga),

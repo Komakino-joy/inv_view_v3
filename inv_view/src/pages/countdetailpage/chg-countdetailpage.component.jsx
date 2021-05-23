@@ -1,25 +1,30 @@
 import React, {useEffect} from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DailyCountsReport from '../../components/CountQuantityDetail/dailycountquantity';
 import CountsByUser from '../../components/CountQuantityDetail/countsbyuser';
 import CountsByUserByDay from '../../components/CountQuantityDetail/counts-by-user-by-day';
 import Download from './export';
 
-import {CHG_requestDailyCountData, CHG_requestUserCountData, CHG_requestUserCountByDay} from '../../redux/countdetailpage/countdetailpage.actions'
+import {
+    CHG_requestDailyCountData, 
+    CHG_requestUserCountData, 
+    CHG_requestUserCountByDay,
+} from '../../redux/countdetailpage/countdetailpage.actions'
 
 import './countdetail.styles.css'
 
-const CountDetailPage = ({ 
-    history, dailyCountData, CHG_requestDailyCountData, userCountData, userCountByDayData, CHG_requestUserCountData,CHG_requestUserCountByDay}) => {
+const CountDetailPage = ({ history }) => {
+        const dispatch = useDispatch();
 
-    
+        const dailyCountData = useSelector(state => state.countData.dailyCount);
+        const userCountData = useSelector(state => state.countData.userCount);
+        const userCountByDayData = useSelector(state => state.countData.userCountByDay);
 
     useEffect(() => {
-        CHG_requestDailyCountData()
-        CHG_requestUserCountData()
-        CHG_requestUserCountByDay()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        dispatch(CHG_requestDailyCountData())
+        dispatch(CHG_requestUserCountData())
+        dispatch(CHG_requestUserCountByDay())
+    }, [dispatch]);
 
     return (
         
@@ -58,16 +63,5 @@ const CountDetailPage = ({
     )
 };
 
-const mapStateToProps = (state) => ({
-    dailyCountData: state.countData.dailyCount,
-    userCountData: state.countData.userCount,
-    userCountByDayData: state.countData.userCountByDay
-});
 
-const mapDispatchToProps = (dispatch) => ({
-    CHG_requestDailyCountData: () => {dispatch(CHG_requestDailyCountData())},
-    CHG_requestUserCountData: () => {dispatch(CHG_requestUserCountData())},
-    CHG_requestUserCountByDay: () => {dispatch(CHG_requestUserCountByDay())}
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CountDetailPage);
+export default CountDetailPage;

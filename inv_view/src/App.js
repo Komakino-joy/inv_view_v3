@@ -2,15 +2,15 @@ import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import HomePage from './pages/homepage/hompage';
 import Header from './components/Header/header.component.jsx';
-import ChgProgressPage from './pages/progresspage/progresspage.component';
-import ChgShrinkPage from './pages/shrinkpage/shrinkpage.component.jsx';
-import ChgCountDetailPage from './pages/countdetailpage/countdetailpage.component';
-import ChgReportUploadPage from './pages/reportuploadpage/reportuploadpage.component';
+import ChgProgressPage from './pages/progresspage/chg-progresspage.component';
+import ChgShrinkPage from './pages/shrinkpage/chg-shrinkpage.component.jsx';
+import ChgCountDetailPage from './pages/countdetailpage/chg-countdetailpage.component';
+import ChgReportUploadPage from './pages/reportuploadpage/chg-reportuploadpage.component';
 
-import FscProgressPage from './pages/progresspage/fsc.progresspage.component';
-import FscShrinkPage from './pages/shrinkpage/fsc.shrinkpage.component.jsx';
+import FscProgressPage from './pages/progresspage/fsc-progresspage.component';
+import FscShrinkPage from './pages/shrinkpage/fsc-shrinkpage.component.jsx';
 import FscCountDetailPage from './pages/countdetailpage/fsc.countdetailpage.component';
-import FscReportUploadPage from './pages/reportuploadpage/fsc.reportuploadpage.component';
+import FscReportUploadPage from './pages/reportuploadpage/fsc-reportuploadpage.component';
 
 const App = () => {
 

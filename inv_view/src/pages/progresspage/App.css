@@ -34,17 +34,17 @@ nav:hover {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-    "active-locs active-locs not-putaway transitional"
-    "qty-overview variance problem-resolve damage"
-    "latest-count latest-count . .";
+    'active-locs active-locs not-putaway transitional'
+    'qty-overview variance-overview problem-resolve damage'
+    'latest-count latest-count . .';
 }
 
 .qty-overview {
   grid-area: qty-overview;
 }
 
-.variance {
-  grid-area: variance;
+.variance-overview {
+  grid-area: variance-overview;
 }
 
 .active-locs {

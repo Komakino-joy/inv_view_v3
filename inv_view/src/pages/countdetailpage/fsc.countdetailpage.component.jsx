@@ -1,32 +1,35 @@
 import React, {useEffect} from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DailyCountsReport from '../../components/CountQuantityDetail/dailycountquantity';
 import CountsByUser from '../../components/CountQuantityDetail/countsbyuser';
 import CountsByUserByDay from '../../components/CountQuantityDetail/counts-by-user-by-day';
 import Download from './export';
 
 import {
-    FSC_requestDailyCountData, 
-    FSC_requestUserCountData, 
-    FSC_requestUserCountByDay
+    CHG_requestDailyCountData, 
+    CHG_requestUserCountData, 
+    CHG_requestUserCountByDay,
 } from '../../redux/countdetailpage/countdetailpage.actions'
 
 import './countdetail.styles.css'
 
-const FscCountDetailPage = ({ 
-    history, dailyCountData, requestDailyCountData, userCountData, userCountByDayData, requestUserCountData,requestUserCountByDay, state}) => {
+const CountDetailPage = ({ history }) => {
+        const dispatch = useDispatch();
+
+        const dailyCountData = useSelector(state => state.countData.dailyCount);
+        const userCountData = useSelector(state => state.countData.userCount);
+        const userCountByDayData = useSelector(state => state.countData.userCountByDay);
 
     useEffect(() => {
-        requestDailyCountData()
-        requestUserCountData()
-        requestUserCountByDay()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        dispatch(CHG_requestDailyCountData())
+        dispatch(CHG_requestUserCountData())
+        dispatch(CHG_requestUserCountByDay())
+    }, [dispatch]);
 
     return (
         
         <div className='countpage'>
-        <nav onClick = {() => history.push('/fsc-progress')}>Back</nav>
+        <nav onClick = {() => history.push('/fnt-chg-progress')}>Back</nav>
         <div id='count-page-wrapper'>
             <div className='download'>
                 <Download daily={dailyCountData} countsByUser={userCountData} countsByUserByDay={userCountByDayData}></Download>
@@ -60,16 +63,5 @@ const FscCountDetailPage = ({
     )
 };
 
-const mapStateToProps = (state) => ({
-    dailyCountData: state.countData.dailyCount,
-    userCountData: state.countData.userCount,
-    userCountByDayData: state.countData.userCountByDay
-});
 
-const mapDispatchToProps = (dispatch) => ({
-    requestDailyCountData: () => {dispatch(FSC_requestDailyCountData())},
-    requestUserCountData: () => {dispatch(FSC_requestUserCountData())},
-    requestUserCountByDay: () => {dispatch(FSC_requestUserCountByDay())}
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FscCountDetailPage);
+export default CountDetailPage;

@@ -32,10 +32,6 @@
   min-width: 160px;
 }
 
-/* .count-variance-container .breakdown-container .body-border > label {
-  margin-bottom: 1em;
-} */
-
 @media screen and (max-width: 1000px) {
   .count-variance-container {
     width: 100%;

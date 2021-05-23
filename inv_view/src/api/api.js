@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const CHG_API_URL = 'http://localhost:5051/chg';
 export const FSC_API_URL = 'http://localhost:5050/fsc';
 

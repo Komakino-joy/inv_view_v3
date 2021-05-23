@@ -1,31 +1,11 @@
-import React, { useEffect } from 'react';
-
-import { useDispatch, useSelector } from 'react-redux';
-
-import { CHG_requestLatestCountData } from '../../redux/progress.page/progress.page.actions';
+import React from 'react';
 
 import {
     LatestEntryHeader, BreakdownContainer, BreakdownLabelContainer, 
     BreakdownQty, BreakdownLabel, BreakdownQtyLabel
 } from './latest-count-data.styles';
 
-const LatestCountData = ({ history, headerColor}) => {
-
-    const dispatch = useDispatch();
-    const latestCountData = useSelector(state => state.progressData.CHG_latestCountData);
-
-    useEffect(() => {
-        let mounted = true;
-
-        if (mounted){
-            dispatch(CHG_requestLatestCountData());
-        };
-
-        return () => {
-            mounted = false;
-        };
-
-    }, [dispatch]);
+const LatestCountData = ({ history, headerColor, latestCountData}) => {
 
     return(
         

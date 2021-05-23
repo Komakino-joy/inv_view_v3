@@ -1,39 +1,12 @@
-import React, {useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { 
-    CHG_requestExpectedQty,
-    CHG_requestVarianceQty,
-    } from '../../redux/progress.page/progress.page.actions';
+import React from 'react';
 
 import '../styles/styles.css';
-import './countQtyOverview.styles.css';
+import './count-qty-overview.styles.css';
 
-const CountQtyOverview = ({ headerColor }) => {
-    const dispatch = useDispatch();
-
-    const netExpected = useSelector(state => state.progressData.CHG_expectedQty)
-    const netVariance = useSelector(state => state.progressData.CHG_varianceQty)
-
-    
-    useEffect(() => {
-        let mounted = true;
-
-        if (mounted){
-            dispatch(CHG_requestExpectedQty());
-            dispatch(CHG_requestVarianceQty());
-        };
-
-        return () => {
-            mounted = false;
-        };
-
-    }, [dispatch]);
-
-    const netQtyCounted = netExpected + netVariance;
-
-    const netAccuracy =  ((1-(Math.abs(netVariance) / netExpected)) * 100).toFixed(2);
-    const absAccuracy =  ((1-(Math.abs(netVariance) / Math.abs(netExpected))) * 100).toFixed(2);
+const CountQtyOverview = ({ headerColor, ...props }) => {
+    const netQtyCounted = props.netExpected + props.netVariance;
+    const netAccuracy =  ((1-(Math.abs(props.netVariance) / props.netExpected)) * 100).toFixed(2);
+    const absAccuracy =  ((1-(Math.abs(props.netVariance) / Math.abs(props.netExpected))) * 100).toFixed(2);
     const goal = 99.50;
    
         return (
@@ -48,14 +21,14 @@ const CountQtyOverview = ({ headerColor }) => {
                 </div>
                 <div className='breakdown-qty'>
                     <p>Net</p>
-                    <label>{netExpected}</label>
-                    <label>{netVariance}</label>
+                    <label>{props.netExpected}</label>
+                    <label>{props.netVariance}</label>
                     <label>{netQtyCounted}</label>
                 </div>
                 <div className='breakdown-qty'>
                     <p>Absolute</p>
-                    <label>{Math.abs(netExpected)}</label>
-                    <label>{Math.abs(netVariance)}</label>
+                    <label>{Math.abs(props.netExpected)}</label>
+                    <label>{Math.abs(props.netVariance)}</label>
                     <label>{netQtyCounted}</label>
                 </div>
 

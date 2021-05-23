@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DailyShrinkReport from '../../components/shrinkreports/dailyshrink/dailyshrinkreport';
 import WeeklyShrinkReport from '../../components/shrinkreports/weeklyshrink/weeklyshrinkreport';
 import MonthlyShrinkReport from '../../components/shrinkreports/monthlyshrink/monthlyshrinkreport';
@@ -7,30 +7,34 @@ import YearlyShrinkReport from '../../components/shrinkreports/yearlyshrink/year
 import Download from './export';
 
 import {
-    FSC_requestDailyShrinkData, 
-    FSC_requestWeeklyShrinkData, 
-    FSC_requestMonthlyShrinkData, 
-    FSC_requestYearlyShrinkData
+    CHG_requestDailyShrinkData, 
+    CHG_requestWeeklyShrinkData, 
+    CHG_requestMonthlyShrinkData, 
+    CHG_requestYearlyShrinkData
 } from '../../redux/shrinkpage/shrinkpage.actions'
 
 import './shrink.styles.css'
 
-const FscShrinkPage = ({ 
-    history, dailyShrinkData, weeklyShrinkData, monthlyShrinkData, yearlyShrinkData, 
-    requestDailyShrink, requestWeeklyShrink, requestMonthlyShrink, requestYearlyShrink }) => {
+const ShrinkPage = ({ history }) => {
+
+    const dispatch = useDispatch();
+
+    const dailyShrinkData = useSelector(state => state.shrinkData.CHG_dailyShrink);
+    const weeklyShrinkData = useSelector(state => state.shrinkData.CHG_weeklyShrink);
+    const monthlyShrinkData = useSelector(state => state.shrinkData.CHG_monthlyShrink);
+    const yearlyShrinkData = useSelector(state => state.shrinkData.CHG_yearlyShrink);
 
     useEffect(() => {
-        requestDailyShrink()
-        requestWeeklyShrink()
-        requestMonthlyShrink()
-        requestYearlyShrink()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        dispatch(CHG_requestDailyShrinkData());
+        dispatch(CHG_requestWeeklyShrinkData());
+        dispatch(CHG_requestMonthlyShrinkData());
+        dispatch(CHG_requestYearlyShrinkData());
+    }, [dispatch]);
 
     return (
         
         <div className='shrinkpage'>
-        <nav onClick = {() => history.push('/fnt-fsc-progress')} >Progress View</nav>
+        <nav onClick = {() => history.push('/fnt-chg-progress')} >Progress View</nav>
 
         <div id='shrink-page-wrapper'>
             <div className='download'>
@@ -78,20 +82,4 @@ const FscShrinkPage = ({
     )
 }
 
-const mapStateToProps = (state) => ({
-    state,
-    dailyShrinkData: state.shrinkData.dailyShrink,
-    weeklyShrinkData: state.shrinkData.weeklyShrink,
-    monthlyShrinkData: state.shrinkData.monthlyShrink,
-    yearlyShrinkData: state.shrinkData.yearlyShrink
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    requestDailyShrink: () => {dispatch(FSC_requestDailyShrinkData())},
-    requestWeeklyShrink: () => {dispatch(FSC_requestWeeklyShrinkData())},
-    requestMonthlyShrink: () => {dispatch(FSC_requestMonthlyShrinkData())},
-    requestYearlyShrink: () => {dispatch(FSC_requestYearlyShrinkData())}
-    
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(FscShrinkPage);
+export default ShrinkPage;

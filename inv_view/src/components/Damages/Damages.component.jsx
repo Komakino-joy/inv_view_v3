@@ -1,29 +1,9 @@
-import React, {useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { CHG_requestDmg } from '../../redux/progress.page/progress.page.actions';
+import React from 'react';
 
 import '../styles/styles.css';
-import './Damages.styles.css';
+import './damages.styles.css';
 
-const ProblemResolve = ({ headerColor }) => {
-   
-    const dispatch = useDispatch();
-    const damages = useSelector(state => state.progressData.damages[0].damage)
-
-    useEffect(() => {
-        let mounted = true;
-
-        if (mounted){
-            dispatch(CHG_requestDmg());
-        };
-
-        return () => {
-            mounted = false;
-        };
-  
-    }, [dispatch]);
-
+const ProblemResolve = ({ headerColor, damages }) => {
 
     return (
     <div className='damages-container'>

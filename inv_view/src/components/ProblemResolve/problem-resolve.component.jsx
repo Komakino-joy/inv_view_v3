@@ -1,28 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { CHG_requestPr } from '../../redux/progress.page/progress.page.actions';
+import React from 'react';
 
 import '../styles/styles.css';
-import './ProblemResolve.styles.css';
+import './problem-resolve.styles.css';
 
-const ProblemResolve = ({ headerColor }
-    ) => {
-    const dispatch = useDispatch();
-    const problemResolve = useSelector(state => state.progressData.CHG_pr)
-
-    useEffect(() => {
-        let mounted = true;
-
-        if (mounted){
-            dispatch(CHG_requestPr());
-        };
-
-        return () => {
-            mounted = false;
-        };
-
-    }, [dispatch]);
+const ProblemResolve = ({ headerColor, ...props }) => {
 
         return (
         <div className='problem-resolve-container'>
@@ -35,8 +16,8 @@ const ProblemResolve = ({ headerColor }
                 </div>
                 
                 <div className='breakdown-qty'>
-                    <label>{problemResolve ? problemResolve[0].transfer_pr : 0}</label>
-                    <label>{problemResolve ? problemResolve[0].return_pr : 0}</label>
+                    <label>{props.problemResolve ? props.problemResolve[0].transfer_pr : 0}</label>
+                    <label>{props.problemResolve ? props.problemResolve[0].return_pr : 0}</label>
                 </div>  
             </div>
             <div className='problem-resolve-totals-container'>
@@ -44,7 +25,7 @@ const ProblemResolve = ({ headerColor }
                     <label>Total: </label>
                 </div>
                 <div className='totals-labels'>
-                    <label className='total'>{problemResolve ? problemResolve[0].transfer_pr +  problemResolve[0].return_pr : 0}</label>
+                    <label className='total'>{props.problemResolve ? props.problemResolve[0].transfer_pr +  props.problemResolve[0].return_pr : 0}</label>
                 </div>
             </div>
 

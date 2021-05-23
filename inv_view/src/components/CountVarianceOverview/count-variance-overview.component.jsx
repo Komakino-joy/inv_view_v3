@@ -1,44 +1,13 @@
-import React, {useEffect} from 'react';
-
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 
 import '../styles/styles.css';
-import './CountVarianceOverview.styles.css';
+import './count-variance-overview.styles.css';
 
-import { 
-    CHG_requestOccupiedLocationsCounted,
-    CHG_requestEmptyLocationsCounted,
-    CHG_requestUniqueLocs,
-    CHG_requestLocsWithVarianceCount,
- } from '../../redux/progress.page/progress.page.actions';
-
-const CountVarianceOverview = ({ headerColor }) => {
-
-    const dispatch = useDispatch();
-    const occupiedLocsCounted = useSelector(state => state.progressData.CHG_occupiedLocCounted);
-    const emptyLocsCounted = useSelector(state => state.progressData.CHG_emptyLocCounted);
-    const locsVisited = useSelector(state => state.progressData.CHG_uniqueLocsCounted);
-    const totalVariances = useSelector(state => state.progressData.CHG_locsWithVarianceCount);
-
-    useEffect(() => {
-        let mounted = true;
-
-        if (mounted){
-            dispatch(CHG_requestOccupiedLocationsCounted());
-            dispatch(CHG_requestEmptyLocationsCounted());
-            dispatch(CHG_requestUniqueLocs());
-            dispatch(CHG_requestLocsWithVarianceCount());
-        };
-
-        return () => {
-            mounted = false;
-        };
-
-    }, [dispatch]);
+const CountVarianceOverview = ({ headerColor, ...props }) => {
 
     const countGoal = 98.50;
-    const totalLocsCounted = occupiedLocsCounted + emptyLocsCounted;
-    const accurateCounts = totalLocsCounted - totalVariances;
+    const totalLocsCounted = props.occupiedLocsCounted + props.emptyLocsCounted;
+    const accurateCounts = totalLocsCounted - props.totalVariances;
     const countAccuracy = ((accurateCounts / totalLocsCounted) * 100).toFixed(2)
    
         return (
@@ -52,10 +21,10 @@ const CountVarianceOverview = ({ headerColor }) => {
                     <label className='txt-label'>Counts With Variance: </label>
                 </div>
                 <div className='breakdown-qty'>
-                    <label >{locsVisited}</label>
+                    <label >{props.locsVisited}</label>
                     <label >{totalLocsCounted}</label>
                     <label >{accurateCounts}</label>
-                    <label >{totalVariances}</label>
+                    <label >{props.totalVariances}</label>
                 </div>
             </div>
             <div className='count-variance-totals-container'>

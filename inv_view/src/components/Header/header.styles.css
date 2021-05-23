@@ -1,4 +1,4 @@
-.page-header {
+.chg-page-header {
   color: white;
   background-color: #4751a3;
   font-size: 2.2em;
@@ -12,12 +12,16 @@
 }
 
 .fsc-page-header {
-  color: rgb(29, 29, 29);
-  background-color: #b3b3b3c5;
+  color: whitesmoke;
+  background-color: rgb(49, 49, 49);
   font-size: 2.2em;
   text-align: left;
   padding-left: 1em;
   padding-bottom: 0.5em;
+  margin-right: -4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 img {

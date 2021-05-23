@@ -29,6 +29,8 @@ const INITIAL_STATE = {
     CHG_transitional6: 0,
     CHG_transitional7: 0,
     CHG_transitionalOver7: 0,
+    CHG_transitionalTotal: 0,
+    CHG_latestCountData: 0,
     error: null,
 }
 
@@ -229,7 +231,21 @@ const progressData = (state = INITIAL_STATE, action) => {
                 error: null,
             };
         
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_TOTAL_SUCCESS:
+            return {
+                ...state,
+                CHG_transitionalTotal: action.payload,
+                error: null,
+            };
 
+        case ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_SUCCESS:
+            return {
+                ...state,
+                CHG_latestCountData: action.payload,
+                error: null,
+            };
+
+        
         case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_UNCOUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_EMPTY_LOCS_COUNTED_FAILURE:

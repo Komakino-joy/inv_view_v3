@@ -393,3 +393,31 @@ export const CHG_transitionalOver7Failure = (error) => ({
     error: error,
 });
 
+export const CHG_requestTransitionalTotal = () => ({
+    type: ProgressPageActionTypes.CHG_TRANSITIONAL_TOTAL_START,
+});
+
+export const CHG_receiveTransitionalTotal=(transitional) => ({
+    type: ProgressPageActionTypes.CHG_TRANSITIONAL_TOTAL_SUCCESS,
+    payload: transitional,
+});
+
+export const CHG_transitionalTotalFailure = (error) => ({
+    type: ProgressPageActionTypes.CHG_TRANSITIONAL_TOTAL_FAILURE,
+    error: error,
+});
+
+export const CHG_requestLatestCountData = () => ({
+    type: ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_START,
+});
+
+export const CHG_receiveLatestCountData=(latestCount) => ({
+    type: ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_SUCCESS,
+    payload: latestCount,
+});
+
+export const CHG_latestCountDataFailure = (error) => ({
+    type: ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_FAILURE,
+    error: error,
+});
+

@@ -9,8 +9,6 @@ import { Route } from 'react-router-dom';
 import './App.css'
 import LatestCountData from '../../components/LatestCountData/latest-count-data.component';
 
-import { CHG_API_URL } from '../../api/api';
-
 function ProgressPage({ history }) {
   return (
     <div>
@@ -33,25 +31,25 @@ function ProgressPage({ history }) {
         <div className='latest-count' >
           <Route
             render={(props) => (
-              <LatestCountData {...props} apiUrl={CHG_API_URL} businessUnit='chg' headerColor='#472f91'  />
+              <LatestCountData {...props} headerColor='#472f91'  />
             )}
           />
         </div>
 
         <div className='not-putaway' >
-          <NotPutaway apiUrl={CHG_API_URL} businessUnit='chg' headerColor='#472f91'/>
+          <NotPutaway headerColor='#472f91'/>
         </div>
 
         <div className='transitional' >
-          <TransitionalOverview apiUrl={CHG_API_URL} businessUnit='chg' headerColor='#472f91'/>
+          <TransitionalOverview headerColor='#472f91'/>
         </div>
 
         <div className='problem-resolve' >
-          <ProblemResolve apiUrl={CHG_API_URL} businessUnit='chg' headerColor='#472f91'/>
+          <ProblemResolve headerColor='#472f91'/>
         </div>
 
         <div className='damage' >
-          <Damages apiUrl={CHG_API_URL} businessUnit='chg' headerColor='#472f91'/>
+          <Damages headerColor='#472f91'/>
         </div>
 
     </div>

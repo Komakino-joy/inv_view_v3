@@ -346,7 +346,7 @@ const handleGetDamages = (req, res) => {
     FROM on_hand_inventory_by_day
     WHERE date_recorded::date = (SELECT MAX(date_recorded) FROM on_hand_inventory_by_day WHERE damages > 0)::date;
 `)
-.then(results => console.log(results.rows[0]))
+.then(results => res.status(200).send(results.rows[0]))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 

@@ -195,10 +195,21 @@ export const httpFetchNotPutawayByDay = async(url, day) => {
 
 export const httpFetchTransitionalByDay = async(url, day) => {
     try {
-        const response = await fetch(`${url}/data/transitional-inv-${day}-day-count`);
+        const response = await fetch(`${url}/data/transitional-inv-${day}-count`);
         const count = await response.json();
         return count
     } catch (error) {
         return error;
     };
 };
+
+export const httpLatestCountData = async(url) => {
+    try {
+        const response = await fetch(`${url}/data/latest-count-data`);
+        const count = await response.json();
+        return count
+    } catch (error) {
+        return error;
+    };
+};
+

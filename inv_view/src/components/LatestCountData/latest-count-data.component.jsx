@@ -1,33 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { fetchData } from '../../api/api';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { CHG_requestLatestCountData } from '../../redux/progress.page/progress.page.actions';
 
 import {
     LatestEntryHeader, BreakdownContainer, BreakdownLabelContainer, 
     BreakdownQty, BreakdownLabel, BreakdownQtyLabel
 } from './latest-count-data.styles';
 
-const LatestCountData = ({ apiUrl, history, businessUnit, headerColor}) => {
+const LatestCountData = ({ history, headerColor}) => {
 
-    const [latestCountData, setLatestCountData] = useState(0);
+    const dispatch = useDispatch();
+    const latestCountData = useSelector(state => state.progressData.CHG_latestCountData);
 
     useEffect(() => {
         let mounted = true;
 
         if (mounted){
-            fetchData(`${apiUrl}${businessUnit}/data/latest-count-data`, setLatestCountData);
+            dispatch(CHG_requestLatestCountData());
         };
 
         return () => {
             mounted = false;
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps    
-    }, []);
+
+    }, [dispatch]);
 
     return(
         
     <div>
-        <span onClick = {() => history.push(`/fnt-${businessUnit}-count-data`)}>Details</span>
+        <span onClick = {() => history.push(`/fnt-chg-count-data`)}>Details</span>
         <LatestEntryHeader style={{backgroundColor: `${headerColor}`}}>Latest Count Data</LatestEntryHeader>
         <BreakdownContainer>
             <BreakdownLabelContainer>

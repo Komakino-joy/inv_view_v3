@@ -55,7 +55,6 @@ const NotPutaway = ({ headerColor }) => {
 
     return (
     <div className='not-putaway-container'>
-    <button onClick={() => console.log(state)}  >CLICK ME</button>
         <header className='panel-header'>SKUs NOT PUTAWAY</header>
         <header className='not-putaway-header header-border' style={{backgroundColor: `${headerColor}`}}>Inv Not Putaway Overview</header>
         <div className='breakdown-container body-border'>

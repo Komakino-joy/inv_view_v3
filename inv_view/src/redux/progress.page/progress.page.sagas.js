@@ -16,6 +16,7 @@ import {
     httpFetchDmg,
     httpFetchNotPutawayByDay,
     httpFetchTransitionalByDay,
+    httpLatestCountData,
     } from '../../api/api';
 
 import {
@@ -75,6 +76,10 @@ import {
     CHG_transitional7Failure,
     CHG_receiveTransitionalOver7,
     CHG_transitionalOver7Failure,
+    CHG_receiveTransitionalTotal,
+    CHG_transitionalTotalFailure,
+    CHG_receiveLatestCountData,
+    CHG_latestCountDataFailure,
     } from './progress.page.actions';
 
 function* CHG_getOccupiedLocsCounted(){
@@ -169,8 +174,8 @@ function* CHG_getDmg(){
 
 function* CHG_getNotPutAway0Day(){
     try{
-        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'0');
-        yield put(CHG_receiveNotPutaway0(damages));
+        const notPutAway = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'0');
+        yield put(CHG_receiveNotPutaway0(notPutAway));
     } catch (error) {
         yield put(CHG_notPutaway0Failure(error));
     }
@@ -178,8 +183,8 @@ function* CHG_getNotPutAway0Day(){
 
 function* CHG_getNotPutAway1Day(){
     try{
-        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'1');
-        yield put(CHG_receiveNotPutaway1(damages));
+        const notPutAway = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'1');
+        yield put(CHG_receiveNotPutaway1(notPutAway));
     } catch (error) {
         yield put(CHG_notPutaway1Failure(error));
     }
@@ -187,8 +192,8 @@ function* CHG_getNotPutAway1Day(){
 
 function* CHG_getNotPutAway2Day(){
     try{
-        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'2');
-        yield put(CHG_receiveNotPutaway2(damages));
+        const notPutAway = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'2');
+        yield put(CHG_receiveNotPutaway2(notPutAway));
     } catch (error) {
         yield put(CHG_notPutaway2Failure(error));
     }
@@ -196,8 +201,8 @@ function* CHG_getNotPutAway2Day(){
 
 function* CHG_getNotPutAway3Day(){
     try{
-        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'3');
-        yield put(CHG_receiveNotPutaway3(damages));
+        const notPutAway = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'3');
+        yield put(CHG_receiveNotPutaway3(notPutAway));
     } catch (error) {
         yield put(CHG_notPutaway3Failure(error));
     }
@@ -206,8 +211,8 @@ function* CHG_getNotPutAway3Day(){
   
 function* CHG_getNotPutAway4Day(){
     try{
-        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'4');
-        yield put(CHG_receiveNotPutaway4(damages));
+        const notPutAway = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'4');
+        yield put(CHG_receiveNotPutaway4(notPutAway));
     } catch (error) {
         yield put(CHG_notPutaway4Failure(error));
     }
@@ -215,8 +220,8 @@ function* CHG_getNotPutAway4Day(){
 
 function* CHG_getNotPutAway5Day(){
     try{
-        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'5');
-        yield put(CHG_receiveNotPutaway5(damages));
+        const notPutAway = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'5');
+        yield put(CHG_receiveNotPutaway5(notPutAway));
     } catch (error) {
         yield put(CHG_notPutaway5Failure(error));
     }
@@ -225,8 +230,8 @@ function* CHG_getNotPutAway5Day(){
 
 function* CHG_getNotPutAway6Day(){
     try{
-        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'6');
-        yield put(CHG_receiveNotPutaway6(damages));
+        const notPutAway = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'6');
+        yield put(CHG_receiveNotPutaway6(notPutAway));
     } catch (error) {
         yield put(CHG_notPutaway6Failure(error));
     }
@@ -234,8 +239,8 @@ function* CHG_getNotPutAway6Day(){
 
 function* CHG_getNotPutAway7Day(){
     try{
-        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'7');
-        yield put(CHG_receiveNotPutaway7(damages));
+        const notPutAway = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'7');
+        yield put(CHG_receiveNotPutaway7(notPutAway));
     } catch (error) {
         yield put(CHG_notPutaway7Failure(error));
     }
@@ -244,8 +249,8 @@ function* CHG_getNotPutAway7Day(){
 
 function* CHG_getNotPutAwayOver7Day(){
     try{
-        const damages = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'over-7');
-        yield put(CHG_receiveNotPutawayOver7(damages));
+        const notPutAway = yield httpFetchNotPutawayByDay(`${CHG_API_URL}`,'over-7');
+        yield put(CHG_receiveNotPutawayOver7(notPutAway));
     } catch (error) {
         yield put(CHG_notPutawayOver7Failure(error));
     }
@@ -253,8 +258,8 @@ function* CHG_getNotPutAwayOver7Day(){
 
 function* CHG_getTransitional0Day(){
     try{
-        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'0');
-        yield put(CHG_receiveTransitional0(damages));
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'0-day');
+        yield put(CHG_receiveTransitional0(transitional));
     } catch (error) {
         yield put(CHG_transitional0Failure(error));
     }
@@ -262,8 +267,8 @@ function* CHG_getTransitional0Day(){
 
 function* CHG_getTransitional1Day(){
     try{
-        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'1');
-        yield put(CHG_receiveTransitional1(damages));
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'1-day');
+        yield put(CHG_receiveTransitional1(transitional));
     } catch (error) {
         yield put(CHG_transitional1Failure(error));
     }
@@ -271,8 +276,8 @@ function* CHG_getTransitional1Day(){
 
 function* CHG_getTransitional2Day(){
     try{
-        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'2');
-        yield put(CHG_receiveTransitional2(damages));
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'2-day');
+        yield put(CHG_receiveTransitional2(transitional));
     } catch (error) {
         yield put(CHG_transitional2Failure(error));
     }
@@ -280,8 +285,8 @@ function* CHG_getTransitional2Day(){
 
 function* CHG_getTransitional3Day(){
     try{
-        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'3');
-        yield put(CHG_receiveTransitional3(damages));
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'3-day');
+        yield put(CHG_receiveTransitional3(transitional));
     } catch (error) {
         yield put(CHG_transitional3Failure(error));
     }
@@ -290,8 +295,8 @@ function* CHG_getTransitional3Day(){
   
 function* CHG_getTransitional4Day(){
     try{
-        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'4');
-        yield put(CHG_receiveTransitional4(damages));
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'4-day');
+        yield put(CHG_receiveTransitional4(transitional));
     } catch (error) {
         yield put(CHG_transitional4Failure(error));
     }
@@ -299,8 +304,8 @@ function* CHG_getTransitional4Day(){
 
 function* CHG_getTransitional5Day(){
     try{
-        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'5');
-        yield put(CHG_receiveTransitional5(damages));
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'5-day');
+        yield put(CHG_receiveTransitional5(transitional));
     } catch (error) {
         yield put(CHG_transitional5Failure(error));
     }
@@ -309,16 +314,16 @@ function* CHG_getTransitional5Day(){
 
 function* CHG_getTransitional6Day(){
     try{
-        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'6');
-        yield put(CHG_receiveTransitional6(damages));
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'6-day');
+        yield put(CHG_receiveTransitional6(transitional));
     } catch (error) {
         yield put(CHG_transitional6Failure(error));
     }
 };
 function* CHG_getTransitional7Day(){
     try{
-        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'7');
-        yield put(CHG_receiveTransitional7(damages));
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'7-day');
+        yield put(CHG_receiveTransitional7(transitional));
     } catch (error) {
         yield put(CHG_transitional7Failure(error));
     }
@@ -327,13 +332,30 @@ function* CHG_getTransitional7Day(){
 
 function* CHG_getTransitionalOver7Day(){
     try{
-        const damages = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'over-7');
-        yield put(CHG_receiveTransitionalOver7(damages));
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'over-7-day');
+        yield put(CHG_receiveTransitionalOver7(transitional));
     } catch (error) {
         yield put(CHG_transitionalOver7Failure(error));
     }
 };
 
+function* CHG_getTransitionalTotal(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${CHG_API_URL}`,'total');
+        yield put(CHG_receiveTransitionalTotal(transitional));
+    } catch (error) {
+        yield put(CHG_transitionalTotalFailure(error));
+    }
+};
+
+function* CHG_getLatestCountData(){
+    try{
+        const latestCount = yield httpLatestCountData(`${CHG_API_URL}`);
+        yield put(CHG_receiveLatestCountData(latestCount));
+    } catch (error) {
+        yield put(CHG_latestCountDataFailure(error));
+    }
+};
 
 export function* CHG_requestOccupiedLocsSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_START, CHG_getOccupiedLocsCounted)
@@ -412,7 +434,7 @@ function* CHG_getNotPutAwayOver7DaySaga() {
 };
 
 function* CHG_getTransitional0DaySaga() {
-    yield takeLatest(ProgressPageActionTypes.CHG_NOT_PUTAWAY_1_START, CHG_getTransitional1Day)
+    yield takeLatest(ProgressPageActionTypes.CHG_NOT_PUTAWAY_1_START, CHG_getTransitional0Day)
 };
 
 function* CHG_getTransitional1DaySaga() {
@@ -447,6 +469,15 @@ function* CHG_getTransitionalOver7DaySaga() {
     yield takeLatest(ProgressPageActionTypes.CHG_NOT_PUTAWAY_7_START, CHG_getTransitionalOver7Day)
 };
 
+function* CHG_getTransitionalTotalSaga() {
+    yield takeLatest(ProgressPageActionTypes.CHG_TRANSITIONAL_TOTAL_START, CHG_getTransitionalTotal)
+};
+
+function* CHG_getLatestCountDataSaga() {
+    yield takeLatest(ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_START, CHG_getLatestCountData)
+};
+
+
 export function* progressPageSagas(){
     yield all([
         call(CHG_requestOccupiedLocsSaga),
@@ -477,5 +508,7 @@ export function* progressPageSagas(){
         call(CHG_getTransitional6DaySaga),
         call(CHG_getTransitional7DaySaga),
         call(CHG_getTransitionalOver7DaySaga),
+        call(CHG_getTransitionalTotalSaga),
+        call(CHG_getLatestCountDataSaga),
     ]);
 };

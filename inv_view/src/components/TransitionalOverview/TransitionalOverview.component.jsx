@@ -11,6 +11,7 @@ import {
     CHG_requestTransitional6,
     CHG_requestTransitional7,
     CHG_requestTransitionalOver7,
+    CHG_requestTransitionalTotal,
  } from '../../redux/progress.page/progress.page.actions';
 
 import '../styles/styles.css';
@@ -30,6 +31,7 @@ const TransitionalOverview = ({ headerColor }) => {
     const sixDay = useSelector(state => state.progressData.CHG_transitional6);
     const sevenDay = useSelector(state => state.progressData.CHG_transitional7);
     const overSevenDay = useSelector(state => state.progressData.CHG_transitionalOver7);
+    const total = useSelector(state => state.progressData.CHG_transitionalTotal);
 
     useEffect(() => {
         let mounted = true;
@@ -44,6 +46,7 @@ const TransitionalOverview = ({ headerColor }) => {
             dispatch(CHG_requestTransitional6());
             dispatch(CHG_requestTransitional7());
             dispatch(CHG_requestTransitionalOver7());
+            dispatch(CHG_requestTransitionalTotal());
         };
 
         return () => {
@@ -100,10 +103,10 @@ const TransitionalOverview = ({ headerColor }) => {
                 <label className='txt-label'>Total: </label>
             </div>
             <div className='totals-qty'>
-                {/* <label className='total'>{total ? total[0].countOfArticle : 0}</label> */}
+                <label className='total'>{total ? total[0].countOfArticle : 0}</label>
             </div>
             <div className='totals-qty'>
-                {/* <label className='total'>{total ? total[0].onHandQty : 0}</label> */}
+                <label className='total'>{total ? total[0].onHandQty : 0}</label>
             </div>
         </div>
 

@@ -1,162 +1,150 @@
 import {call, put, takeLatest, all} from 'redux-saga/effects';
 
+import ShrinkPageActionTypes from './shrink-page.types';
+
 import { 
-    fetchDailyShrink, 
-    fetchWeeklyShrink, 
-    fetchMonthlyShrink, 
-    fetchYearlyShrink,
-    FSC_fetchDailyShrink,
-    FSC_fetchWeeklyShrink,
-    FSC_fetchMonthlyShrink,
-    FSC_fetchYearlyShrink,
+    CHG_API_URL,
+    FSC_API_URL,
+    httpFetchDailyShrink,
+    httpFetchWeeklyShrink,
+    httpFetchMonthlyShrink,
+    httpFetchYearlyShrink,
      } from '../../api/api'
 
 import { 
-    REQUEST_DAILY_SHRINK_DATA, 
-    receiveDailyShrinkData,
-
-    REQUEST_MONTHLY_SHRINK_DATA, 
-    receiveMonthlyShrinkData,
-
-    REQUEST_WEEKLY_SHRINK_DATA, 
-    receiveWeeklyShrinkData,
-
-    REQUEST_YEARLY_SHRINK_DATA, 
-    receiveYearlyShrinkData,
-
-    FSC_REQUEST_DAILY_SHRINK_DATA, 
+    CHG_receiveDailyShrinkData,
+    CHG_receiveMonthlyShrinkData,
+    CHG_receiveWeeklyShrinkData,
+    CHG_receiveYearlyShrinkData,
+    CHG_dailySrinkFailure,
+    CHG_weeklyShrinkDataFailure,
+    CHG_monthlyShrinkDataFailure,
+    CHG_yearlyShrinkDataFailure,
     FSC_receiveDailyShrinkData,
-
-    FSC_REQUEST_WEEKLY_SHRINK_DATA, 
-    FSC_receiveWeeklyShrinkData,
-
-    FSC_REQUEST_MONTHLY_SHRINK_DATA, 
     FSC_receiveMonthlyShrinkData,
-
-    FSC_REQUEST_YEARLY_SHRINK_DATA, 
+    FSC_receiveWeeklyShrinkData,
     FSC_receiveYearlyShrinkData,
+    FSC_dailySrinkFailure,
+    FSC_weeklyShrinkDataFailure,
+    FSC_monthlyShrinkDataFailure,
+    FSC_yearlyShrinkDataFailure,
 
 } from './shrinkpage.actions';
 
 
 
-function* getDailyShrink(dailyShrinkData){
+function* CHG_getDailyShrink(){
     try{
-        const dailyShrink = yield call(fetchDailyShrink, dailyShrinkData)
-        yield put(receiveDailyShrinkData(dailyShrink))
+        const dailyShrink = yield httpFetchDailyShrink(`${CHG_API_URL}`);
+        yield put(CHG_receiveDailyShrinkData(dailyShrink))
     } catch (error) {
-        console.log(error);
-    }
+        yield put(CHG_dailySrinkFailure(error));
+    };
 };
 
-export function* requestDailyShrinkSaga(){
-    yield takeLatest(REQUEST_DAILY_SHRINK_DATA, getDailyShrink)
-}
-
-function* getWeeklyShrink(weeklyShrinkData){
+function* CHG_getWeeklyShrink(){
     try{
-        const weeklyShrink = yield call(fetchWeeklyShrink, weeklyShrinkData)
-        yield put(receiveWeeklyShrinkData(weeklyShrink))
+        const weeklyShrink = yield httpFetchWeeklyShrink(`${CHG_API_URL}`);
+        yield put(CHG_receiveWeeklyShrinkData(weeklyShrink))
     } catch (error) {
-        console.log(error);
-    }
+        yield put(CHG_weeklyShrinkDataFailure(error));
+    };
 };
 
-export function* requestWeeklyShrinkSaga(){
-    yield takeLatest(REQUEST_WEEKLY_SHRINK_DATA, getWeeklyShrink)
-}
-
-
-
-function* getMonthlyShrink(monthlyShrinkData){
+function* CHG_getMonthlyShrink(){
     try{
-        const monthlyShrink = yield call(fetchMonthlyShrink, monthlyShrinkData)
-        yield put(receiveMonthlyShrinkData(monthlyShrink))
+        const monthlyShrink = yield httpFetchMonthlyShrink(`${CHG_API_URL}`);
+        yield put(CHG_receiveMonthlyShrinkData(monthlyShrink))
     } catch (error) {
-        console.log(error);
-    }
+        yield put(CHG_monthlyShrinkDataFailure(error));
+    };
 };
 
-export function* requestMonthlyShrinkSaga(){
-    yield takeLatest(REQUEST_MONTHLY_SHRINK_DATA, getMonthlyShrink)
-}
-
-
-
-function* getYearlyShrink(yearlyShrinkData){
+function* CHG_getYearlyShrink(){
     try{
-        const yearlyShrink = yield call(fetchYearlyShrink, yearlyShrinkData)
-        yield put(receiveYearlyShrinkData(yearlyShrink))
+        const yearlyShrink = yield httpFetchYearlyShrink(`${CHG_API_URL}`);
+        yield put(CHG_receiveYearlyShrinkData(yearlyShrink))
     } catch (error) {
-        console.log(error);
-    }
+        yield put(CHG_yearlyShrinkDataFailure(error));
+    };
 };
 
-export function* requestYearlyShrinkSaga(){
-    yield takeLatest(REQUEST_YEARLY_SHRINK_DATA, getYearlyShrink)
-}
-
-function* FSC_getDailyShrink(FSC_dailyShrinkData){
+function* FSC_getDailyShrink(){
     try{
-        const FSC_dailyShrink = yield call(FSC_fetchDailyShrink, FSC_dailyShrinkData)
-        yield put(FSC_receiveDailyShrinkData(FSC_dailyShrink))
+        const dailyShrink = yield httpFetchDailyShrink(`${FSC_API_URL}`);
+        yield put(FSC_receiveDailyShrinkData(dailyShrink))
     } catch (error) {
-        console.log(error);
-    }
+        yield put(FSC_dailySrinkFailure(error));
+    };
+};
+
+function* FSC_getWeeklyShrink(){
+    try{
+        const weeklyShrink = yield httpFetchWeeklyShrink(`${FSC_API_URL}`);
+        yield put(FSC_receiveWeeklyShrinkData(weeklyShrink))
+    } catch (error) {
+        yield put(FSC_weeklyShrinkDataFailure(error));
+    };
+};
+
+function* FSC_getMonthlyShrink(){
+    try{
+        const monthlyShrink = yield httpFetchMonthlyShrink(`${FSC_API_URL}`);
+        yield put(FSC_receiveMonthlyShrinkData(monthlyShrink))
+    } catch (error) {
+        yield put(FSC_monthlyShrinkDataFailure(error));
+    };
+};
+
+function* FSC_getYearlyShrink(){
+    try{
+        const yearlyShrink = yield httpFetchYearlyShrink(`${FSC_API_URL}`);
+        yield put(FSC_receiveYearlyShrinkData(yearlyShrink))
+    } catch (error) {
+        yield put(FSC_yearlyShrinkDataFailure(error));
+    };
+};
+
+export function* CHG_requestDailyShrinkSaga(){
+    yield takeLatest(ShrinkPageActionTypes.CHG_DAILY_SHRINK_DATA_START, CHG_getDailyShrink)
+};
+
+export function* CHG_requestWeeklyShrinkSaga(){
+    yield takeLatest(ShrinkPageActionTypes.CHG_WEEKLY_SHRINK_DATA_START, CHG_getWeeklyShrink)
+};
+
+export function* CHG_requestMonthlyShrinkSaga(){
+    yield takeLatest(ShrinkPageActionTypes.CHG_MONTHLY_SHRINK_DATA_START, CHG_getMonthlyShrink)
+};
+
+export function* CHG_requestYearlyShrinkSaga(){
+    yield takeLatest(ShrinkPageActionTypes.CHG_YEARLY_SHRINK_DATA_START, CHG_getYearlyShrink)
 };
 
 export function* FSC_requestDailyShrinkSaga(){
-    yield takeLatest(FSC_REQUEST_DAILY_SHRINK_DATA, FSC_getDailyShrink)
-}
-
-function* FSC_getWeeklyShrink(FSC_weeklyShrinkData){
-    try{
-        const FSC_weeklyShrink = yield call(FSC_fetchWeeklyShrink, FSC_weeklyShrinkData)
-        yield put(FSC_receiveWeeklyShrinkData(FSC_weeklyShrink))
-    } catch (error) {
-        console.log(error);
-    }
+    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_DAILY_SHRINK_DATA, FSC_getDailyShrink)
 };
+
 export function* FSC_requestWeeklyShrinkSaga(){
-    yield takeLatest(FSC_REQUEST_WEEKLY_SHRINK_DATA, FSC_getWeeklyShrink)
-}
-
-
-function* FSC_getMonthlyShrink(FSC_monthlyShrinkData){
-    try{
-        const FSC_monthlyShrink = yield call(FSC_fetchMonthlyShrink, FSC_monthlyShrinkData)
-        yield put(FSC_receiveMonthlyShrinkData(FSC_monthlyShrink))
-    } catch (error) {
-        console.log(error);
-    }
+    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_WEEKLY_SHRINK_DATA, FSC_getWeeklyShrink)
 };
 
 export function* FSC_requestMonthlyShrinkSaga(){
-    yield takeLatest(FSC_REQUEST_MONTHLY_SHRINK_DATA, FSC_getMonthlyShrink)
-}
-
-
-function* FSC_getYearlyShrink(FSC_yearlyShrinkData){
-    try{
-        const FSC_yearlyShrink = yield call(FSC_fetchYearlyShrink, FSC_yearlyShrinkData)
-        yield put(FSC_receiveYearlyShrinkData(FSC_yearlyShrink))
-    } catch (error) {
-        console.log(error);
-    }
+    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_MONTHLY_SHRINK_DATA, FSC_getMonthlyShrink)
 };
 
 export function* FSC_requestYearlyShrinkSaga(){
-    yield takeLatest(FSC_REQUEST_YEARLY_SHRINK_DATA, FSC_getYearlyShrink)
-}
+    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_YEARLY_SHRINK_DATA, FSC_getYearlyShrink)
+};
 
 
 
 export function* shrinkSagas(){
     yield all([
-        call(requestDailyShrinkSaga),
-        call(requestWeeklyShrinkSaga),
-        call(requestMonthlyShrinkSaga),
-        call(requestYearlyShrinkSaga),
+        call(CHG_requestDailyShrinkSaga),
+        call(CHG_requestWeeklyShrinkSaga),
+        call(CHG_requestMonthlyShrinkSaga),
+        call(CHG_requestYearlyShrinkSaga),
         call(FSC_requestDailyShrinkSaga),
         call(FSC_requestWeeklyShrinkSaga),
         call(FSC_requestMonthlyShrinkSaga),

@@ -1,86 +1,117 @@
-export const REQUEST_DAILY_SHRINK_DATA = "REQUEST_DAILY_SHRINK_DATA";
-export const RECEIVE_DAILY_SHRINK_DATA = "RECEIVE_DAILY_SHRINK_DATA";
+import ShrinkPageActionTypes from './shrink-page.types';
 
-export const REQUEST_WEEKLY_SHRINK_DATA = "REQUEST_WEEKLY_SHRINK_DATA";
-export const RECEIVE_WEEKLY_SHRINK_DATA = "RECEIVE_WEEKLY_SHRINK_DATA";
-
-export const REQUEST_MONTHLY_SHRINK_DATA = "REQUEST_MONTHLY_SHRINK_DATA";
-export const RECEIVE_MONTHLY_SHRINK_DATA = "RECEIVE_MONTHLY_SHRINK_DATA";
-
-export const REQUEST_YEARLY_SHRINK_DATA = "REQUEST_YEARLY_SHRINK_DATA";
-export const RECEIVE_YEARLY_SHRINK_DATA = "RECEIVE_YEARLY_SHRINK_DATA";
-
-export const FSC_REQUEST_DAILY_SHRINK_DATA = "FSC_REQUEST_DAILY_SHRINK_DATA";
-export const FSC_RECEIVE_DAILY_SHRINK_DATA = "FSC_RECEIVE_DAILY_SHRINK_DATA";
-
-export const FSC_REQUEST_WEEKLY_SHRINK_DATA = "FSC_REQUEST_WEEKLY_SHRINK_DATA";
-export const FSC_RECEIVE_WEEKLY_SHRINK_DATA = "FSC_RECEIVE_WEEKLY_SHRINK_DATA";
-
-export const FSC_REQUEST_MONTHLY_SHRINK_DATA = "FSC_REQUEST_MONTHLY_SHRINK_DATA";
-export const FSC_RECEIVE_MONTHLY_SHRINK_DATA = "FSC_RECEIVE_MONTHLY_SHRINK_DATA";
-
-export const FSC_REQUEST_YEARLY_SHRINK_DATA = "FSC_REQUEST_YEARLY_SHRINK_DATA";
-export const FSC_RECEIVE_YEARLY_SHRINK_DATA = "FSC_RECEIVE_YEARLY_SHRINK_DATA";
-
-
-
-export const requestDailyShrinkData = () => ({
-    type: REQUEST_DAILY_SHRINK_DATA
+export const CHG_requestDailyShrinkData = () => ({
+    type: ShrinkPageActionTypes.CHG_DAILY_SHRINK_DATA_START
 });
-export const receiveDailyShrinkData = (dailyShrink) => ({
-    type: RECEIVE_DAILY_SHRINK_DATA,  dailyShrink
-})
 
-export const requestWeeklyShrinkData = () => ({
-    type: REQUEST_WEEKLY_SHRINK_DATA
+export const CHG_receiveDailyShrinkData = (dailyShrink) => ({
+    type: ShrinkPageActionTypes.CHG_DAILY_SHRINK_DATA_SUCCESS,  
+    payload: dailyShrink,
 });
-export const receiveWeeklyShrinkData = (weeklyShrink) => ({
-    type: RECEIVE_WEEKLY_SHRINK_DATA,  weeklyShrink
-})
 
-export const requestMonthlyShrinkData = () => ({
-    type: REQUEST_MONTHLY_SHRINK_DATA
+export const CHG_dailySrinkFailure = (error) => ({
+    type: ShrinkPageActionTypes.CHG_DAILY_SHRINK_DATA_FAILURE,
+    payload: error, 
 });
-export const receiveMonthlyShrinkData = (monthlyShrink) => ({
-    type: RECEIVE_MONTHLY_SHRINK_DATA,  monthlyShrink
-})
 
-export const requestYearlyShrinkData = () => ({
-    type: REQUEST_YEARLY_SHRINK_DATA
+
+export const CHG_requestWeeklyShrinkData = () => ({
+    type: ShrinkPageActionTypes.CHG_WEEKLY_SHRINK_DATA_START
 });
-export const receiveYearlyShrinkData = (yearlyShrink) => ({
-    type: RECEIVE_YEARLY_SHRINK_DATA,  yearlyShrink
-})
 
+export const CHG_receiveWeeklyShrinkData = (weeklyShrink) => ({
+    type: ShrinkPageActionTypes.CHG_WEEKLY_SHRINK_DATA_SUCCESS,  
+    payload: weeklyShrink
+});
+
+export const CHG_weeklyShrinkDataFailure = (error) => ({
+    type: ShrinkPageActionTypes.CHG_WEEKLY_SHRINK_DATA_FAILURE,
+    payload: error,
+});
+
+
+export const CHG_requestMonthlyShrinkData = () => ({
+    type: ShrinkPageActionTypes.CHG_MONTHLY_SHRINK_DATA_START
+});
+
+export const CHG_receiveMonthlyShrinkData = (monthlyShrink) => ({
+    type: ShrinkPageActionTypes.CHG_MONTHLY_SHRINK_DATA_SUCCESS,  
+    payload: monthlyShrink,
+});
+
+export const CHG_monthlyShrinkDataFailure = (error) => ({
+    type: ShrinkPageActionTypes.CHG_MONTHLY_SHRINK_DATA_FAILURE,
+    payload: error,
+});
+
+export const CHG_requestYearlyShrinkData = () => ({
+    type: ShrinkPageActionTypes.CHG_YEARLY_SHRINK_DATA_START
+});
+
+export const CHG_receiveYearlyShrinkData = (yearlyShrink) => ({
+    type: ShrinkPageActionTypes.CHG_YEARLY_SHRINK_DATA_SUCCESS,  
+    payload: yearlyShrink
+});
+
+export const CHG_yearlyShrinkDataFailure = (error) => ({
+    type: ShrinkPageActionTypes.CHG_YEARLY_SHRINK_DATA_FAILURE,
+    payload: error,
+});
 
 export const FSC_requestDailyShrinkData = () => ({
-    type: FSC_REQUEST_DAILY_SHRINK_DATA
+    type: ShrinkPageActionTypes.FSC_DAILY_SHRINK_DATA_START
 });
+
 export const FSC_receiveDailyShrinkData = (dailyShrink) => ({
-    type: FSC_RECEIVE_DAILY_SHRINK_DATA,  dailyShrink
-})
+    type: ShrinkPageActionTypes.FSC_DAILY_SHRINK_DATA_SUCCESS,  
+    payload: dailyShrink,
+});
+
+export const FSC_dailySrinkFailure = (error) => ({
+    type: ShrinkPageActionTypes.FSC_DAILY_SHRINK_DATA_FAILURE,
+    payload: error, 
+});
 
 
 export const FSC_requestWeeklyShrinkData = () => ({
-    type: FSC_REQUEST_WEEKLY_SHRINK_DATA
+    type: ShrinkPageActionTypes.FSC_WEEKLY_SHRINK_DATA_START
 });
+
 export const FSC_receiveWeeklyShrinkData = (weeklyShrink) => ({
-    type: FSC_RECEIVE_WEEKLY_SHRINK_DATA,  weeklyShrink
-})
+    type: ShrinkPageActionTypes.FSC_WEEKLY_SHRINK_DATA_SUCCESS,  
+    payload: weeklyShrink
+});
+
+export const FSC_weeklyShrinkDataFailure = (error) => ({
+    type: ShrinkPageActionTypes.FSC_WEEKLY_SHRINK_DATA_FAILURE,
+    payload: error,
+});
 
 
 export const FSC_requestMonthlyShrinkData = () => ({
-    type: FSC_REQUEST_MONTHLY_SHRINK_DATA
+    type: ShrinkPageActionTypes.FSC_MONTHLY_SHRINK_DATA_START
 });
-export const FSC_receiveMonthlyShrinkData = (monthlyShrink) => ({
-    type: FSC_RECEIVE_MONTHLY_SHRINK_DATA,  monthlyShrink
-})
 
+export const FSC_receiveMonthlyShrinkData = (monthlyShrink) => ({
+    type: ShrinkPageActionTypes.CHG_MONTHLY_SHRINK_DATA_SUCCESS,  
+    payload: monthlyShrink,
+});
+
+export const FSC_monthlyShrinkDataFailure = (error) => ({
+    type: ShrinkPageActionTypes.FSC_MONTHLY_SHRINK_DATA_FAILURE,
+    payload: error,
+});
 
 export const FSC_requestYearlyShrinkData = () => ({
-    type: FSC_REQUEST_YEARLY_SHRINK_DATA
+    type: ShrinkPageActionTypes.FSC_YEARLY_SHRINK_DATA_START
 });
-export const FSC_receiveYearlyShrinkData = (yearlyShrink) => ({
-    type: FSC_RECEIVE_YEARLY_SHRINK_DATA,  yearlyShrink
-})
 
+export const FSC_receiveYearlyShrinkData = (yearlyShrink) => ({
+    type: ShrinkPageActionTypes.FSC_YEARLY_SHRINK_DATA_SUCCESS,  
+    payload: yearlyShrink
+});
+
+export const FSC_yearlyShrinkDataFailure = (error) => ({
+    type: ShrinkPageActionTypes.FSC_YEARLY_SHRINK_DATA_FAILURE,
+    payload: error,
+});

@@ -27,14 +27,14 @@ chgDataRouter.get("/cyclecount-newest-record", countsController.handleGetLatestC
 chgDataRouter.get("/adjustment-last-update", adjustmentsController.handleGetLastUpdate);
 chgDataRouter.get("/cyclecount-last-update", countsController.handleGetLastUpdate );
 chgDataRouter.get("/not-putaway-last-update", notPutawayController.handleGetLastUpdate );
-chgDataRouter.get("/transtional-last-update", transInvController.handleGetLastUpdate );
+chgDataRouter.get("/transitional-last-update", transInvController.handleGetLastUpdate );
 chgDataRouter.get("/empty-active-last-update", emptyActiveController.handleGetLastUpdate );
 
 //Handle last uploaded times for reports POST
 chgDataRouter.post("/adjustment-last-update-post", adjustmentsController.handlePostLastUpdate);
 chgDataRouter.post("/cyclecount-last-update-post", countsController.handlePostLastUpdate );
 chgDataRouter.post("/not-putaway-last-update-post", notPutawayController.handlePostLastUpdate );
-chgDataRouter.post("/transtional-last-update-post", transInvController.handlePostLastUpdate );
+chgDataRouter.post("/transitional-last-update-post", transInvController.handlePostLastUpdate );
 chgDataRouter.post("/empty-active-last-update-post", emptyActiveController.handlePostLastUpdate );
 
 //Get on hand inventory Daily Entry 
@@ -66,7 +66,7 @@ chgDataRouter.get("/absolute-total-variance-sum", progressView.handleGetAbsTotal
 chgDataRouter.get("/total-expected-qty-sum", progressView.handleGetTotalExpectedQty);
 chgDataRouter.get("/damages", progressView.handleGetDamages);
 chgDataRouter.get("/pr", progressView.handleGetProblemResolve);
-chgDataRouter.get("/not-putaway-0-days-count", progressView.handleGetNotPutawayZero);
+chgDataRouter.get("/not-putaway-0-day-count", progressView.handleGetNotPutawayZero);
 chgDataRouter.get("/not-putaway-1-day-count", progressView.handleGetNotPutawayOne);
 chgDataRouter.get("/not-putaway-2-day-count", progressView.handleGetNotPutawayTwo);
 chgDataRouter.get("/not-putaway-3-day-count", progressView.handleGetNotPutawayThree);
@@ -74,8 +74,8 @@ chgDataRouter.get("/not-putaway-4-day-count", progressView.handleGetNotPutawayFo
 chgDataRouter.get("/not-putaway-5-day-count", progressView.handleGetNotPutawayFive);
 chgDataRouter.get("/not-putaway-6-day-count", progressView.handleGetNotPutawaySix);
 chgDataRouter.get("/not-putaway-7-day-count", progressView.handleGetNotPutawaySeven);
-chgDataRouter.get("/not-putaway-over-7-days-count", progressView.handleGetNotPutawayOverSeven);
-chgDataRouter.get("/transitional-inv-0-days-count", progressView.handleGetTransitionalZero);
+chgDataRouter.get("/not-putaway-over-7-day-count", progressView.handleGetNotPutawayOverSeven);
+chgDataRouter.get("/transitional-inv-0-day-count", progressView.handleGetTransitionalZero);
 chgDataRouter.get("/transitional-inv-1-day-count", progressView.handleGetTransitionalOne);
 chgDataRouter.get("/transitional-inv-2-day-count", progressView.handleGetTransitionalTwo);
 chgDataRouter.get("/transitional-inv-3-day-count", progressView.handleGetTransitionalThree);
@@ -83,7 +83,7 @@ chgDataRouter.get("/transitional-inv-4-day-count", progressView.handleGetTransit
 chgDataRouter.get("/transitional-inv-5-day-count", progressView.handleGetTransitionalFive);
 chgDataRouter.get("/transitional-inv-6-day-count", progressView.handleGetTransitionalSix);
 chgDataRouter.get("/transitional-inv-7-day-count", progressView.handleGetTransitionalSeven);
-chgDataRouter.get("/transitional-inv-over-7-days-count", progressView.handleGetTransitionalOverSeven);
+chgDataRouter.get("/transitional-inv-over-7-day-count", progressView.handleGetTransitionalOverSeven);
 chgDataRouter.get("/transitional-inv-total-count", progressView.handleGetTransitionalTotal);
 chgDataRouter.get("/latest-count-data", progressView.handleGetLatestCountData);
 

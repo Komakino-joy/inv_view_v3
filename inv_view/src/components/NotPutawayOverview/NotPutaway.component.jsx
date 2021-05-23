@@ -1,45 +1,59 @@
-import React, {useEffect, useState} from 'react';
-import { fetchData } from "../../api/api";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { 
+    CHG_requestNotPutaway1,
+    CHG_requestNotPutaway2,
+    CHG_requestNotPutaway3,
+    CHG_requestNotPutaway4,
+    CHG_requestNotPutaway5,
+    CHG_requestNotPutaway6,
+    CHG_requestNotPutaway7,
+    CHG_requestNotPutawayOver7,
+ } from '../../redux/progress.page/progress.page.actions';
+
 import '../styles/styles.css';
 import './NotPutaway.styles.css';
 
-const NotPutaway = ({ apiUrl, businessUnit, headerColor }) => {
+const NotPutaway = ({ headerColor }) => {
 
-    const [currentDay, setCurrentDay] = useState(0);
-    const [oneDay, setOneDay] = useState(0);
-    const [twoDay, setTwoDay] = useState(0);
-    const [threeDay, setThreeDay] = useState(0);
-    const [fourDay, setFourDay] = useState(0);
-    const [fiveDay, setFiveDay] = useState(0);
-    const [sixDay, setSixDay] = useState(0);
-    const [sevenDay, setSevenDay] = useState(0);
-    const [overSevenDay, setOverSevenDay] = useState(0);
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
+    const currentDay = useSelector(state => state.progressData.CHG_notPutaway0);
+    const oneDay = useSelector(state => state.progressData.CHG_notPutaway1);
+    const twoDay = useSelector(state => state.progressData.CHG_notPutaway2);
+    const threeDay = useSelector(state => state.progressData.CHG_notPutaway3);
+    const fourDay = useSelector(state => state.progressData.CHG_notPutaway4);
+    const fiveDay = useSelector(state => state.progressData.CHG_notPutaway5);
+    const sixDay = useSelector(state => state.progressData.CHG_notPutaway6);
+    const sevenDay = useSelector(state => state.progressData.CHG_notPutaway7);
+    const overSevenDay = useSelector(state => state.progressData.CHG_notPutawayOver7);
 
     useEffect(() => {
         let mounted = true;
 
         if (mounted){
-            fetchData(`${apiUrl}${businessUnit}/data/not-putaway-0-days-count`, setCurrentDay);
-            fetchData(`${apiUrl}${businessUnit}/data/not-putaway-1-day-count`, setOneDay);
-            fetchData(`${apiUrl}${businessUnit}/data/not-putaway-2-day-count`, setTwoDay);
-            fetchData(`${apiUrl}${businessUnit}/data/not-putaway-3-day-count`, setThreeDay);
-            fetchData(`${apiUrl}${businessUnit}/data/not-putaway-4-day-count`, setFourDay);
-            fetchData(`${apiUrl}${businessUnit}/data/not-putaway-5-day-count`, setFiveDay);
-            fetchData(`${apiUrl}${businessUnit}/data/not-putaway-6-day-count`, setSixDay);
-            fetchData(`${apiUrl}${businessUnit}/data/not-putaway-7-day-count`, setSevenDay);
-            fetchData(`${apiUrl}${businessUnit}/data/not-putaway-over-7-days-count`, setOverSevenDay);
+            dispatch(CHG_requestNotPutaway1());
+            dispatch(CHG_requestNotPutaway2());
+            dispatch(CHG_requestNotPutaway3());
+            dispatch(CHG_requestNotPutaway4());
+            dispatch(CHG_requestNotPutaway5());
+            dispatch(CHG_requestNotPutaway6());
+            dispatch(CHG_requestNotPutaway7());
+            dispatch(CHG_requestNotPutawayOver7());
         };
 
         return () => {
             mounted = false;
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps    
-    }, []);
+ 
+    }, [dispatch]);
 
     const notPutawayTotal = currentDay + oneDay + twoDay + threeDay + fourDay + fiveDay + sixDay + sevenDay + overSevenDay;
 
     return (
     <div className='not-putaway-container'>
+    <button onClick={() => console.log(state)}  >CLICK ME</button>
         <header className='panel-header'>SKUs NOT PUTAWAY</header>
         <header className='not-putaway-header header-border' style={{backgroundColor: `${headerColor}`}}>Inv Not Putaway Overview</header>
         <div className='breakdown-container body-border'>

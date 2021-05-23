@@ -1,26 +1,35 @@
 import React, {useEffect} from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DailyShrinkReport from '../../components/shrinkreports/dailyshrink/dailyshrinkreport';
 import WeeklyShrinkReport from '../../components/shrinkreports/weeklyshrink/weeklyshrinkreport';
 import MonthlyShrinkReport from '../../components/shrinkreports/monthlyshrink/monthlyshrinkreport';
 import YearlyShrinkReport from '../../components/shrinkreports/yearlyshrink/yearlyshrinkreport';
 import Download from './export';
 
-import {requestDailyShrinkData, requestWeeklyShrinkData, requestMonthlyShrinkData, requestYearlyShrinkData} from '../../redux/shrinkpage/shrinkpage.actions'
+import {
+    CHG_requestDailyShrinkData, 
+    CHG_requestWeeklyShrinkData, 
+    CHG_requestMonthlyShrinkData, 
+    CHG_requestYearlyShrinkData
+} from '../../redux/shrinkpage/shrinkpage.actions'
 
 import './shrink.styles.css'
 
-const ShrinkPage = ({ 
-    history, dailyShrinkData, weeklyShrinkData, monthlyShrinkData, yearlyShrinkData, 
-    requestDailyShrink, requestWeeklyShrink, requestMonthlyShrink, requestYearlyShrink }) => {
+const ShrinkPage = ({ history }) => {
+
+    const dispatch = useDispatch();
+
+    const dailyShrinkData = useSelector(state => state.shrinkData.CHG_dailyShrink);
+    const weeklyShrinkData = useSelector(state => state.shrinkData.CHG_weeklyShrink);
+    const monthlyShrinkData = useSelector(state => state.shrinkData.CHG_monthlyShrink);
+    const yearlyShrinkData = useSelector(state => state.shrinkData.CHG_yearlyShrink);
 
     useEffect(() => {
-        requestDailyShrink()
-        requestWeeklyShrink()
-        requestMonthlyShrink()
-        requestYearlyShrink()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        dispatch(CHG_requestDailyShrinkData());
+        dispatch(CHG_requestWeeklyShrinkData());
+        dispatch(CHG_requestMonthlyShrinkData());
+        dispatch(CHG_requestYearlyShrinkData());
+    }, [dispatch]);
 
     return (
         
@@ -73,20 +82,4 @@ const ShrinkPage = ({
     )
 }
 
-const mapStateToProps = (state) => ({
-    state,
-    dailyShrinkData: state.shrinkData.dailyShrink,
-    weeklyShrinkData: state.shrinkData.weeklyShrink,
-    monthlyShrinkData: state.shrinkData.monthlyShrink,
-    yearlyShrinkData: state.shrinkData.yearlyShrink
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    requestDailyShrink: () => {dispatch(requestDailyShrinkData())},
-    requestWeeklyShrink: () => {dispatch(requestWeeklyShrinkData())},
-    requestMonthlyShrink: () => {dispatch(requestMonthlyShrinkData())},
-    requestYearlyShrink: () => {dispatch(requestYearlyShrinkData())}
-    
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShrinkPage);
+export default ShrinkPage;

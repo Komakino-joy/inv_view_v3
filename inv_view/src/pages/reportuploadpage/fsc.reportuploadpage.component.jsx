@@ -50,8 +50,8 @@ const FscFscReportUploadPage = ({history, seenDailyEntryReport}) => {
                         header={'Transitional Inventory Report Upload'} 
                         uploadType={"transitional-upload-header"} 
                         url={'/upload-transitional-inventory'}
-                        lastUpdatedUrl={"/transtional-last-update"}
-                        lastUpdatedPostUrl={"/transtional-last-update-post"}
+                        lastUpdatedUrl={"/transitional-last-update"}
+                        lastUpdatedPostUrl={"/transitional-last-update-post"}
                     />
                 </TransitionalReportContainer>
                 <AdjustmentReportContainer className="adjustment-report" >

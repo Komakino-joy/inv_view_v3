@@ -27,14 +27,14 @@ fscDataRouter.get("/cyclecount-newest-record", countsController.handleGetLatestC
 fscDataRouter.get("/adjustment-last-update", adjustmentsController.handleGetLastUpdate);
 fscDataRouter.get("/cyclecount-last-update", countsController.handleGetLastUpdate );
 fscDataRouter.get("/not-putaway-last-update", notPutawayController.handleGetLastUpdate );
-fscDataRouter.get("/transtional-last-update", transInvController.handleGetLastUpdate );
+fscDataRouter.get("/transitional-last-update", transInvController.handleGetLastUpdate );
 fscDataRouter.get("/empty-active-last-update", emptyActiveController.handleGetLastUpdate );
 
 //Handle last uploaded times for reports POST
 fscDataRouter.post("/adjustment-last-update-post", adjustmentsController.handlePostLastUpdate);
 fscDataRouter.post("/cyclecount-last-update-post", countsController.handlePostLastUpdate );
 fscDataRouter.post("/not-putaway-last-update-post", notPutawayController.handlePostLastUpdate );
-fscDataRouter.post("/transtional-last-update-post", transInvController.handlePostLastUpdate );
+fscDataRouter.post("/transitional-last-update-post", transInvController.handlePostLastUpdate );
 fscDataRouter.post("/empty-active-last-update-post", emptyActiveController.handlePostLastUpdate );
 
 //Get on hand inventory Daily Entry 
@@ -66,7 +66,7 @@ fscDataRouter.get("/absolute-total-variance-sum", progressView.handleGetAbsTotal
 fscDataRouter.get("/total-expected-qty-sum", progressView.handleGetTotalExpectedQty);
 fscDataRouter.get("/damages", progressView.handleGetDamages);
 fscDataRouter.get("/pr", progressView.handleGetProblemResolve);
-fscDataRouter.get("/not-putaway-0-days-count", progressView.handleGetNotPutawayZero);
+fscDataRouter.get("/not-putaway-0-day-count", progressView.handleGetNotPutawayZero);
 fscDataRouter.get("/not-putaway-1-day-count", progressView.handleGetNotPutawayOne);
 fscDataRouter.get("/not-putaway-2-day-count", progressView.handleGetNotPutawayTwo);
 fscDataRouter.get("/not-putaway-3-day-count", progressView.handleGetNotPutawayThree);
@@ -74,8 +74,8 @@ fscDataRouter.get("/not-putaway-4-day-count", progressView.handleGetNotPutawayFo
 fscDataRouter.get("/not-putaway-5-day-count", progressView.handleGetNotPutawayFive);
 fscDataRouter.get("/not-putaway-6-day-count", progressView.handleGetNotPutawaySix);
 fscDataRouter.get("/not-putaway-7-day-count", progressView.handleGetNotPutawaySeven);
-fscDataRouter.get("/not-putaway-over-7-days-count", progressView.handleGetNotPutawayOverSeven);
-fscDataRouter.get("/transitional-inv-0-days-count", progressView.handleGetTransitionalZero);
+fscDataRouter.get("/not-putaway-over-7-day-count", progressView.handleGetNotPutawayOverSeven);
+fscDataRouter.get("/transitional-inv-0-day-count", progressView.handleGetTransitionalZero);
 fscDataRouter.get("/transitional-inv-1-day-count", progressView.handleGetTransitionalOne);
 fscDataRouter.get("/transitional-inv-2-day-count", progressView.handleGetTransitionalTwo);
 fscDataRouter.get("/transitional-inv-3-day-count", progressView.handleGetTransitionalThree);
@@ -83,7 +83,7 @@ fscDataRouter.get("/transitional-inv-4-day-count", progressView.handleGetTransit
 fscDataRouter.get("/transitional-inv-5-day-count", progressView.handleGetTransitionalFive);
 fscDataRouter.get("/transitional-inv-6-day-count", progressView.handleGetTransitionalSix);
 fscDataRouter.get("/transitional-inv-7-day-count", progressView.handleGetTransitionalSeven);
-fscDataRouter.get("/transitional-inv-over-7-days-count", progressView.handleGetTransitionalOverSeven);
+fscDataRouter.get("/transitional-inv-over-7-day-count", progressView.handleGetTransitionalOverSeven);
 fscDataRouter.get("/transitional-inv-total-count", progressView.handleGetTransitionalTotal);
 fscDataRouter.get("/latest-count-data", progressView.handleGetLatestCountData);
 

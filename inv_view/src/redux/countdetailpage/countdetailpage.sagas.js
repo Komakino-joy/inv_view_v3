@@ -3,13 +3,11 @@ import {call, put, takeLatest, all} from 'redux-saga/effects';
 import CountDetailActionTypes from './countdetailpage.types';
 
 import { 
-    CHG_fetchDailyCount, 
-    CHG_fetchUserCount, 
-    CHG_fetchUserCountByDay,
-    
-    FSC_fetchDailyCount, 
-    FSC_fetchUserCount, 
-    FSC_fetchUserCountByDay,
+    CHG_API_URL,
+    FSC_API_URL,
+    httpFetchDailyCount, 
+    httpFetchUserCount, 
+    httpFetchUserCountByDay,
      } from '../../api/api';
 
 import { 
@@ -31,7 +29,7 @@ import {
 
 function* CHG_getDailyCount(){
     try{
-        const dailyCount = yield CHG_fetchDailyCount();
+        const dailyCount = yield httpFetchDailyCount(`${CHG_API_URL}`);
         yield put(CHG_receiveDailyCountData(dailyCount));
     } catch (error) {
         yield put(CHG_dailyCountDataFailure(error));
@@ -40,7 +38,7 @@ function* CHG_getDailyCount(){
 
 function* CHG_getUserCount(){
     try{
-        const userCount = yield CHG_fetchUserCount();
+        const userCount = yield httpFetchUserCount(`${CHG_API_URL}`);
         yield put(CHG_receiveUserCountData(userCount))
     } catch (error) {
         yield put(CHG_userCountDataFailure(error));
@@ -49,7 +47,7 @@ function* CHG_getUserCount(){
 
 function* CHG_getUserCountByDay(){
     try{
-        const userCountByDay = yield CHG_fetchUserCountByDay();
+        const userCountByDay = yield httpFetchUserCountByDay(`${CHG_API_URL}`);
         yield put(CHG_receiveUserCountByDay(userCountByDay));
     } catch (error) {
         yield put(CHG_userCountByDayFailure(error));
@@ -57,10 +55,9 @@ function* CHG_getUserCountByDay(){
 };
 
 
-
 function* FSC_getDailyCount(){
     try{
-        const FSC_dailyCount = yield FSC_fetchDailyCount();
+        const FSC_dailyCount = yield httpFetchDailyCount(`${FSC_API_URL}`);
         yield put(FSC_receiveDailyCountData(FSC_dailyCount));
     } catch (error) {
         yield put(FSC_dailyCountDataFailure(error));
@@ -69,7 +66,7 @@ function* FSC_getDailyCount(){
 
 function* FSC_getUserCount(){
     try{
-        const FSC_userCount = yield FSC_fetchUserCount();
+        const FSC_userCount = yield httpFetchUserCount(`${FSC_API_URL}`);
         yield put(FSC_receiveUserCountData(FSC_userCount));
     } catch (error) {
         yield put(FSC_userCountDataFailure(error));
@@ -78,7 +75,7 @@ function* FSC_getUserCount(){
 
 function* FSC_getUserCountByDay(){
     try{
-        const FSC_userCountByDay = yield FSC_fetchUserCountByDay();
+        const FSC_userCountByDay = yield httpFetchUserCountByDay(`${FSC_API_URL}`);
         yield put(FSC_receiveUserCountByDay(FSC_userCountByDay));
     } catch (error) {
         yield put(FSC_userCountByDayFailure(error));

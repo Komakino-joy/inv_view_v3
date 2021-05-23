@@ -1,43 +1,54 @@
-import React, {useEffect, useState} from 'react';
-import { fetchData } from "../../api/api";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { 
+    CHG_requestTransitional1,
+    CHG_requestTransitional2,
+    CHG_requestTransitional3,
+    CHG_requestTransitional4,
+    CHG_requestTransitional5,
+    CHG_requestTransitional6,
+    CHG_requestTransitional7,
+    CHG_requestTransitionalOver7,
+ } from '../../redux/progress.page/progress.page.actions';
+
 import '../styles/styles.css';
 import './TransitionalOverview.styles.css';
 
-const TransitionalOverview = ({ apiUrl, businessUnit, headerColor }) => {
+const TransitionalOverview = ({ headerColor }) => {
 
 
-    const [currentDay, setCurrentDay] = useState(0);
-    const [oneDay, setOneDay] = useState(0);
-    const [twoDay, setTwoDay] = useState(0);
-    const [threeDay, setThreeDay] = useState(0);
-    const [fourDay, setFourDay] = useState(0);
-    const [fiveDay, setFiveDay] = useState(0);
-    const [sixDay, setSixDay] = useState(0);
-    const [sevenDay, setSevenDay] = useState(0);
-    const [overSevenDay, setOverSevenDay] = useState(0);
-    const [total, setTotal] = useState(0);
+    const dispatch = useDispatch();
+
+    const currentDay = useSelector(state => state.progressData.CHG_transitional0);
+    const oneDay = useSelector(state => state.progressData.CHG_transitional1);
+    const twoDay = useSelector(state => state.progressData.CHG_transitional2);
+    const threeDay = useSelector(state => state.progressData.CHG_transitional3);
+    const fourDay = useSelector(state => state.progressData.CHG_transitional4);
+    const fiveDay = useSelector(state => state.progressData.CHG_transitional5);
+    const sixDay = useSelector(state => state.progressData.CHG_transitional6);
+    const sevenDay = useSelector(state => state.progressData.CHG_transitional7);
+    const overSevenDay = useSelector(state => state.progressData.CHG_transitionalOver7);
 
     useEffect(() => {
         let mounted = true;
 
         if (mounted){
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-0-days-count`, setCurrentDay);
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-1-day-count`, setOneDay);
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-2-day-count`, setTwoDay);
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-3-day-count`, setThreeDay);
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-4-day-count`, setFourDay);
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-5-day-count`, setFiveDay);
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-6-day-count`, setSixDay);
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-7-day-count`, setSevenDay);
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-over-7-days-count`, setOverSevenDay);
-            fetchData(`${apiUrl}${businessUnit}/data/transitional-inv-total-count`, setTotal)
+            dispatch(CHG_requestTransitional1());
+            dispatch(CHG_requestTransitional2());
+            dispatch(CHG_requestTransitional3());
+            dispatch(CHG_requestTransitional4());
+            dispatch(CHG_requestTransitional5());
+            dispatch(CHG_requestTransitional6());
+            dispatch(CHG_requestTransitional7());
+            dispatch(CHG_requestTransitionalOver7());
         };
 
         return () => {
             mounted = false;
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+
+    }, [dispatch]);
 
     return (
     
@@ -87,10 +98,10 @@ const TransitionalOverview = ({ apiUrl, businessUnit, headerColor }) => {
                 <label className='txt-label'>Total: </label>
             </div>
             <div className='totals-qty'>
-                <label className='total'>{total ? total[0].countOfArticle : 0}</label>
+                {/* <label className='total'>{total ? total[0].countOfArticle : 0}</label> */}
             </div>
             <div className='totals-qty'>
-                <label className='total'>{total ? total[0].onHandQty : 0}</label>
+                {/* <label className='total'>{total ? total[0].onHandQty : 0}</label> */}
             </div>
         </div>
 

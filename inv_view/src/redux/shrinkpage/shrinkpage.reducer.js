@@ -1,43 +1,87 @@
-import { 
-    RECEIVE_DAILY_SHRINK_DATA,  
-    RECEIVE_WEEKLY_SHRINK_DATA,
-    RECEIVE_MONTHLY_SHRINK_DATA, 
-    RECEIVE_YEARLY_SHRINK_DATA,
-    FSC_RECEIVE_DAILY_SHRINK_DATA, 
-    FSC_RECEIVE_WEEKLY_SHRINK_DATA, 
-    FSC_RECEIVE_MONTHLY_SHRINK_DATA, 
-    FSC_RECEIVE_YEARLY_SHRINK_DATA, 
-} from './shrinkpage.actions';
+import ShrinkPageActionTypes from './shrink-page.types';
 
-const INITIAL_STATE = {}
+const INITIAL_STATE = {
+    CHG_dailyShrink:null,
+    CHG_weeklyShrink:null,
+    CHG_monthlyShrink:null,
+    CHG_yearlyShrink:null,
+    FSC_dailyShrink:null,
+    FSC_weeklyShrink:null,
+    FSC_monthlyShrink:null,
+    FSC_yearlyShrink:null,
+    error:null,
+};
 
+const shrinkData = (state = INITIAL_STATE, action) => {
+    switch (action.type) {
+        case ShrinkPageActionTypes.CHG_DAILY_SHRINK_DATA_SUCCESS:
+            return {
+                ...state, 
+                CHG_dailyShrink:action.payload,
+                error:null,
+            };
 
-const shrinkData = (state = INITIAL_STATE, {type, dailyShrink, weeklyShrink, monthlyShrink, yearlyShrink}) => {
-    switch (type) {
-        case RECEIVE_DAILY_SHRINK_DATA:
-            return {...state, dailyShrink}
+        case ShrinkPageActionTypes.CHG_WEEKLY_SHRINK_DATA_SUCCESS:
+            return {
+                ...state, 
+                CHG_weeklyShrink:action.payload,
+                error:null,
+            };
 
-        case RECEIVE_WEEKLY_SHRINK_DATA:
-            return {...state, weeklyShrink}
+        case ShrinkPageActionTypes.CHG_MONTHLY_SHRINK_DATA_SUCCESS:
+            return {
+                ...state, 
+                CHG_monthlyShrink:action.payload,
+                error:null,
+            };
 
-        case RECEIVE_MONTHLY_SHRINK_DATA:
-            return {...state, monthlyShrink}
+        case ShrinkPageActionTypes.CHG_YEARLY_SHRINK_DATA_SUCCESS:
+            return {
+                ...state, 
+                CHG_yearlyShrink:action.payload,
+                error:null,
+            };
 
-        case RECEIVE_YEARLY_SHRINK_DATA:
-            return {...state, yearlyShrink}
+        case ShrinkPageActionTypes.FSC_DAILY_SHRINK_DATA_SUCCESS:
+            return {
+                ...state, 
+                FSC_dailyShrink:action.payload,
+                error:null,
+            };
 
-        case FSC_RECEIVE_DAILY_SHRINK_DATA:
-            return {...state, dailyShrink}
+        case ShrinkPageActionTypes.FSC_WEEKLY_SHRINK_DATA_SUCCESS:
+            return {
+                ...state, 
+                FSC_weeklyShrink:action.payload,
+                error:null,
+            };
 
-        case FSC_RECEIVE_WEEKLY_SHRINK_DATA:
-            return {...state, weeklyShrink}
+        case ShrinkPageActionTypes.FSC_MONTHLY_SHRINK_DATA_SUCCESS:
+            return {
+                ...state, 
+                FSC_monthlyShrink:action.payload,
+                error:null,
+            };
 
-        case FSC_RECEIVE_MONTHLY_SHRINK_DATA:
-            return {...state, monthlyShrink}
-
-        case FSC_RECEIVE_YEARLY_SHRINK_DATA:
-            return {...state, yearlyShrink}
-            
+        case ShrinkPageActionTypes.FSC_YEARLY_SHRINK_DATA_SUCCESS:
+            return {
+                ...state, 
+                FSC_yearlyShrink:action.payload,
+                error:null,
+            };
+    
+        case ShrinkPageActionTypes.CHG_DAILY_SHRINK_DATA_FAILURE:
+        case ShrinkPageActionTypes.CHG_WEEKLY_SHRINK_DATA_FAILURE:
+        case ShrinkPageActionTypes.CHG_MONTHLY_SHRINK_DATA_FAILURE: 
+        case ShrinkPageActionTypes.CHG_YEARLY_SHRINK_DATA_FAILURE: 
+        case ShrinkPageActionTypes.FSC_DAILY_SHRINK_DATA_FAILURE:
+        case ShrinkPageActionTypes.FSC_WEEKLY_SHRINK_DATA_FAILURE:
+        case ShrinkPageActionTypes.FSC_MONTHLY_SHRINK_DATA_FAILURE: 
+        case ShrinkPageActionTypes.FSC_YEARLY_SHRINK_DATA_FAILURE:     
+            return{
+            ...state,
+            error:action.payload,
+            }       
 
         default:
             return state;

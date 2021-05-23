@@ -1,5 +1,5 @@
-export const CHG_API_URL = 'http://localhost:5051/';
-export const FSC_API_URL = 'http://localhost:5050/'
+export const CHG_API_URL = 'http://localhost:5051/chg';
+export const FSC_API_URL = 'http://localhost:5050/fsc';
 
 export const fetchData = (url, setStateFunction ) => {
     fetch(url)
@@ -7,11 +7,9 @@ export const fetchData = (url, setStateFunction ) => {
     .then(data => setStateFunction(data))
 };
 
-// ^ --------------------------CHG API CALLS ------------------------
-
-export const fetchDailyShrink = async() => {
+export const httpFetchDailyShrink = async(url) => {
     try{
-        const response = await fetch(`${CHG_API_URL}chg/data/on-hand-inventory-by-day`);
+        const response = await fetch(`${url}/data/on-hand-inventory-by-day`);
         const dailyShrink = await response.json();
         return dailyShrink
     } catch(err) {
@@ -19,9 +17,9 @@ export const fetchDailyShrink = async() => {
     };
 };
 
-export const fetchWeeklyShrink = async() => {
+export const httpFetchWeeklyShrink = async(url) => {
     try{
-        const response = await fetch(`${CHG_API_URL}chg/data/on-hand-inventory-by-week`);
+        const response = await fetch(`${url}/data/on-hand-inventory-by-week`);
         const weeklyShrink = await response.json();
         return weeklyShrink
     } catch(err) {
@@ -29,9 +27,9 @@ export const fetchWeeklyShrink = async() => {
     };
 };
 
-export const fetchMonthlyShrink = async() => {
+export const httpFetchMonthlyShrink = async(url) => {
     try{
-        const response = await fetch(`${CHG_API_URL}chg/data/on-hand-inventory-by-month`);
+        const response = await fetch(`${url}/data/on-hand-inventory-by-month`);
         const monthlyShrink = await response.json();
         return monthlyShrink
     } catch(err) {
@@ -39,19 +37,19 @@ export const fetchMonthlyShrink = async() => {
     };
 };
 
-export const fetchYearlyShrink = async() => {
+export const httpFetchYearlyShrink = async(url) => {
     try{
-        const response = await fetch(`${CHG_API_URL}chg/data/on-hand-inventory-by-year`);
+        const response = await fetch(`${url}/data/on-hand-inventory-by-year`);
         const yearlyShrink = await response.json();
         return yearlyShrink
-    } catch(err) {
+    } catch(err) {  
         console.log(err)
     };
 };
 
-export const CHG_fetchDailyCount = async() => {
+export const httpFetchDailyCount = async(url) => {
     try{
-        const response = await fetch(`${CHG_API_URL}chg/data/counts-by-day`);
+        const response = await fetch(`${url}/data/counts-by-day`);
         const dailyCount = await response.json();
         return dailyCount
     } catch(err) {
@@ -60,9 +58,9 @@ export const CHG_fetchDailyCount = async() => {
 };
 
 
-export const CHG_fetchUserCount = async() => {
+export const httpFetchUserCount = async(url) => {
     try{
-        const response = await fetch(`${CHG_API_URL}chg/data/counts-by-user`);
+        const response = await fetch(`${url}/data/counts-by-user`);
         const userCount = await response.json();
         return userCount
     } catch(err) {
@@ -70,9 +68,9 @@ export const CHG_fetchUserCount = async() => {
     };
 };
 
-export const CHG_fetchUserCountByDay = async() => {
+export const httpFetchUserCountByDay = async(url) => {
     try{
-        const response = await fetch(`${CHG_API_URL}chg/data/counts-by-user-by-day`);
+        const response = await fetch(`${url}/data/counts-by-user-by-day`);
         const userCount = await response.json();
         return userCount
     } catch(err) {
@@ -81,186 +79,126 @@ export const CHG_fetchUserCountByDay = async() => {
 };
 
 
-export const CHG_fetchOccupiedLocsUncounted = async() => {
+export const httpFetchOccupiedLocsUncounted = async(url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/occupied-locations-uncounted`);
+        const response = await fetch(`${url}/data/occupied-locations-uncounted`);
         const occupiedLocsUncounted = await response.json();
         return occupiedLocsUncounted
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
-export const CHG_fetchOccupiedLocsCounted = async() => {
+export const httpFetchOccupiedLocsCounted = async(url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/occupied-locations-counted`);
+        const response = await fetch(`${url}/data/occupied-locations-counted`);
         const occupiedLocsCounted = await response.json();
         return occupiedLocsCounted
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
 
-export const CHG_fetchEmptyLocsCounted = async() => {
+export const httpFetchEmptyLocsCounted = async(url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/empty-locations-counted`);
+        const response = await fetch(`${url}/data/empty-locations-counted`);
         const emptyLocsCounted = await response.json();
         return emptyLocsCounted
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
 
-export const CHG_fetchEmptyLocsUncounted = async() => {
+export const httpFetchEmptyLocsUncounted = async(url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/empty-locations-uncounted`);
+        const response = await fetch(`${url}/data/empty-locations-uncounted`);
         const emptyLocsUncounted = await response.json();
         return emptyLocsUncounted
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
 
-export const CHG_fetchTotalExpectedQty = async() => {
+export const httpFetchTotalExpectedQty = async(url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/total-expected-qty-sum`);
+        const response = await fetch(`${url}/data/total-expected-qty-sum`);
         const sum = await response.json();
         return sum
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
-export const CHG_fetchTotalVarianceQty = async() => {
+export const httpFetchTotalVarianceQty = async(url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/total-variance-sum`);
+        const response = await fetch(`${url}/data/total-variance-sum`);
         const sum = await response.json();
         return sum
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
 
-export const CHG_fetchUniqueLocsCounted = async() => {
+export const httpFetchUniqueLocsCounted = async(url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/count-unique-locations-counted`);
+        const response = await fetch(`${url}/data/count-unique-locations-counted`);
         const count = await response.json();
         return count
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
-export const CHG_fetchTotalCountsWithVariance = async() => {
+export const httpFetchTotalCountsWithVariance = async(url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/count-variances`);
+        const response = await fetch(`${url}/data/count-variances`);
         const count = await response.json();
         return count
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
-export const CHG_fetchPR = async() => {
+export const httpFetchPR = async(url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/pr`);
+        const response = await fetch(`${url}/data/pr`);
         const count = await response.json();
         return count;
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
-export const CHG_fetchDmg = async () => {
+export const httpFetchDmg = async (url) => {
     try {
-        const response = await fetch(`${CHG_API_URL}chg/data/damages`);
+        const response = await fetch(`${url}/data/damages`);
         const count = await response.json();
         return count;
     } catch (error) {
-        console.log(error);
+        return error;;
     };
 };
 
-
-// ^ --------------------------FSC API CALLS ------------------------
-
-export const FSC_fetchDailyShrink = async() => {
-    try{
-        const response = await fetch(`${FSC_API_URL}fsc/data/on-hand-inventory-by-day`);
-        const dailyShrink = await response.json();
-        return dailyShrink
-    } catch(err) {
-        console.log(err)
-    }
+export const httpFetchNotPutawayByDay = async(url, day) => {
+    try {
+        const response = await fetch(`${url}/data/not-putaway-${day}-day-count`);
+        const count = await response.json();
+        return count
+    } catch (error) {
+        return error;
+    };
 };
 
-
-export const FSC_fetchWeeklyShrink = async() => {
-    try{
-        const response = await fetch(`${FSC_API_URL}fsc/data/on-hand-inventory-by-week`);
-        const weeklyShrink = await response.json();
-        return weeklyShrink
-    } catch(err) {
-        console.log(err)
-    }
+export const httpFetchTransitionalByDay = async(url, day) => {
+    try {
+        const response = await fetch(`${url}/data/transitional-inv-${day}-day-count`);
+        const count = await response.json();
+        return count
+    } catch (error) {
+        return error;
+    };
 };
-
-
-export const FSC_fetchMonthlyShrink = async() => {
-    try{
-        const response = await fetch(`${FSC_API_URL}fsc/data/on-hand-inventory-by-month`);
-        const monthlyShrink = await response.json();
-        return monthlyShrink
-    } catch(err) {
-        console.log(err)
-    }
-};
-
-export const FSC_fetchYearlyShrink = async() => {
-    try{
-        const response = await fetch(`${FSC_API_URL}fsc/data/on-hand-inventory-by-year`);
-        const yearlyShrink = await response.json();
-        return yearlyShrink
-    } catch(err) {
-        console.log(err)
-    }
-};
-
-
-export const FSC_fetchDailyCount = async() => {
-    try{
-        const response = await fetch(`${FSC_API_URL}fsc/data/counts-by-day`);
-        const dailyCount = await response.json();
-        return dailyCount
-    } catch(err) {
-        console.log(err)
-    }
-};
-
-
-export const FSC_fetchUserCount = async() => {
-    try{
-        const response = await fetch(`${FSC_API_URL}fsc/data/counts-by-user`);
-        const userCount = await response.json();
-        return userCount
-    } catch(err) {
-        console.log(err)
-    }
-};
-
-export const FSC_fetchUserCountByDay = async() => {
-    try{
-        const response = await fetch(`${FSC_API_URL}fsc/data/counts-by-user-by-day`);
-        const userCount = await response.json();
-        return userCount
-    } catch(err) {
-        console.log(err)
-    }
-};
-
-
-

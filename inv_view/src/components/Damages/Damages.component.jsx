@@ -27,7 +27,6 @@ const ProblemResolve = ({ headerColor }) => {
 
     return (
     <div className='damages-container'>
-    <button onClick={() => console.log(damages)} >CLick me</button>
         <header className='panel-header'>DAMAGES</header>
         <header className='damages-header header-border' style={{backgroundColor: `${headerColor}`}}>Damages Overview</header>
         <div className='breakdown-container body-border'>

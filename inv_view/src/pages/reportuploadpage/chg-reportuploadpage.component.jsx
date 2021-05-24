@@ -32,7 +32,7 @@ const ReportUploadPage = ({history}) => {
                         <ReportUpload 
                             header={'Empty Active Report Upload'} 
                             uploadType={"empty-active-upload-header"}
-                            url={"/upload-empty-active-locations"}
+                            apiRoute={"/excel/upload-empty-active-locations"}
                             lastUpdatedUrl={"/empty-active-last-update"}
                             lastUpdatedPostUrl={'/empty-active-last-update-post'}
                         />
@@ -41,7 +41,7 @@ const ReportUploadPage = ({history}) => {
                         <ReportUpload 
                             header={'Not Putaway Report Upload'} 
                             uploadType={"not-putaway-upload-header"} 
-                            url={"/upload-not-putaway"}
+                            apiRoute={"/excel/upload-not-putaway"}
                             lastUpdatedUrl={"/not-putaway-last-update"}
                             lastUpdatedPostUrl={"/not-putaway-last-update-post"}
                         />
@@ -50,7 +50,7 @@ const ReportUploadPage = ({history}) => {
                         <ReportUpload 
                             header={'Transitional Inventory Report Upload'} 
                             uploadType={"transitional-upload-header"} 
-                            url={'/upload-transitional-inventory'}
+                            apiRoute={'/excel/upload-transitional-inventory'}
                             lastUpdatedUrl={"/transitional-last-update"}
                             lastUpdatedPostUrl={"/transitional-last-update-post"}
                         />
@@ -60,7 +60,7 @@ const ReportUploadPage = ({history}) => {
                             header={'Adjustment Report Upload'} 
                             dataTracked 
                             uploadType={"adjustment-data-upload-header"}
-                            url={"/upload-adjustments"}
+                            apiRoute={"/excel/upload-adjustments"}
                             lastUpdatedUrl={"/adjustment-last-update"}
                             lastUpdatedPostUrl={"/adjustment-last-update-post"}
                             newestRecordUrl={"/adjustment-newest-record"}
@@ -72,7 +72,7 @@ const ReportUploadPage = ({history}) => {
                         <ReportUpload 
                             header={'Cycle Count Report Upload'} 
                             dataTracked uploadType={"cycle-count-upload-header"}
-                            url={"/upload-counts"}
+                            apiRoute={"/excel/upload-counts"}
                             lastUpdatedUrl={"/cyclecount-last-update"}
                             lastUpdatedPostUrl={"/cyclecount-last-update-post"}
                             newestRecordUrl={"/cyclecount-newest-record"}

@@ -1,7 +1,24 @@
 import axios from 'axios';
+const source = axios.CancelToken.source();
 
 export const CHG_API_URL = 'http://localhost:5051/chg';
 export const FSC_API_URL = 'http://localhost:5050/fsc';
+
+
+export const httpFileUpload = async(baseUrl, apiRoute, file) => {
+    console.log(baseUrl+apiRoute)
+    const formData = new FormData();
+    formData.append(
+        "file",
+        file,
+
+      ); 
+    axios.post(`${baseUrl}${apiRoute}`, 
+                formData, 
+                {cancelToken: source.token})
+                .then(res => { alert(res.data.message) })
+                .catch(error => { alert(error)});
+};
 
 export const fetchData = (url, setStateFunction ) => {
     fetch(url)

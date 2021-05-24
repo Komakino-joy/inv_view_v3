@@ -3,7 +3,7 @@ import React from 'react';
 import '../styles/styles.css';
 import './damages.styles.css';
 
-const ProblemResolve = ({ headerColor, damages }) => {
+const Damages = ({ headerColor, damages }) => {
 
     return (
     <div className='damages-container'>
@@ -14,11 +14,11 @@ const ProblemResolve = ({ headerColor, damages }) => {
                 <label>Total Damages: </label>
             </div>
             <div className='breakdown-qty'>
-                <label>{damages ? damages : 0}</label>
+                <label>{damages ? damages : null}</label>
             </div>
         </div>
     </div>
     );
 }
 
-export default ProblemResolve;
+export default Damages;

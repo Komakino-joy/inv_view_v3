@@ -78,7 +78,7 @@ function ProgressPage({ history }) {
   const transitionalSevenDay = useSelector(state => state.progressData.CHG_transitional7);
   const transitionalOverSevenDay = useSelector(state => state.progressData.CHG_transitionalOver7);
   const problemResolve = useSelector(state => state.progressData.CHG_pr)
-  const damages = useSelector(state => state.progressData.damages[0].damage);
+  const damages = useSelector(state => state.progressData.CHG_damages.damage);
   const headerColor = '#472f91';
 
   useEffect(() => {
@@ -128,8 +128,8 @@ function ProgressPage({ history }) {
 
   return (
     <div>
-        <nav onClick = {() => history.push('/fnt-shrink-data')}>Shrink Reports</nav>
-        <nav className='secondary-nav' onClick = {() => history.push('/fnt-report-upload')}>Report Uploads</nav>
+        <nav onClick = {() => history.push('/fnt-chg-shrink-data')}>Shrink Reports</nav>
+        <nav className='secondary-nav' onClick = {() => history.push('/fnt-chg-report-upload')}>Report Uploads</nav>
     <div className="App">
       
         <div className='active-locs' >

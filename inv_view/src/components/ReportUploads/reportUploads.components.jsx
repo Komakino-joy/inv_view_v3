@@ -2,18 +2,25 @@ import React,{useState, useEffect} from 'react';
 import axios from 'axios';
 
 import { CHG_API_URL } from '../../api/api';
- 
+
 import './report-uploads.styles.css';
 import LoadingOverlay from 'react-loading-overlay';
 
+import { useDispatch } from 'react-redux';
+
+import { 
+  fileUploadStart
+} from '../../redux/file-upload/file-upload.actions';
 
 const ReportUpload =({
-  header, dataTracked, uploadType, url, dupeCheck, dupeDelete, 
+  header, dataTracked, uploadType, apiRoute, dupeCheck, dupeDelete, 
   lastUpdatedUrl, newestRecordUrl, lastUpdatedPostUrl}) => {
+
+    const dispatch = useDispatch();
 
     const source = axios.CancelToken.source();
 
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState('')
     const [inputKey, setInputKey] = useState(null)
     const [dupes, setDupes] = useState(null)
     const [lastUpdated, setLastUpdated] = useState(null)
@@ -29,17 +36,17 @@ const ReportUpload =({
 
             if (header === 'Adjustment Report Upload' || header === 'Cycle Count Report Upload'){
 
-              let getDupeCheck = await axios.get(`${CHG_API_URL}chg/data${dupeCheck}`, {cancelToken: source.token});
+              let getDupeCheck = await axios.get(`${CHG_API_URL}/data${dupeCheck}`, {cancelToken: source.token});
               setDupes(getDupeCheck.data)
 
-              let getNewestRec = await axios.get(`${CHG_API_URL}chg/data${newestRecordUrl}`, {cancelToken: source.token});
+              let getNewestRec = await axios.get(`${CHG_API_URL}/data${newestRecordUrl}`, {cancelToken: source.token});
               setNewestRecord(getNewestRec.data)
             
             } else {
 
             }
 
-            let getLastUpdates = await axios.get(`${CHG_API_URL}chg/data${lastUpdatedUrl}`, {cancelToken: source.token});
+            let getLastUpdates = await axios.get(`${CHG_API_URL}/data${lastUpdatedUrl}`, {cancelToken: source.token});
             setLastUpdated(getLastUpdates.data)
           })()
         ]);
@@ -67,34 +74,29 @@ const ReportUpload =({
       setInputKey(randomString);
     }
 
+
     const onFileUpload = async() => {
-      const formData = new FormData();
-      try{
-        formData.append(
-          "file",
-          file
-        );  
+
         if (file){
           setLoading(true)
         await Promise.all([
           (async() => {
-
-          await axios.post(`${CHG_API_URL}chg/excel${url}`, formData, {cancelToken: source.token})
-          .then(res => { alert(res.data.message) });
           
-          await axios.post(`${CHG_API_URL}chg/data${lastUpdatedPostUrl}`, {cancelToken: source.token})
+          dispatch(fileUploadStart({file, apiRoute: `${apiRoute}`}))
+          
+          await axios.post(`${CHG_API_URL}/data${lastUpdatedPostUrl}`, {cancelToken: source.token})
       
           if (header === 'Adjustment Report Upload' || header === 'Cycle Count Report Upload'){
       
-            let getDupeCheck = await axios.get(`${CHG_API_URL}chg/data${dupeCheck}`, {cancelToken: source.token});
+            let getDupeCheck = await axios.get(`${CHG_API_URL}/data${dupeCheck}`, {cancelToken: source.token});
                 setDupes(getDupeCheck.data)
         
-            let getNewestRec = await axios.get(`${CHG_API_URL}chg/data${newestRecordUrl}`, {cancelToken: source.token});
+            let getNewestRec = await axios.get(`${CHG_API_URL}/data${newestRecordUrl}`, {cancelToken: source.token});
             setNewestRecord(getNewestRec.data)
           
           } else {}
       
-          let getLastUpdates = await axios.get(`${CHG_API_URL}chg/data${lastUpdatedUrl}`, {cancelToken: source.token});
+          let getLastUpdates = await axios.get(`${CHG_API_URL}/data${lastUpdatedUrl}`, {cancelToken: source.token});
           setLastUpdated(getLastUpdates.data)
       
           clearFileInput();
@@ -105,14 +107,12 @@ const ReportUpload =({
       }else{
         alert("Please select a file.")
       }
-      } catch {
-        alert("Please select a file.")
-      }
 
     };
 
+  
     const deleteDuplicates = () =>{
-      axios.delete(`${CHG_API_URL}chg/data${dupeDelete}`)
+      axios.delete(`${CHG_API_URL}/data${dupeDelete}`)
       .then(res => alert('Duplicate records deleted!'))
       .then(setDupes(0))
       .catch(err => alert('Something went wrong, unable to delete records at this time.'))
@@ -135,6 +135,7 @@ const ReportUpload =({
                   onChange={onFileChange} 
                   accept=".xlsx"
                   key={inputKey || '' }
+                  value=''
                 />
             </form>
             </div>

@@ -94,25 +94,25 @@ export function* CHG_requestUserCountByDaySaga(){
     yield takeLatest(CountDetailActionTypes.CHG_REQUEST_USER_COUNT_BY_DAY_DATA, CHG_getUserCountByDay)
 }
 
-export function* FSC_requestDailyCountSaga(){
-    yield takeLatest(CountDetailActionTypes.FSC_REQUEST_DAILY_COUNT_DATA, FSC_getDailyCount)
-}
+// export function* FSC_requestDailyCountSaga(){
+//     yield takeLatest(CountDetailActionTypes.FSC_REQUEST_DAILY_COUNT_DATA, FSC_getDailyCount)
+// }
 
-export function* FSC_requestUserCountSaga(){
-    yield takeLatest(CountDetailActionTypes.FSC_REQUEST_USER_COUNT_DATA, FSC_getUserCount)
-}
+// export function* FSC_requestUserCountSaga(){
+//     yield takeLatest(CountDetailActionTypes.FSC_REQUEST_USER_COUNT_DATA, FSC_getUserCount)
+// }
 
-export function* FSC_requestUserCountByDaySaga(){
-    yield takeLatest(CountDetailActionTypes.FSC_REQUEST_USER_COUNT_BY_DAY_DATA, FSC_getUserCountByDay)
-}
+// export function* FSC_requestUserCountByDaySaga(){
+//     yield takeLatest(CountDetailActionTypes.FSC_REQUEST_USER_COUNT_BY_DAY_DATA, FSC_getUserCountByDay)
+// }
 
 export function* countSagas(){
     yield all([
         call(CHG_requestDailyCountSaga),
         call(CHG_requestUserCountSaga),
         call(CHG_requestUserCountByDaySaga),
-        call(FSC_requestDailyCountSaga),
-        call(FSC_requestUserCountSaga),
-        call(FSC_requestUserCountByDaySaga),
+        // call(FSC_requestDailyCountSaga),
+        // call(FSC_requestUserCountSaga),
+        // call(FSC_requestUserCountByDaySaga),
     ])
 }

@@ -15,11 +15,11 @@ import "react-datepicker/dist/react-datepicker.css";
 const DailyEntry = ({toggleDailyEntry}) => {
     
     const [selectedDate, setSelectedDate] = useState(null);
-    const [onHand, setOnHand] = useState(null);
-    const [transferPr, setTransferPr] = useState(null);
-    const [returnPr, setReturnPr] = useState(null);
-    const [damages, setDamages] = useState(null);
-    const [latestDate, setLatestDate] = useState(null);
+    const [onHand, setOnHand] = useState('');
+    const [transferPr, setTransferPr] = useState('');
+    const [returnPr, setReturnPr] = useState('');
+    const [damages, setDamages] = useState('');
+    const [latestDate, setLatestDate] = useState('');
 
     // eslint-disable-next-line
     useEffect(async() => {

@@ -121,21 +121,21 @@ export function* CHG_requestYearlyShrinkSaga(){
     yield takeLatest(ShrinkPageActionTypes.CHG_YEARLY_SHRINK_DATA_START, CHG_getYearlyShrink)
 };
 
-export function* FSC_requestDailyShrinkSaga(){
-    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_DAILY_SHRINK_DATA, FSC_getDailyShrink)
-};
+// export function* FSC_requestDailyShrinkSaga(){
+//     yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_DAILY_SHRINK_DATA, FSC_getDailyShrink)
+// };
 
-export function* FSC_requestWeeklyShrinkSaga(){
-    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_WEEKLY_SHRINK_DATA, FSC_getWeeklyShrink)
-};
+// export function* FSC_requestWeeklyShrinkSaga(){
+//     yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_WEEKLY_SHRINK_DATA, FSC_getWeeklyShrink)
+// };
 
-export function* FSC_requestMonthlyShrinkSaga(){
-    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_MONTHLY_SHRINK_DATA, FSC_getMonthlyShrink)
-};
+// export function* FSC_requestMonthlyShrinkSaga(){
+//     yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_MONTHLY_SHRINK_DATA, FSC_getMonthlyShrink)
+// };
 
-export function* FSC_requestYearlyShrinkSaga(){
-    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_YEARLY_SHRINK_DATA, FSC_getYearlyShrink)
-};
+// export function* FSC_requestYearlyShrinkSaga(){
+//     yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_YEARLY_SHRINK_DATA, FSC_getYearlyShrink)
+// };
 
 
 
@@ -145,9 +145,9 @@ export function* shrinkSagas(){
         call(CHG_requestWeeklyShrinkSaga),
         call(CHG_requestMonthlyShrinkSaga),
         call(CHG_requestYearlyShrinkSaga),
-        call(FSC_requestDailyShrinkSaga),
-        call(FSC_requestWeeklyShrinkSaga),
-        call(FSC_requestMonthlyShrinkSaga),
-        call(FSC_requestYearlyShrinkSaga),
+        // call(FSC_requestDailyShrinkSaga),
+        // call(FSC_requestWeeklyShrinkSaga),
+        // call(FSC_requestMonthlyShrinkSaga),
+        // call(FSC_requestYearlyShrinkSaga),
     ])
 }

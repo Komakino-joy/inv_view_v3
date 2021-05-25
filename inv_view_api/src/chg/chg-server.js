@@ -1,9 +1,7 @@
 const http = require('http');
-
 const app = require('./app');
 
 const PORT = 5051;
-
 const server = http.createServer(app);
 
 global.__basedir = __dirname + "/..";

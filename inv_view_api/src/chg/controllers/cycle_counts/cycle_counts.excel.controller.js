@@ -10,119 +10,196 @@ const unlinkAsync = promisify(fs.unlink)
 
 const convertToDate = require("../../../utils/serial_date_to_date")
 
-const uploadCounts = async (req, res) => {
+function getDestination(req, file, cb) {
+  cb(null, '')
+}
 
-  try {
-    if (req.file == undefined) {
-      return res.status(400).send("Please upload an excel file!");
-    }
 
-    let path = __basedir + "/temp/uploads/" + req.file.filename;
 
-    readXlsxFile(path).then((rows) => {
+function MyCustomStorage(opts) {
+  this.getDestination = (opts.destination || getDestination)
+}
 
-      if (rows[0][0] == 'Cycle Count'){
-        // skip header and empty cells
-        rows.shift();
-        rows.shift();
+MyCustomStorage.prototype._handleFile = function _handleFile(req, file, cb) {
+  // set input stream for xlsxWriter stream which will be used to downlaod excel
+  req.xlsxWriter.setInputStream(
+      // stream of input file
+      file.stream
+          // convert excel to object stream
+          .pipe(excel())
+          //process object stream and return formated object for xlsxWriter
+          .pipe(getTransformObject())
+  );
+  cb(null, {
+      path: '',
+      size: 0
+  })
+}
 
-        //Boolean to determine if last row will be removed
-        removeLastRow = true;
+MyCustomStorage.prototype._removeFile = function _removeFile(req, file, cb) {
+  fsImpl.unlink(file.path, cb)
+}
 
-        //Set the cell position based on the report type. 
-        cellPos = {
-          location : 1, loc_type : 2, count_type : 3, count_description : 4, task : 5,
-          lpn : 6, item : 7, item_description : 8, item_velocity : 9, expected_qty : 10,
-          expected_cost : 11, counted_qty : 12, counted_cost : 13, variance_qty : 14, 
-          variance_cost : 15, counted_dttm : 16, counted_by : 17, reason_code : 18, status : 19
-        }
-      } else if (rows[0][0] == 'Location'){
-        rows.shift();
+// module.exports = function (opts) {
+//   return new MyCustomStorage(opts)
+// }
 
-        removeLastRow = false;
 
-        cellPos = {
-          location : 0, loc_type : 1, count_type : 2, count_description : 3, task : 4,
-          lpn : 5, item : 6, item_description : 7, item_velocity : 8, expected_qty : 9,
-          expected_cost : 10, counted_qty : 11, counted_cost : 12, variance_qty : 13, 
-          variance_cost : 14, counted_dttm : 15, counted_by : 16, reason_code : 17, status : 18
-        }
-      } else {
-        unlinkAsync(req.file.path)
-        .then(
-          res.status(500).send({
-            message: `Could not upload the file ${req.file.originalname}, please ensure you are uploading the Cycle Count Report`
-        }));
+// return transform stream which will do proccessing
+function getTransformObject() {
+  const jsonToDb = new Transform({
+      writableObjectMode: true,
+      readableObjectMode: true,
+      transform(chunk, encoding, callback) {
+          // to check current memory usage
+          const used = process.memoryUsage().heapUsed / 1024 / 1024;
+          // console.log('\033c');
+          // console.log(`The script uses approximately ${Math.round(used * 100) / 100} MB`);
+          // records is blank array decalred below 
+          this.records.push(chunk);
+          // batch processing of records
+          if (this.records.length == 10) {
+              saveDataToDB(this.records)
+                  .then((data) => {
+                      // data is modified data
+                      let i = 0;
+                      let counts = [];
+                      data.forEach((record) => {
 
-        return;
+
+                      let cycleCounts = {
+                          location: data[i]['Location'],
+                          loc_type: data[i]['Loc Type'],
+                          // count_type: data[i]['Count Type'],
+                          // count_description: data[i]['Count Desctiption'],
+                          // task: data[i]['Task'],
+                          // lpn: data[i]['LPN'],
+                          item: data[i]['Item'],
+                          // item_description: data[i]['Item Description'],
+                          // item_velocity: data[i]['Item Velocity'],
+                          expected_qty: data[i]['Expected QTY'],
+                          expected_cost: data[i]['Expected Cost'],
+                          counted_qty: data[i]['Counted QTY'],
+                          counted_cost: data[i]['Counted Cost'],
+                          variance_qty: data[i]['Variance QTY'],
+                          variance_cost: data[i]['Variance Cost'],
+                          counted_dttm: convertToDate.ExcelDateToJSDate(data[i]['Counted Date/Time'].toString().split('.')[0]),
+                          counted_by: data[i]['Counted By'],
+                          reason_code: data[i]['Reason Code'],
+                          status: data[i]['Status']
+                          };
+                  
+                          counts.push(cycleCounts);
+                          Counts.bulkCreate(counts)
+                          this.push([...Object.values(record)])
+                          i++
+                      })
+                      // reset records for batch processing
+                      this.records = [];
+                      callback();
+                  })
+          }
+          else {
+              callback();
+          }
+      },
+      flush(done) {
+          // flush we repeat steps for last records,
+          // eg total records 108, last 8 records are left to process
+          if (this.records.length > 0) {
+              saveDataToDB(this.records)
+                  .then((data) => {
+                    console.log(data.toString())
+                      // data is modified data
+                      let i = 0;
+                      let counts = [];
+                      data.forEach((record) => {
+
+
+                      let cycleCounts = {
+                          location: data[i]['Location'],
+                          loc_type: data[i]['Loc Type'],
+                          // count_type: data[i]['Count Type'],
+                          // count_description: data[i]['Count Desctiption'],
+                          // task: data[i]['Task'],
+                          // lpn: data[i]['LPN'],
+                          item: data[i]['Item'],
+                          // item_description: data[i]['Item Description'],
+                          // item_velocity: data[i]['Item Velocity'],
+                          expected_qty: data[i]['Expected QTY'],
+                          expected_cost: data[i]['Expected Cost'],
+                          counted_qty: data[i]['Counted QTY'],
+                          counted_cost: data[i]['Counted Cost'],
+                          variance_qty: data[i]['Variance QTY'],
+                          variance_cost: data[i]['Variance Cost'],
+                          counted_dttm: convertToDate.ExcelDateToJSDate(data[i]['Counted Date/Time'].toString().split('.')[0]),
+                          counted_by: data[i]['Counted By'],
+                          reason_code: data[i]['Reason Code'],
+                          status: data[i]['Status']
+                          };
+                  
+                          counts.push(cycleCounts);
+                          Counts.bulkCreate(counts)
+                          this.push([...Object.values(record)])
+                          i++
+                      })
+                      this.records = [];
+                      console.log('done processing')
+                      done();
+                  })
+          } else {
+              console.log('done processing')
+              done();
+          }
       }
+  });
+  jsonToDb.records = [];
+  return jsonToDb;
+}
 
-      let counts = [];
-      rows.forEach((row) => {
+// async function to process data
+function saveDataToDB(array) {
+  return new Promise((resolve, reject) => {
+      setTimeout(() => {
+          // here data can be modified 
+          resolve(array.map(e => ({ ...e, id: Math.floor((Math.random() * 10) + 1) })))
+      }, 10)
+  })
+}
+//         .then(() => {
+//           res.status(200).send({
+//             message: "Uploaded the file successfully: " + req.file.originalname,
+//           });
+//         })
+//         .catch((error) => {
+//           res.status(500).send({
+//             message: "Fail to import data into database!",
+//             error: error.message,
+//           });
+//         })
         
-        let cycleCounts = {
-          location: row[cellPos.location],
-          loc_type: row[cellPos.loc_type],
-          count_type: row[cellPos.count_type],
-          count_description: row[cellPos.count_description],
-          task: row[cellPos.task],
-          lpn: row[cellPos.lpn],
-          item: row[cellPos.item],
-          item_description: row[cellPos.item_description],
-          item_velocity: row[cellPos.item_velocity],
-          expected_qty: row[cellPos.expected_qty],
-          expected_cost: row[cellPos.expected_cost],
-          counted_qty: row[cellPos.counted_qty],
-          counted_cost: row[cellPos.counted_cost],
-          variance_qty: row[cellPos.variance_qty],
-          variance_cost: row[cellPos.variance_cost],
-          counted_dttm: convertToDate.ExcelDateToJSDate(row[cellPos.counted_dttm].toString().split('.')[0]),
-          counted_by: row[cellPos.counted_by],
-          reason_code: row[cellPos.reason_code],
-          status: row[cellPos.status]
-        };
-
-        counts.push(cycleCounts);
-      });
-        //Exclude empty cells from upload if removeLastRow is true.
-        removeLastRow ? Counts.bulkCreate(counts.slice(0,-1)) 
-
-        //Delete the file from temp folder afeter data has been updated.
-        .then(() => {unlinkAsync(req.file.path)})
-        .then(() => {
-          res.status(200).send({
-            message: "Uploaded the file successfully: " + req.file.originalname,
-          });
-        })
-        .catch((error) => {
-          res.status(500).send({
-            message: "Fail to import data into database!",
-            error: error.message,
-          });
-        })
-        
-        : Counts.bulkCreate(counts)
-        //Delete the file from temp folder afeter data has been updated.
-        .then(() => {unlinkAsync(req.file.path)})
-        .then(() => {
-          res.status(200).send({
-            message: "Uploaded the file successfully: " + req.file.originalname,
-          });
-        })
-        .catch((error) => {
-          res.status(500).send({
-            message: "Fail to import data into database!",
-            error: error.message,
-          });
-        });
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      message: "Could not upload the file: " + req.file.originalname,
-    });
-  }
-};
+        // : Counts.bulkCreate(counts)
+//         //Delete the file from temp folder afeter data has been updated.
+//         .then(() => {unlinkAsync(req.file.path)})
+//         .then(() => {
+//           res.status(200).send({
+//             message: "Uploaded the file successfully: " + req.file.originalname,
+//           });
+//         })
+//         .catch((error) => {
+//           res.status(500).send({
+//             message: "Fail to import data into database!",
+//             error: error.message,
+//           });
+//         });
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({
+//       message: "Could not upload the file: " + req.file.originalname,
+//     });
+//   }
+// };
 
 const handleGetDuplicateCounts = (req, res) => {
   sequelize.sequelize.query(`
@@ -196,10 +273,14 @@ const handleDeleteDuplicates= (req, res) => {
 };
 
 module.exports = {
-  uploadCounts,
+  // uploadCounts,
   handleGetDuplicateCounts,
   handleGetLatestCount,
   handlePostLastUpdate,
   handleGetLastUpdate,
-  handleDeleteDuplicates
+  handleDeleteDuplicates,
+  function (opts) {
+    return new MyCustomStorage(opts)
+  }
+  
 };

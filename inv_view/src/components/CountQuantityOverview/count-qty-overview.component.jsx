@@ -19,19 +19,39 @@ const CountQtyOverview = ({ headerColor, ...props }) => {
                     <label className='txt-label'>Variance: </label>
                     <label className='txt-label'>Qty Counted: </label>
                 </div>
-                <div className='breakdown-qty'>
-                    <p>Net</p>
-                    <label>{props.netExpected}</label>
-                    <label>{props.netVariance}</label>
-                    <label>{netQtyCounted}</label>
-                </div>
-                <div className='breakdown-qty'>
-                    <p>Absolute</p>
-                    <label>{Math.abs(props.netExpected)}</label>
-                    <label>{Math.abs(props.netVariance)}</label>
-                    <label>{netQtyCounted}</label>
-                </div>
-
+                    {
+                    netQtyCounted > 0 ? (
+                        <>
+                        <div className='breakdown-qty'>
+                            <p>Net</p>
+                            <label>{props.netExpected}</label>
+                            <label>{props.netVariance}</label>
+                            <label>{netQtyCounted}</label>
+                        </div>
+                        <div className='breakdown-qty'>
+                            <p>Absolute</p>
+                            <label>{Math.abs(props.netExpected)}</label>
+                            <label>{Math.abs(props.netVariance)}</label>
+                            <label>{netQtyCounted}</label>
+                        </div>
+                        </>
+                        ):(
+                        <>
+                        <div className='breakdown-qty'>
+                            <p>Net</p>
+                            <label>0</label>
+                            <label>0</label>
+                            <label>0</label>
+                        </div>
+                        <div className='breakdown-qty'>
+                            <p>Absolute</p>
+                            <label>0</label>
+                            <label>0</label>
+                            <label>0</label>
+                        </div>
+                        </>
+                        )
+                    }
             </div>
             <div className='count-qty-totals-container'>
                 <div className='totals-labels'>

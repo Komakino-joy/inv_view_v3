@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Breakdowns and reports of local inventory",
   "scripts": {
-    "chg-server": "nodemon src/chg/chg-server.js",
+    "chg-server": "nodemon --max-old-space-size=5096 src/chg/chg-server.js",
     "fsc-server": "nodemon src/fsc/fsc-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,13 +21,14 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "excel-stream": "^1.1.1",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "knex": "^0.95.4",
     "multer": "^1.4.2",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1",
-    "read-excel-file": "^4.0.6",
-    "sequelize": "^5.21.13"
+    "sequelize": "^5.21.13",
+    "xlsx-write-stream": "0.0.19"
   }
 }

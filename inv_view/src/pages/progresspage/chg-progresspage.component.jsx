@@ -49,36 +49,36 @@ import './App.css'
 function ProgressPage({ history }) {
 
   const dispatch = useDispatch();
-  const occupiedLocsCounted = useSelector(state => state.progressData.CHG_occupiedLocCounted);
-  const occupiedLocsUncounted = useSelector(state => state.progressData.CHG_occupiedLocUnCounted);
-  const emptyLocsCounted = useSelector(state => state.progressData.CHG_emptyLocCounted);
-  const emptyLocsUncounted = useSelector(state => state.progressData.CHG_emptyLocUncounted);
+  const occupiedLocsCounted = useSelector(state => state.CHG_progressData.occupiedLocCounted);
+  const occupiedLocsUncounted = useSelector(state => state.CHG_progressData.occupiedLocUnCounted);
+  const emptyLocsCounted = useSelector(state => state.CHG_progressData.emptyLocCounted);
+  const emptyLocsUncounted = useSelector(state => state.CHG_progressData.emptyLocUncounted);
   const locTotal  = occupiedLocsCounted + occupiedLocsUncounted + emptyLocsCounted + emptyLocsUncounted;
-  const netExpected = useSelector(state => state.progressData.CHG_expectedQty);
-  const netVariance = useSelector(state => state.progressData.CHG_varianceQty);
-  const locsVisited = useSelector(state => state.progressData.CHG_uniqueLocsCounted);
-  const totalVariances = useSelector(state => state.progressData.CHG_locsWithVarianceCount);
-  const latestCountData = useSelector(state => state.progressData.CHG_latestCountData);
-  const notPutawayCurrentDay = useSelector(state => state.progressData.CHG_notPutaway0);
-  const notPutawayOneDay = useSelector(state => state.progressData.CHG_notPutaway1);
-  const notPutawayTwoDay = useSelector(state => state.progressData.CHG_notPutaway2);
-  const notPutawayThreeDay = useSelector(state => state.progressData.CHG_notPutaway3);
-  const notPutawayFourDay = useSelector(state => state.progressData.CHG_notPutaway4);
-  const notPutawayFiveDay = useSelector(state => state.progressData.CHG_notPutaway5);
-  const notPutawaySixDay = useSelector(state => state.progressData.CHG_notPutaway6);
-  const notPutawaySevenDay = useSelector(state => state.progressData.CHG_notPutaway7);
-  const notPutawayOverSevenDay = useSelector(state => state.progressData.CHG_notPutawayOver7);
-  const transitionalCurrentDay = useSelector(state => state.progressData.CHG_transitional0);
-  const transitionalOneDay = useSelector(state => state.progressData.CHG_transitional1);
-  const transitionalTwoDay = useSelector(state => state.progressData.CHG_transitional2);
-  const transitionalThreeDay = useSelector(state => state.progressData.CHG_transitional3);
-  const transitionalFourDay = useSelector(state => state.progressData.CHG_transitional4);
-  const transitionalFiveDay = useSelector(state => state.progressData.CHG_transitional5);
-  const transitionalSixDay = useSelector(state => state.progressData.CHG_transitional6);
-  const transitionalSevenDay = useSelector(state => state.progressData.CHG_transitional7);
-  const transitionalOverSevenDay = useSelector(state => state.progressData.CHG_transitionalOver7);
-  const problemResolve = useSelector(state => state.progressData.CHG_pr)
-  const damages = useSelector(state => state.progressData.CHG_damages.damage);
+  const netExpected = useSelector(state => state.CHG_progressData.expectedQty);
+  const netVariance = useSelector(state => state.CHG_progressData.varianceQty);
+  const locsVisited = useSelector(state => state.CHG_progressData.uniqueLocsCounted);
+  const totalVariances = useSelector(state => state.CHG_progressData.locsWithVarianceCount);
+  const latestCountData = useSelector(state => state.CHG_progressData.latestCountData);
+  const notPutawayCurrentDay = useSelector(state => state.CHG_progressData.notPutaway0);
+  const notPutawayOneDay = useSelector(state => state.CHG_progressData.notPutaway1);
+  const notPutawayTwoDay = useSelector(state => state.CHG_progressData.notPutaway2);
+  const notPutawayThreeDay = useSelector(state => state.CHG_progressData.notPutaway3);
+  const notPutawayFourDay = useSelector(state => state.CHG_progressData.notPutaway4);
+  const notPutawayFiveDay = useSelector(state => state.CHG_progressData.notPutaway5);
+  const notPutawaySixDay = useSelector(state => state.CHG_progressData.notPutaway6);
+  const notPutawaySevenDay = useSelector(state => state.CHG_progressData.notPutaway7);
+  const notPutawayOverSevenDay = useSelector(state => state.CHG_progressData.notPutawayOver7);
+  const transitionalCurrentDay = useSelector(state => state.CHG_progressData.transitional0);
+  const transitionalOneDay = useSelector(state => state.CHG_progressData.transitional1);
+  const transitionalTwoDay = useSelector(state => state.CHG_progressData.transitional2);
+  const transitionalThreeDay = useSelector(state => state.CHG_progressData.transitional3);
+  const transitionalFourDay = useSelector(state => state.CHG_progressData.transitional4);
+  const transitionalFiveDay = useSelector(state => state.CHG_progressData.transitional5);
+  const transitionalSixDay = useSelector(state => state.CHG_progressData.transitional6);
+  const transitionalSevenDay = useSelector(state => state.CHG_progressData.transitional7);
+  const transitionalOverSevenDay = useSelector(state => state.CHG_progressData.transitionalOver7);
+  const problemResolve = useSelector(state => state.CHG_progressData.pr)
+  const damages = useSelector(state => state.CHG_progressData.damages.damage);
   const headerColor = '#472f91';
 
   useEffect(() => {
@@ -123,7 +123,7 @@ function ProgressPage({ history }) {
           mounted = false;
       };
 
-  }, [dispatch]);
+  });
 
 
   return (
@@ -149,7 +149,7 @@ function ProgressPage({ history }) {
             netExpected={netExpected}
             netVariance={netVariance}
          />
-        </div>
+        </div> 
 
         <div className='variance-overview' > 
           <CountVarianceOverview 

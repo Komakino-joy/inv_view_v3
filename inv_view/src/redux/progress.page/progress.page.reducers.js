@@ -1,247 +1,247 @@
 import ProgressPageActionTypes  from './progress.page.types';
 
 const INITIAL_STATE = {
-    CHG_occupiedLocCounted : 0,
-    CHG_occupiedLocUnCounted: 0,
-    CHG_emptyLocCounted: 0,
-    CHG_emptyLocUncounted: 0,
-    CHG_expectedQty: 0,
-    CHG_varianceQty: 0,
-    CHG_uniqueLocsCounted: 0,
-    CHG_locsWithVarianceCount: 0,
-    CHG_pr: 0,
-    CHG_damages: 0,
-    CHG_notPutaway0: 0,
-    CHG_notPutaway1: 0,
-    CHG_notPutaway2: 0,
-    CHG_notPutaway3: 0,
-    CHG_notPutaway4: 0,
-    CHG_notPutaway5: 0,
-    CHG_notPutaway6: 0,
-    CHG_notPutaway7: 0,
-    CHG_notPutawayOver7: 0,
-    CHG_transitional0: 0,
-    CHG_transitional1: 0,
-    CHG_transitional2: 0,
-    CHG_transitional3: 0,
-    CHG_transitional4: 0,
-    CHG_transitional5: 0,
-    CHG_transitional6: 0,
-    CHG_transitional7: 0,
-    CHG_transitionalOver7: 0,
-    CHG_transitionalTotal: 0,
-    CHG_latestCountData: 0,
+    occupiedLocCounted : 0,
+    occupiedLocUnCounted: 0,
+    emptyLocCounted: 0,
+    emptyLocUncounted: 0,
+    expectedQty: 0,
+    varianceQty: 0,
+    uniqueLocsCounted: 0,
+    locsWithVarianceCount: 0,
+    pr: 0,
+    damages: 0,
+    notPutaway0: 0,
+    notPutaway1: 0,
+    notPutaway2: 0,
+    notPutaway3: 0,
+    notPutaway4: 0,
+    notPutaway5: 0,
+    notPutaway6: 0,
+    notPutaway7: 0,
+    notPutawayOver7: 0,
+    transitional0: 0,
+    transitional1: 0,
+    transitional2: 0,
+    transitional3: 0,
+    transitional4: 0,
+    transitional5: 0,
+    transitional6: 0,
+    transitional7: 0,
+    transitionalOver7: 0,
+    transitionalTotal: 0,
+    latestCountData: 0,
     error: null,
 }
 
-const progressData = (state = INITIAL_STATE, action) => {
+export const CHG_progressData = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_SUCCESS:
             return {
                 ...state, 
-                CHG_occupiedLocCounted : action.payload,
+                occupiedLocCounted : action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_UNCOUNTED_SUCCESS:
             return {
                 ...state, 
-                CHG_occupiedLocUnCounted : action.payload,
+                occupiedLocUnCounted : action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_EMPTY_LOCS_COUNTED_SUCCESS:
             return {
                 ...state, 
-                CHG_emptyLocCounted : action.payload,
+                emptyLocCounted : action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_EMPTY_LOCS_UNCOUNTED_SUCCESS:
             return {
                 ...state, 
-                CHG_emptyLocUncounted : action.payload,
+                emptyLocUncounted : action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_EXPECTED_QTY_SUCCESS:
             return {
                 ...state, 
-                CHG_expectedQty : action.payload,
+                expectedQty : action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_VARIANCE_QTY_SUCCESS:
             return {
                 ...state, 
-                CHG_varianceQty : action.payload,
+                varianceQty : action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_SUCCESS:
             return {
                 ...state, 
-                CHG_uniqueLocsCounted : action.payload,
+                uniqueLocsCounted : action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_SUCCESS:
             return {
                 ...state, 
-                CHG_locsWithVarianceCount : action.payload,
+                locsWithVarianceCount : action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_PR_SUCCESS:
             return{
                 ...state,
-                CHG_pr: action.payload,
+                pr: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_DMG_SUCCESS:
             return {
                 ...state,
-                CHG_damages: action.payload,
+                damages: action.payload,
                 error: null
             };
         case ProgressPageActionTypes.CHG_NOT_PUTAWAY_0_SUCCESS:
             return {
                 ...state,
-                CHG_notPutaway0: action.payload,
+                notPutaway0: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_NOT_PUTAWAY_1_SUCCESS:
             return {
                 ...state,
-                CHG_notPutaway1: action.payload,
+                notPutaway1: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_NOT_PUTAWAY_2_SUCCESS:
             return {
                 ...state,
-                CHG_notPutaway2: action.payload,
+                notPutaway2: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_NOT_PUTAWAY_3_SUCCESS:
             return {
                 ...state,
-                CHG_notPutaway3: action.payload,
+                notPutaway3: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_NOT_PUTAWAY_4_SUCCESS:
             return {
                 ...state,
-                CHG_notPutaway4: action.payload,
+                notPutaway4: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_NOT_PUTAWAY_5_SUCCESS:
             return {
                 ...state,
-                CHG_notPutaway5: action.payload,
+                notPutaway5: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_NOT_PUTAWAY_6_SUCCESS:
             return {
                 ...state,
-                CHG_notPutaway6: action.payload,
+                notPutaway6: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_NOT_PUTAWAY_7_SUCCESS:
             return {
                 ...state,
-                CHG_notPutaway7: action.payload,
+                notPutaway7: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_NOT_PUTAWAY_OVER_7_SUCCESS:
             return {
                 ...state,
-                CHG_notPutawayOver7: action.payload,
+                notPutawayOver7: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_TRANSITIONAL_0_SUCCESS:
             return {
                 ...state,
-                CHG_transitional0: action.payload,
+                transitional0: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_TRANSITIONAL_1_SUCCESS:
             return {
                 ...state,
-                CHG_transitional1: action.payload,
+                transitional1: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_TRANSITIONAL_2_SUCCESS:
             return {
                 ...state,
-                CHG_transitional2: action.payload,
+                transitional2: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_TRANSITIONAL_3_SUCCESS:
             return {
                 ...state,
-                CHG_transitional3: action.payload,
+                transitional3: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_TRANSITIONAL_4_SUCCESS:
             return {
                 ...state,
-                CHG_transitional4: action.payload,
+                transitional4: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_TRANSITIONAL_5_SUCCESS:
             return {
                 ...state,
-                CHG_transitional5: action.payload,
+                transitional5: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_TRANSITIONAL_6_SUCCESS:
             return {
                 ...state,
-                CHG_transitional6: action.payload,
+                transitional6: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_TRANSITIONAL_7_SUCCESS:
             return {
                 ...state,
-                CHG_transitional7: action.payload,
+                transitional7: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_TRANSITIONAL_OVER_7_SUCCESS:
             return {
                 ...state,
-                CHG_transitionalOver7: action.payload,
+                transitionalOver7: action.payload,
                 error: null,
             };
         
         case ProgressPageActionTypes.CHG_TRANSITIONAL_TOTAL_SUCCESS:
             return {
                 ...state,
-                CHG_transitionalTotal: action.payload,
+                transitionalTotal: action.payload,
                 error: null,
             };
 
         case ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_SUCCESS:
             return {
                 ...state,
-                CHG_latestCountData: action.payload,
+                latestCountData: action.payload,
                 error: null,
             };
 
@@ -283,4 +283,252 @@ const progressData = (state = INITIAL_STATE, action) => {
     }
 };
 
-export default progressData;
+export const FSC_progressData = (state = INITIAL_STATE, action) => {
+    switch (action.type) {
+        case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_SUCCESS:
+            return {
+                ...state, 
+                occupiedLocCounted : action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_UNCOUNTED_SUCCESS:
+            return {
+                ...state, 
+                occupiedLocUnCounted : action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_EMPTY_LOCS_COUNTED_SUCCESS:
+            return {
+                ...state, 
+                emptyLocCounted : action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_EMPTY_LOCS_UNCOUNTED_SUCCESS:
+            return {
+                ...state, 
+                emptyLocUncounted : action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_EXPECTED_QTY_SUCCESS:
+            return {
+                ...state, 
+                expectedQty : action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_VARIANCE_QTY_SUCCESS:
+            return {
+                ...state, 
+                varianceQty : action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_SUCCESS:
+            return {
+                ...state, 
+                uniqueLocsCounted : action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_SUCCESS:
+            return {
+                ...state, 
+                locsWithVarianceCount : action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_PR_SUCCESS:
+            return{
+                ...state,
+                pr: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_DMG_SUCCESS:
+            return {
+                ...state,
+                damages: action.payload,
+                error: null
+            };
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_0_SUCCESS:
+            return {
+                ...state,
+                notPutaway0: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_1_SUCCESS:
+            return {
+                ...state,
+                notPutaway1: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_2_SUCCESS:
+            return {
+                ...state,
+                notPutaway2: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_3_SUCCESS:
+            return {
+                ...state,
+                notPutaway3: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_4_SUCCESS:
+            return {
+                ...state,
+                notPutaway4: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_5_SUCCESS:
+            return {
+                ...state,
+                notPutaway5: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_6_SUCCESS:
+            return {
+                ...state,
+                notPutaway6: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_7_SUCCESS:
+            return {
+                ...state,
+                notPutaway7: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_OVER_7_SUCCESS:
+            return {
+                ...state,
+                notPutawayOver7: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_0_SUCCESS:
+            return {
+                ...state,
+                transitional0: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_1_SUCCESS:
+            return {
+                ...state,
+                transitional1: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_2_SUCCESS:
+            return {
+                ...state,
+                transitional2: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_3_SUCCESS:
+            return {
+                ...state,
+                transitional3: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_4_SUCCESS:
+            return {
+                ...state,
+                transitional4: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_5_SUCCESS:
+            return {
+                ...state,
+                transitional5: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_6_SUCCESS:
+            return {
+                ...state,
+                transitional6: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_7_SUCCESS:
+            return {
+                ...state,
+                transitional7: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_OVER_7_SUCCESS:
+            return {
+                ...state,
+                transitionalOver7: action.payload,
+                error: null,
+            };
+        
+        case ProgressPageActionTypes.CHG_TRANSITIONAL_TOTAL_SUCCESS:
+            return {
+                ...state,
+                transitionalTotal: action.payload,
+                error: null,
+            };
+
+        case ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_SUCCESS:
+            return {
+                ...state,
+                latestCountData: action.payload,
+                error: null,
+            };
+
+        
+        case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_FAILURE:
+        case ProgressPageActionTypes.CHG_OCCUPIED_LOCS_UNCOUNTED_FAILURE:
+        case ProgressPageActionTypes.CHG_EMPTY_LOCS_COUNTED_FAILURE:
+        case ProgressPageActionTypes.CHG_EMPTY_LOCS_UNCOUNTED_FAILURE:
+        case ProgressPageActionTypes.CHG_EXPECTED_QTY_FAILURE:
+        case ProgressPageActionTypes.CHG_VARIANCE_QTY_FAILURE:
+        case ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_FAILURE:
+        case ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_FAILURE:
+        case ProgressPageActionTypes.CHG_PR_FAILURE:
+        case ProgressPageActionTypes.CHG_DMG_FAILURE:
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_0_FAILURE:
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_1_FAILURE:
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_2_FAILURE:
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_3_FAILURE:
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_4_FAILURE:
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_5_FAILURE:
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_6_FAILURE:
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_7_FAILURE:
+        case ProgressPageActionTypes.CHG_NOT_PUTAWAY_OVER_7_FAILURE:
+        case ProgressPageActionTypes.CHG_TRANSITONAL_0_FAILURE:
+        case ProgressPageActionTypes.CHG_TRANSITONAL_1_FAILURE:
+        case ProgressPageActionTypes.CHG_TRANSITONAL_2_FAILURE:
+        case ProgressPageActionTypes.CHG_TRANSITONAL_3_FAILURE:
+        case ProgressPageActionTypes.CHG_TRANSITONAL_4_FAILURE:
+        case ProgressPageActionTypes.CHG_TRANSITONAL_5_FAILURE:
+        case ProgressPageActionTypes.CHG_TRANSITONAL_6_FAILURE:
+        case ProgressPageActionTypes.CHG_TRANSITONAL_7_FAILURE:
+        case ProgressPageActionTypes.CHG_TRANSITONAL_OVER_7_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+            }
+        default:
+            return state;
+    }
+};
+

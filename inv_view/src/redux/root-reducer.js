@@ -1,8 +1,16 @@
 import {combineReducers} from 'redux';
-import shrinkData from './shrinkpage/shrinkpage.reducer';
-import countData from './countdetailpage/countdetailpage.reducer';
+
+import { 
+    CHG_shrinkData,
+    FSC_shrinkData 
+} from './shrinkpage/shrinkpage.reducer';
+
+import {
+    CHG_countData,
+    FSC_countData
+} from './countdetailpage/countdetailpage.reducers';
 import modalState from './modal/modal.reducer';
-import progressData from './progress.page/progress.page.reducers';
+import { CHG_progressData } from './progress.page/progress.page.reducers';
 import fileUploadReducer from './file-upload/file-upload.reducer';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from "redux-persist";
@@ -13,10 +21,13 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-    shrinkData,
-    countData,
+    CHG_shrinkData,
+    FSC_shrinkData,
+    CHG_countData,
+    FSC_countData,
     modalState,
-    progressData,
+    CHG_progressData,
+    // FSC_progressData,
     fileUploadReducer,
 });
 

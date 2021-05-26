@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import ReportUpload from '../../components/ReportUploads/reportUploads.components';
+import ReportUpload from '../../components/ReportUploads/report-uploads.components';
 import DailyEntry from '../../components/DailyEntry/daily-entry.component';
 import DailyEntryReportModal from '../../components/DailyEntryModal/daily-entry-report-modal.component';
 

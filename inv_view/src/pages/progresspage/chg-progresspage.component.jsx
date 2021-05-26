@@ -123,14 +123,14 @@ function ProgressPage({ history }) {
           mounted = false;
       };
 
-  });
+  },[dispatch]);
 
 
   return (
     <div>
         <nav onClick = {() => history.push('/fnt-chg-shrink-data')}>Shrink Reports</nav>
         <nav className='secondary-nav' onClick = {() => history.push('/fnt-chg-report-upload')}>Report Uploads</nav>
-    <div className="App">
+      <div className="App">
       
         <div className='active-locs' >
           <ActiveLocs 
@@ -141,7 +141,7 @@ function ProgressPage({ history }) {
             emptyLocsUncounted = {emptyLocsUncounted}
             locTotal  = {locTotal}
             />
-        </div>
+        </div> 
       
         <div className='qty-overview' >
          <CountQtyOverview 
@@ -159,7 +159,7 @@ function ProgressPage({ history }) {
             locsVisited = {locsVisited}
             totalVariances = {totalVariances}
             />
-        </div>
+        </div> 
 
         <div className='latest-count' >
           <Route
@@ -171,7 +171,7 @@ function ProgressPage({ history }) {
                 />
             )}
           />
-        </div>
+        </div> 
 
         <div className='not-putaway' >
           <NotPutaway 
@@ -186,7 +186,7 @@ function ProgressPage({ history }) {
             sevenDay = {notPutawaySevenDay}
             overSevenDay = {notPutawayOverSevenDay} 
             />
-        </div>
+        </div> 
 
         <div className='transitional' >
           <TransitionalOverview 
@@ -201,22 +201,21 @@ function ProgressPage({ history }) {
             sevenDay = {transitionalSevenDay}
             overSevenDay = {transitionalOverSevenDay} 
             />
-        </div>
+        </div> 
 
         <div className='problem-resolve' >
           <ProblemResolve 
             headerColor={headerColor}
             problemResolve={problemResolve}
             />
-        </div>
+        </div> 
 
         <div className='damage' >
           <Damages 
             headerColor={headerColor}
             damages={damages} 
             />
-        </div>
-
+        </div> 
     </div>
     </div>
   );

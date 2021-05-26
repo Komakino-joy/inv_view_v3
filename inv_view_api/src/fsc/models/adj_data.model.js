@@ -18,6 +18,9 @@ module.exports = (sequelize, Sequelize) => {
       },    
       date_time: {
         type: Sequelize.DATE
+      },    
+      reason: {
+        type: Sequelize.STRING
       }
     }, 
     {

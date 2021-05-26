@@ -1,6 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
     const Counts = sequelize.define("counts", {
-      
+      customer: {
+        type: Sequelize.STRING
+      },
       location: {
         type: Sequelize.STRING
       },

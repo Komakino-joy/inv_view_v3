@@ -3,11 +3,11 @@ const express = require("express");
 const countDetails = require("../controllers/count_details/count_detail.controller")
 const progressView = require("../controllers/progress_view/progress_view.controller")
 const shrinkView = require("../controllers/shrink_data/shrink_data.controller")
-const notPutawayController = require("../controllers/not_putaway/not_putaway.excel.controller");
-const emptyActiveController = require("../controllers/empty_active_locations/empty_active.excel.controller");
-const transInvController = require("../controllers/transitional_inventory/transitional.inventory.excel.controller"); 
-const countsController = require("../controllers/cycle_counts/cycle_counts.excel.controller");
-const adjustmentsController = require("../controllers/inventory_adjustments/inventory_adjustments.excel.controller");
+const notPutawayController = require("../controllers/not_putaway/not_putaway.controller");
+const emptyActiveController = require("../controllers/empty_active_locations/empty_active.controller");
+const transInvController = require("../controllers/transitional_inventory/transitional.inventory.controller"); 
+const countsController = require("../controllers/cycle_counts/cycle_counts.controller");
+const adjustmentsController = require("../controllers/inventory_adjustments/inventory_adjustments.controller");
 const dailyOnHandController = require("../controllers/daily_on_hand/daily_on_hand.controller");
 
 

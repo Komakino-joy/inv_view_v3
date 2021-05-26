@@ -10,6 +10,9 @@ module.exports = (sequelize, Sequelize) => {
       created_dttm: {
         type: Sequelize.DATE
       },
+      customer: {
+        type: Sequelize.STRING
+      }
     }, 
     {
       freezeTableName: true

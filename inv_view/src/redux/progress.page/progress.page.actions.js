@@ -1,5 +1,7 @@
 import ProgressPageActionTypes from './progress.page.types';
 
+// ^ CHG progress page actions
+
 export const CHG_requestOccupiedLocationsCounted = () => ({
     type: ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_START,
 });
@@ -418,6 +420,430 @@ export const CHG_receiveLatestCountData=(latestCount) => ({
 
 export const CHG_latestCountDataFailure = (error) => ({
     type: ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_FAILURE,
+    error: error,
+});
+
+
+// ^ FSC progress page actions
+
+export const FSC_requestOccupiedLocationsCounted = () => ({
+    type: ProgressPageActionTypes.FSC_OCCUPIED_LOCS_COUNTED_START,
+});
+
+export const FSC_receiveOccupiedLocations = (locations) => ({
+    type: ProgressPageActionTypes.FSC_OCCUPIED_LOCS_COUNTED_SUCCESS, 
+    payload: locations, 
+});
+
+export const FSC_occupiedLocationsFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_OCCUPIED_LOCS_COUNTED_FAILURE, 
+    payload: error, 
+});
+
+export const FSC_requestOccupiedLocationsUncounted = () => ({
+    type: ProgressPageActionTypes.FSC_OCCUPIED_LOCS_UNCOUNTED_START,
+});
+
+export const FSC_receiveOccupiedLocationsUncounted = (locations) => ({
+    type: ProgressPageActionTypes.FSC_OCCUPIED_LOCS_UNCOUNTED_SUCCESS, 
+    payload: locations, 
+});
+
+export const FSC_occupiedLocationsUncountedFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_OCCUPIED_LOCS_UNCOUNTED_FAILURE, 
+    payload: error, 
+});
+
+export const FSC_requestEmptyLocationsCounted = () => ({
+    type: ProgressPageActionTypes.FSC_EMPTY_LOCS_COUNTED_START,
+});
+
+export const FSC_receiveEmptyLocationsCounted = (locations) => ({
+    type: ProgressPageActionTypes.FSC_EMPTY_LOCS_COUNTED_SUCCESS, 
+    payload: locations, 
+});
+
+export const FSC_emptyLocationsCountedFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_EMPTY_LOCS_COUNTED_FAILURE, 
+    payload: error, 
+});
+
+export const FSC_requestEmptyLocationsUncounted = () => ({
+    type: ProgressPageActionTypes.FSC_EMPTY_LOCS_UNCOUNTED_START,
+});
+export const FSC_receiveEmptyLocationsUncounted = (locations) => ({
+    type: ProgressPageActionTypes.FSC_EMPTY_LOCS_UNCOUNTED_SUCCESS, 
+    payload: locations, 
+});
+
+export const FSC_emptyLocationsUncountedFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_EMPTY_LOCS_UNCOUNTED_FAILURE, 
+    payload: error, 
+});
+
+export const FSC_requestExpectedQty = () => ({
+    type: ProgressPageActionTypes.FSC_EXPECTED_QTY_START,
+});
+export const FSC_receiveExpectedQty = (locations) => ({
+    type: ProgressPageActionTypes.FSC_EXPECTED_QTY_SUCCESS, 
+    payload: locations, 
+});
+
+export const FSC_expectedQtyFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_EXPECTED_QTY_FAILURE, 
+    payload: error, 
+});
+
+export const FSC_requestVarianceQty = () => ({
+    type: ProgressPageActionTypes.FSC_VARIANCE_QTY_START,
+});
+export const FSC_receivevarianceQty = (locations) => ({
+    type: ProgressPageActionTypes.FSC_VARIANCE_QTY_SUCCESS, 
+    payload: locations, 
+});
+
+export const FSC_varianceQtyFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_VARIANCE_QTY_FAILURE, 
+    payload: error, 
+});
+
+export const FSC_requestUniqueLocs = () => ({
+    type: ProgressPageActionTypes.FSC_UNIQUE_LOCS_COUNTED_START,
+});
+
+export const FSC_receiveUniqueLocs = (locationCount) => ({
+    type: ProgressPageActionTypes.FSC_UNIQUE_LOCS_COUNTED_SUCCESS, 
+    payload: locationCount, 
+});
+
+export const FSC_uniqueLocsFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_UNIQUE_LOCS_COUNTED_FAILURE, 
+    payload: error, 
+});
+
+export const FSC_requestLocsWithVarianceCount = () => ({
+    type: ProgressPageActionTypes.FSC_TOTAL_COUNTS_WITH_VARIANCE_START,
+});
+
+export const FSC_receiveLocsWithVarianceCount= (locationsCount) => ({
+    type: ProgressPageActionTypes.FSC_TOTAL_COUNTS_WITH_VARIANCE_SUCCESS, 
+    payload: locationsCount, 
+});
+
+export const FSC_locsWithVarianceCountFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TOTAL_COUNTS_WITH_VARIANCE_FAILURE, 
+    payload: error, 
+});
+
+// Actions for PR component
+export const FSC_requestPr = () => ({
+    type: ProgressPageActionTypes.FSC_PR_START, 
+});
+
+export const FSC_receivePR = (pr) => ({
+    type:  ProgressPageActionTypes.FSC_PR_SUCCESS,
+    payload: pr,
+});
+
+export const FSC_prFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_PR_FAILURE,
+    payload: error,
+});
+
+// Actions for damages component
+export const FSC_requestDmg = () => ({
+    type: ProgressPageActionTypes.FSC_DMG_START,
+});
+
+export const FSC_receiveDmg =(damages) => ({
+    type: ProgressPageActionTypes.FSC_DMG_SUCCESS,
+    payload: damages,
+});
+
+export const FSC_dmgFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_DMG_FAILURE,
+    error: error,
+});
+
+// Actions for not putaway component
+export const FSC_requestNotPutaway0 = () => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_0_START,
+});
+
+export const FSC_receiveNotPutaway0 =(notPutaway) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_0_SUCCESS,
+    payload: notPutaway,
+});
+
+export const FSC_notPutaway0Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_0_FAILURE,
+    error: error,
+});
+
+export const FSC_requestNotPutaway1 = () => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_1_START,
+});
+
+export const FSC_receiveNotPutaway1 =(notPutaway) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_1_SUCCESS,
+    payload: notPutaway,
+});
+
+export const FSC_notPutaway1Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_1_FAILURE,
+    error: error,
+});
+
+export const FSC_requestNotPutaway2 = () => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_2_START,
+});
+
+export const FSC_receiveNotPutaway2 =(notPutaway) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_2_SUCCESS,
+    payload: notPutaway,
+});
+
+export const FSC_notPutaway2Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_2_FAILURE,
+    error: error,
+});
+
+export const FSC_requestNotPutaway3 = () => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_3_START,
+});
+
+export const FSC_receiveNotPutaway3 =(notPutaway) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_3_SUCCESS,
+    payload: notPutaway,
+});
+
+export const FSC_notPutaway3Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_3_FAILURE,
+    error: error,
+});
+
+export const FSC_requestNotPutaway4 = () => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_4_START,
+});
+
+export const FSC_receiveNotPutaway4 =(notPutaway) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_4_SUCCESS,
+    payload: notPutaway,
+});
+
+export const FSC_notPutaway4Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_4_FAILURE,
+    error: error,
+});
+
+export const FSC_requestNotPutaway5 = () => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_5_START,
+});
+
+export const FSC_receiveNotPutaway5 =(notPutaway) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_5_SUCCESS,
+    payload: notPutaway,
+});
+
+export const FSC_notPutaway5Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_5_FAILURE,
+    error: error,
+});
+
+export const FSC_requestNotPutaway6 = () => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_6_START,
+});
+
+export const FSC_receiveNotPutaway6 =(notPutaway) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_6_SUCCESS,
+    payload: notPutaway,
+});
+
+export const FSC_notPutaway6Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_6_FAILURE,
+    error: error,
+});
+
+export const FSC_requestNotPutaway7 = () => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_7_START,
+});
+
+export const FSC_receiveNotPutaway7 =(notPutaway) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_7_SUCCESS,
+    payload: notPutaway,
+});
+
+export const FSC_notPutaway7Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_7_FAILURE,
+    error: error,
+});
+
+export const FSC_requestNotPutawayOver7 = () => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_OVER_7_START,
+});
+
+export const FSC_receiveNotPutawayOver7 =(notPutaway) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_OVER_7_SUCCESS,
+    payload: notPutaway,
+});
+
+export const FSC_notPutawayOver7Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_NOT_PUTAWAY_OVER_7_FAILURE,
+    error: error,
+});
+
+// Transitional component actions 
+export const FSC_requestTransitional0 = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_0_START,
+});
+
+export const FSC_receiveTransitional0 =(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_0_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitional0Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_0_FAILURE,
+    error: error,
+});
+
+export const FSC_requestTransitional1 = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_1_START,
+});
+
+export const FSC_receiveTransitional1 =(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_1_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitional1Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_1_FAILURE,
+    error: error,
+});
+
+export const FSC_requestTransitional2 = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_2_START,
+});
+
+export const FSC_receiveTransitional2 =(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_2_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitional2Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_2_FAILURE,
+    error: error,
+});
+
+export const FSC_requestTransitional3 = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_3_START,
+});
+
+export const FSC_receiveTransitional3 =(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_3_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitional3Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_3_FAILURE,
+    error: error,
+});
+
+export const FSC_requestTransitional4 = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_4_START,
+});
+
+export const FSC_receiveTransitional4 =(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_4_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitional4Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_4_FAILURE,
+    error: error,
+});
+
+export const FSC_requestTransitional5 = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_5_START,
+});
+
+export const FSC_receiveTransitional5 =(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_5_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitional5Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_5_FAILURE,
+    error: error,
+});
+
+export const FSC_requestTransitional6 = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_6_START,
+});
+
+export const FSC_receiveTransitional6 =(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_6_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitional6Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_6_FAILURE,
+    error: error,
+});
+
+export const FSC_requestTransitional7 = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_7_START,
+});
+
+export const FSC_receiveTransitional7 =(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_7_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitional7Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_7_FAILURE,
+    error: error,
+});
+
+export const FSC_requestTransitionalOver7 = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_OVER_7_START,
+});
+
+export const FSC_receiveTransitionalOver7 =(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_OVER_7_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitionalOver7Failure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_OVER_7_FAILURE,
+    error: error,
+});
+
+export const FSC_requestTransitionalTotal = () => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_TOTAL_START,
+});
+
+export const FSC_receiveTransitionalTotal=(transitional) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_TOTAL_SUCCESS,
+    payload: transitional,
+});
+
+export const FSC_transitionalTotalFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_TRANSITIONAL_TOTAL_FAILURE,
+    error: error,
+});
+
+export const FSC_requestLatestCountData = () => ({
+    type: ProgressPageActionTypes.FSC_LATEST_COUNT_DATA_START,
+});
+
+export const FSC_receiveLatestCountData=(latestCount) => ({
+    type: ProgressPageActionTypes.FSC_LATEST_COUNT_DATA_SUCCESS,
+    payload: latestCount,
+});
+
+export const FSC_latestCountDataFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_LATEST_COUNT_DATA_FAILURE,
     error: error,
 });
 

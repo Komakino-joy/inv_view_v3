@@ -9,7 +9,7 @@ import {
     ReportPageBody, ReportGridContainer, DailyEntryContainer,
     EmptyActiveContainer, TransitionalReportContainer,
     NotPutawayContainer, AdjustmentReportContainer, CycleCountReportContainer
-} from './reportuploadpage.styles';
+} from './report-upload-page.styles';
 
 
 const ReportUploadPage = ({history}) => {
@@ -18,7 +18,7 @@ const ReportUploadPage = ({history}) => {
 
     return(
         <div>
-            <nav id='report-upload-nav' onClick = {() => history.push('/fnt-chg-progress')} >Progress View</nav>
+            <nav id='report-upload-nav' onClick = {() => history.push('/fnt-fsc-progress')} >Progress View</nav>
             <ReportPageBody>
                 <ReportGridContainer>
                 <DailyEntryContainer className="daily-entry">

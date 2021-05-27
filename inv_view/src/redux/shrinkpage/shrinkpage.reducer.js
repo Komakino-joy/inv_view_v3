@@ -38,42 +38,11 @@ export const CHG_shrinkData = (state = INITIAL_STATE, action) => {
                 error:null,
             };
 
-        case ShrinkPageActionTypes.FSC_DAILY_SHRINK_DATA_SUCCESS:
-            return {
-                ...state, 
-                FSC_dailyShrink:action.payload,
-                error:null,
-            };
-
-        case ShrinkPageActionTypes.FSC_WEEKLY_SHRINK_DATA_SUCCESS:
-            return {
-                ...state, 
-                FSC_weeklyShrink:action.payload,
-                error:null,
-            };
-
-        case ShrinkPageActionTypes.FSC_MONTHLY_SHRINK_DATA_SUCCESS:
-            return {
-                ...state, 
-                FSC_monthlyShrink:action.payload,
-                error:null,
-            };
-
-        case ShrinkPageActionTypes.FSC_YEARLY_SHRINK_DATA_SUCCESS:
-            return {
-                ...state, 
-                FSC_yearlyShrink:action.payload,
-                error:null,
-            };
     
         case ShrinkPageActionTypes.CHG_DAILY_SHRINK_DATA_FAILURE:
         case ShrinkPageActionTypes.CHG_WEEKLY_SHRINK_DATA_FAILURE:
         case ShrinkPageActionTypes.CHG_MONTHLY_SHRINK_DATA_FAILURE: 
-        case ShrinkPageActionTypes.CHG_YEARLY_SHRINK_DATA_FAILURE: 
-        case ShrinkPageActionTypes.FSC_DAILY_SHRINK_DATA_FAILURE:
-        case ShrinkPageActionTypes.FSC_WEEKLY_SHRINK_DATA_FAILURE:
-        case ShrinkPageActionTypes.FSC_MONTHLY_SHRINK_DATA_FAILURE: 
-        case ShrinkPageActionTypes.FSC_YEARLY_SHRINK_DATA_FAILURE:     
+        case ShrinkPageActionTypes.CHG_YEARLY_SHRINK_DATA_FAILURE:  
             return{
             ...state,
             error:action.payload,

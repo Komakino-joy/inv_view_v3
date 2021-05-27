@@ -8,7 +8,7 @@ import {
     FulfillmentButton,
     CheggButton,
     Image
- } from './homepage.stlyes';
+ } from './home-page.stlyes';
 
 const HomePage = ({ history }) => {
     return (

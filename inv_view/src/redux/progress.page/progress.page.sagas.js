@@ -4,6 +4,7 @@ import ProgressPageActionTypes from './progress.page.types';
 
 import { 
     CHG_API_URL,
+    FSC_API_URL,
     httpFetchOccupiedLocsCounted,
     httpFetchOccupiedLocsUncounted,
     httpFetchEmptyLocsCounted,
@@ -80,6 +81,66 @@ import {
     CHG_transitionalTotalFailure,
     CHG_receiveLatestCountData,
     CHG_latestCountDataFailure,
+    FSC_receiveOccupiedLocations,
+    FSC_occupiedLocationsFailure,
+    FSC_receiveOccupiedLocationsUncounted,
+    FSC_occupiedLocationsUncountedFailure,
+    FSC_receiveEmptyLocationsCounted,
+    FSC_emptyLocationsCountedFailure,
+    FSC_receiveEmptyLocationsUncounted,
+    FSC_emptyLocationsUncountedFailure,
+    FSC_receiveExpectedQty,
+    FSC_expectedQtyFailure,
+    FSC_receivevarianceQty,
+    FSC_varianceQtyFailure,
+    FSC_receiveUniqueLocs,
+    FSC_uniqueLocsFailure,
+    FSC_receiveLocsWithVarianceCount,
+    FSC_locsWithVarianceCountFailure,
+    FSC_receivePR,
+    FSC_prFailure,
+    FSC_receiveDmg,
+    FSC_dmgFailure,
+    FSC_receiveNotPutaway0,
+    FSC_notPutaway0Failure,
+    FSC_receiveNotPutaway1,
+    FSC_notPutaway1Failure,
+    FSC_receiveNotPutaway2,
+    FSC_notPutaway2Failure,
+    FSC_receiveNotPutaway3,
+    FSC_notPutaway3Failure,
+    FSC_receiveNotPutaway4,
+    FSC_notPutaway4Failure,
+    FSC_receiveNotPutaway5,
+    FSC_notPutaway5Failure,
+    FSC_receiveNotPutaway6,
+    FSC_notPutaway6Failure,
+    FSC_receiveNotPutaway7,
+    FSC_notPutaway7Failure,
+    FSC_receiveNotPutawayOver7,
+    FSC_notPutawayOver7Failure,
+    FSC_receiveTransitional0,
+    FSC_transitional0Failure,
+    FSC_receiveTransitional1,
+    FSC_transitional1Failure,
+    FSC_receiveTransitional2,
+    FSC_transitional2Failure,
+    FSC_receiveTransitional3,
+    FSC_transitional3Failure,
+    FSC_receiveTransitional4,
+    FSC_transitional4Failure,
+    FSC_receiveTransitional5,
+    FSC_transitional5Failure,
+    FSC_receiveTransitional6,
+    FSC_transitional6Failure,
+    FSC_receiveTransitional7,
+    FSC_transitional7Failure,
+    FSC_receiveTransitionalOver7,
+    FSC_transitionalOver7Failure,
+    FSC_receiveTransitionalTotal,
+    FSC_transitionalTotalFailure,
+    FSC_receiveLatestCountData,
+    FSC_latestCountDataFailure,
     } from './progress.page.actions';
 
 function* CHG_getOccupiedLocsCounted(){
@@ -357,35 +418,310 @@ function* CHG_getLatestCountData(){
     }
 };
 
-export function* CHG_requestOccupiedLocsSaga(){
+function* FSC_getOccupiedLocsCounted(){
+    try{
+        const locations = yield httpFetchOccupiedLocsCounted(`${FSC_API_URL}`);
+        yield put(FSC_receiveOccupiedLocations(locations));
+    } catch (error) {
+        yield put(FSC_occupiedLocationsFailure(error));
+    }
+};
+
+function* FSC_getOccupiedLocsUncounted(){
+    try{
+        const locations = yield httpFetchOccupiedLocsUncounted(`${FSC_API_URL}`);
+        yield put(FSC_receiveOccupiedLocationsUncounted(locations));
+    } catch (error) {
+        yield put(FSC_occupiedLocationsUncountedFailure(error));
+    }
+};
+
+function* FSC_getEmptyLocsCounted(){
+    try{
+        const locations = yield httpFetchEmptyLocsCounted(`${FSC_API_URL}`);
+        yield put(FSC_receiveEmptyLocationsCounted(locations));
+    } catch (error) {
+        yield put(FSC_emptyLocationsCountedFailure(error));
+    }
+};
+
+function* FSC_getEmptyLocsUncounted(){
+    try{
+        const locations = yield httpFetchEmptyLocsUncounted(`${FSC_API_URL}`);
+        yield put(FSC_receiveEmptyLocationsUncounted(locations));
+    } catch (error) {
+        yield put(FSC_emptyLocationsUncountedFailure(error));
+    }
+};
+
+function* FSC_getExpectedQty(){
+    try{
+        const sum = yield httpFetchTotalExpectedQty(`${FSC_API_URL}`);
+        yield put(FSC_receiveExpectedQty(sum));
+    } catch (error) {
+        yield put(FSC_expectedQtyFailure(error));
+    }
+};
+
+function* FSC_getVarianceQty(){
+    try{
+        const sum = yield httpFetchTotalVarianceQty(`${FSC_API_URL}`);
+        yield put(FSC_receivevarianceQty(sum));
+    } catch (error) {
+        yield put(FSC_varianceQtyFailure(error));
+    }
+};
+
+function* FSC_getUniqueLocsCounted(){
+    try{
+        const count = yield httpFetchUniqueLocsCounted(`${FSC_API_URL}`);
+        yield put(FSC_receiveUniqueLocs(count));
+    } catch (error) {
+        yield put(FSC_uniqueLocsFailure(error));
+    }
+};
+
+function* FSC_getTotalCountsWithVariance(){
+    try{
+        const locationsCount = yield httpFetchTotalCountsWithVariance(`${FSC_API_URL}`);
+        yield put(FSC_receiveLocsWithVarianceCount(locationsCount));
+    } catch (error) {
+        yield put(FSC_locsWithVarianceCountFailure(error));
+    }
+};
+
+function* FSC_getPr() {
+    try {
+        const pr = yield httpFetchPR(`${FSC_API_URL}`);
+        yield put(FSC_receivePR(pr));
+    } catch (error) {
+        yield put(FSC_prFailure(error))
+    };
+   };
+
+function* FSC_getDmg(){
+    try{
+        const damages = yield httpFetchDmg(`${FSC_API_URL}`);
+        yield put(FSC_receiveDmg(damages));
+    } catch (error) {
+        yield put(FSC_dmgFailure(error));
+    }
+};
+
+function* FSC_getNotPutAway0Day(){
+    try{
+        const notPutAway = yield httpFetchNotPutawayByDay(`${FSC_API_URL}`,'0');
+        yield put(FSC_receiveNotPutaway0(notPutAway));
+    } catch (error) {
+        yield put(FSC_notPutaway0Failure(error));
+    }
+};
+
+function* FSC_getNotPutAway1Day(){
+    try{
+        const notPutAway = yield httpFetchNotPutawayByDay(`${FSC_API_URL}`,'1');
+        yield put(FSC_receiveNotPutaway1(notPutAway));
+    } catch (error) {
+        yield put(FSC_notPutaway1Failure(error));
+    }
+};
+
+function* FSC_getNotPutAway2Day(){
+    try{
+        const notPutAway = yield httpFetchNotPutawayByDay(`${FSC_API_URL}`,'2');
+        yield put(FSC_receiveNotPutaway2(notPutAway));
+    } catch (error) {
+        yield put(FSC_notPutaway2Failure(error));
+    }
+};
+
+function* FSC_getNotPutAway3Day(){
+    try{
+        const notPutAway = yield httpFetchNotPutawayByDay(`${FSC_API_URL}`,'3');
+        yield put(FSC_receiveNotPutaway3(notPutAway));
+    } catch (error) {
+        yield put(FSC_notPutaway3Failure(error));
+    }
+};
+
+  
+function* FSC_getNotPutAway4Day(){
+    try{
+        const notPutAway = yield httpFetchNotPutawayByDay(`${FSC_API_URL}`,'4');
+        yield put(FSC_receiveNotPutaway4(notPutAway));
+    } catch (error) {
+        yield put(FSC_notPutaway4Failure(error));
+    }
+};
+
+function* FSC_getNotPutAway5Day(){
+    try{
+        const notPutAway = yield httpFetchNotPutawayByDay(`${FSC_API_URL}`,'5');
+        yield put(FSC_receiveNotPutaway5(notPutAway));
+    } catch (error) {
+        yield put(FSC_notPutaway5Failure(error));
+    }
+};
+
+
+function* FSC_getNotPutAway6Day(){
+    try{
+        const notPutAway = yield httpFetchNotPutawayByDay(`${FSC_API_URL}`,'6');
+        yield put(FSC_receiveNotPutaway6(notPutAway));
+    } catch (error) {
+        yield put(FSC_notPutaway6Failure(error));
+    }
+}; 
+
+function* FSC_getNotPutAway7Day(){
+    try{
+        const notPutAway = yield httpFetchNotPutawayByDay(`${FSC_API_URL}`,'7');
+        yield put(FSC_receiveNotPutaway7(notPutAway));
+    } catch (error) {
+        yield put(FSC_notPutaway7Failure(error));
+    }
+};
+
+
+function* FSC_getNotPutAwayOver7Day(){
+    try{
+        const notPutAway = yield httpFetchNotPutawayByDay(`${FSC_API_URL}`,'over-7');
+        yield put(FSC_receiveNotPutawayOver7(notPutAway));
+    } catch (error) {
+        yield put(FSC_notPutawayOver7Failure(error));
+    }
+};
+
+function* FSC_getTransitional0Day(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'0-day');
+        yield put(FSC_receiveTransitional0(transitional));
+    } catch (error) {
+        yield put(FSC_transitional0Failure(error));
+    }
+};
+
+function* FSC_getTransitional1Day(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'1-day');
+        yield put(FSC_receiveTransitional1(transitional));
+    } catch (error) {
+        yield put(FSC_transitional1Failure(error));
+    }
+};
+
+function* FSC_getTransitional2Day(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'2-day');
+        yield put(FSC_receiveTransitional2(transitional));
+    } catch (error) {
+        yield put(FSC_transitional2Failure(error));
+    }
+};
+
+function* FSC_getTransitional3Day(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'3-day');
+        yield put(FSC_receiveTransitional3(transitional));
+    } catch (error) {
+        yield put(FSC_transitional3Failure(error));
+    }
+};
+
+  
+function* FSC_getTransitional4Day(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'4-day');
+        yield put(FSC_receiveTransitional4(transitional));
+    } catch (error) {
+        yield put(FSC_transitional4Failure(error));
+    }
+};
+
+function* FSC_getTransitional5Day(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'5-day');
+        yield put(FSC_receiveTransitional5(transitional));
+    } catch (error) {
+        yield put(FSC_transitional5Failure(error));
+    }
+};
+
+
+function* FSC_getTransitional6Day(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'6-day');
+        yield put(FSC_receiveTransitional6(transitional));
+    } catch (error) {
+        yield put(FSC_transitional6Failure(error));
+    }
+};
+function* FSC_getTransitional7Day(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'7-day');
+        yield put(FSC_receiveTransitional7(transitional));
+    } catch (error) {
+        yield put(FSC_transitional7Failure(error));
+    }
+};
+
+
+function* FSC_getTransitionalOver7Day(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'over-7-day');
+        yield put(FSC_receiveTransitionalOver7(transitional));
+    } catch (error) {
+        yield put(FSC_transitionalOver7Failure(error));
+    }
+};
+
+function* FSC_getTransitionalTotal(){
+    try{
+        const transitional = yield httpFetchTransitionalByDay(`${FSC_API_URL}`,'total');
+        yield put(FSC_receiveTransitionalTotal(transitional));
+    } catch (error) {
+        yield put(FSC_transitionalTotalFailure(error));
+    }
+};
+
+function* FSC_getLatestCountData(){
+    try{
+        const latestCount = yield httpLatestCountData(`${FSC_API_URL}`);
+        yield put(FSC_receiveLatestCountData(latestCount));
+    } catch (error) {
+        yield put(FSC_latestCountDataFailure(error));
+    }
+};
+
+function* CHG_requestOccupiedLocsSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_START, CHG_getOccupiedLocsCounted)
 };
 
-export function* CHG_requestOccupiedLocsUncountedSaga(){
+function* CHG_requestOccupiedLocsUncountedSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_OCCUPIED_LOCS_UNCOUNTED_START, CHG_getOccupiedLocsUncounted)
 };
 
-export function* CHG_requestEmptyLocsCountedSaga(){
+function* CHG_requestEmptyLocsCountedSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_EMPTY_LOCS_COUNTED_START, CHG_getEmptyLocsCounted)
 };
 
-export function* CHG_requestEmptyLocsUncountedSaga(){
+function* CHG_requestEmptyLocsUncountedSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_EMPTY_LOCS_UNCOUNTED_START, CHG_getEmptyLocsUncounted)
 };
 
-export function* CHG_requestExpectedQtySaga(){
+function* CHG_requestExpectedQtySaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_EXPECTED_QTY_START, CHG_getExpectedQty)
 };
 
-export function* CHG_requestVarianceQtySaga(){
+function* CHG_requestVarianceQtySaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_VARIANCE_QTY_START, CHG_getVarianceQty)
 };
 
-export function* CHG_requestUniqueLocsCountedSaga(){
+function* CHG_requestUniqueLocsCountedSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_START, CHG_getUniqueLocsCounted)
 };
 
-export function* CHG_requestTotalCountsWithVarianceSaga(){
+function* CHG_requestTotalCountsWithVarianceSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_START, CHG_getTotalCountsWithVariance)
 };
 
@@ -477,6 +813,126 @@ function* CHG_getLatestCountDataSaga() {
     yield takeLatest(ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_START, CHG_getLatestCountData)
 };
 
+function* FSC_requestOccupiedLocsSaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_OCCUPIED_LOCS_COUNTED_START, FSC_getOccupiedLocsCounted)
+};
+
+function* FSC_requestOccupiedLocsUncountedSaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_OCCUPIED_LOCS_UNCOUNTED_START, FSC_getOccupiedLocsUncounted)
+};
+
+function* FSC_requestEmptyLocsCountedSaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_EMPTY_LOCS_COUNTED_START, FSC_getEmptyLocsCounted)
+};
+
+function* FSC_requestEmptyLocsUncountedSaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_EMPTY_LOCS_UNCOUNTED_START, FSC_getEmptyLocsUncounted)
+};
+
+function* FSC_requestExpectedQtySaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_EXPECTED_QTY_START, FSC_getExpectedQty)
+};
+
+function* FSC_requestVarianceQtySaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_VARIANCE_QTY_START, FSC_getVarianceQty)
+};
+
+function* FSC_requestUniqueLocsCountedSaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_UNIQUE_LOCS_COUNTED_START, FSC_getUniqueLocsCounted)
+};
+
+function* FSC_requestTotalCountsWithVarianceSaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_TOTAL_COUNTS_WITH_VARIANCE_START, FSC_getTotalCountsWithVariance)
+};
+
+function* FSC_getPrSaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_PR_START, FSC_getPr)
+}
+
+function* FSC_getDmgSaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_PR_START, FSC_getDmg)
+};
+
+function* FSC_getNotPutAway0DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_0_START, FSC_getNotPutAway0Day)
+};
+
+function* FSC_getNotPutAway1DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_1_START, FSC_getNotPutAway1Day)
+};
+    
+function* FSC_getNotPutAway2DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_2_START, FSC_getNotPutAway2Day)
+};
+  
+function* FSC_getNotPutAway3DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_3_START, FSC_getNotPutAway3Day)
+};
+
+function* FSC_getNotPutAway4DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_4_START, FSC_getNotPutAway4Day)
+};
+
+function* FSC_getNotPutAway5DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_5_START, FSC_getNotPutAway5Day)
+};
+
+function* FSC_getNotPutAway6DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_6_START, FSC_getNotPutAway6Day)
+};
+
+function* FSC_getNotPutAway7DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_7_START, FSC_getNotPutAway7Day)
+};
+  
+function* FSC_getNotPutAwayOver7DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_7_START, FSC_getNotPutAwayOver7Day)
+};
+
+function* FSC_getTransitional0DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_1_START, FSC_getTransitional0Day)
+};
+
+function* FSC_getTransitional1DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_1_START, FSC_getTransitional1Day)
+};
+    
+function* FSC_getTransitional2DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_2_START, FSC_getTransitional2Day)
+};
+  
+function* FSC_getTransitional3DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_3_START, FSC_getTransitional3Day)
+};
+
+function* FSC_getTransitional4DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_4_START, FSC_getTransitional4Day)
+};
+
+function* FSC_getTransitional5DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_5_START, FSC_getTransitional5Day)
+};
+
+function* FSC_getTransitional6DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_6_START, FSC_getTransitional6Day)
+};
+
+function* FSC_getTransitional7DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_7_START, FSC_getTransitional7Day)
+};
+  
+function* FSC_getTransitionalOver7DaySaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_NOT_PUTAWAY_7_START, FSC_getTransitionalOver7Day)
+};
+
+function* FSC_getTransitionalTotalSaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_TRANSITIONAL_TOTAL_START, FSC_getTransitionalTotal)
+};
+
+function* FSC_getLatestCountDataSaga() {
+    yield takeLatest(ProgressPageActionTypes.FSC_LATEST_COUNT_DATA_START, FSC_getLatestCountData)
+};
+
 
 export function* progressPageSagas(){
     yield all([
@@ -510,5 +966,35 @@ export function* progressPageSagas(){
         call(CHG_getTransitionalOver7DaySaga),
         call(CHG_getTransitionalTotalSaga),
         call(CHG_getLatestCountDataSaga),
+        call(FSC_requestOccupiedLocsSaga),
+        call(FSC_requestOccupiedLocsUncountedSaga),
+        call(FSC_requestEmptyLocsCountedSaga),
+        call(FSC_requestEmptyLocsUncountedSaga),
+        call(FSC_requestExpectedQtySaga),
+        call(FSC_requestVarianceQtySaga),
+        call(FSC_requestUniqueLocsCountedSaga),
+        call(FSC_requestTotalCountsWithVarianceSaga),
+        call(FSC_getPrSaga),
+        call(FSC_getDmgSaga),
+        call(FSC_getNotPutAway0DaySaga),
+        call(FSC_getNotPutAway1DaySaga),
+        call(FSC_getNotPutAway2DaySaga),
+        call(FSC_getNotPutAway3DaySaga),
+        call(FSC_getNotPutAway4DaySaga),
+        call(FSC_getNotPutAway5DaySaga),
+        call(FSC_getNotPutAway6DaySaga),
+        call(FSC_getNotPutAway7DaySaga),
+        call(FSC_getNotPutAwayOver7DaySaga),
+        call(FSC_getTransitional0DaySaga),
+        call(FSC_getTransitional1DaySaga),
+        call(FSC_getTransitional2DaySaga),
+        call(FSC_getTransitional3DaySaga),
+        call(FSC_getTransitional4DaySaga),
+        call(FSC_getTransitional5DaySaga),
+        call(FSC_getTransitional6DaySaga),
+        call(FSC_getTransitional7DaySaga),
+        call(FSC_getTransitionalOver7DaySaga),
+        call(FSC_getTransitionalTotalSaga),
+        call(FSC_getLatestCountDataSaga),
     ]);
 };

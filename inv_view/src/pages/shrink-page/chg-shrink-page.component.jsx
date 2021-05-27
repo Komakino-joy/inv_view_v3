@@ -13,16 +13,16 @@ import {
     CHG_requestYearlyShrinkData
 } from '../../redux/shrinkpage/shrinkpage.actions'
 
-import './shrink.styles.css'
+import './shrink-page.styles.css'
 
 const ShrinkPage = ({ history }) => {
 
     const dispatch = useDispatch();
 
-    const dailyShrinkData = useSelector(state => state.shrinkData.CHG_dailyShrink);
-    const weeklyShrinkData = useSelector(state => state.shrinkData.CHG_weeklyShrink);
-    const monthlyShrinkData = useSelector(state => state.shrinkData.CHG_monthlyShrink);
-    const yearlyShrinkData = useSelector(state => state.shrinkData.CHG_yearlyShrink);
+    const dailyShrinkData = useSelector(state => state.CHG_shrinkData.dailyShrink);
+    const weeklyShrinkData = useSelector(state => state.CHG_shrinkData.weeklyShrink);
+    const monthlyShrinkData = useSelector(state => state.CHG_shrinkData.monthlyShrink);
+    const yearlyShrinkData = useSelector(state => state.CHG_shrinkData.yearlyShrink);
 
     useEffect(() => {
         dispatch(CHG_requestDailyShrinkData());

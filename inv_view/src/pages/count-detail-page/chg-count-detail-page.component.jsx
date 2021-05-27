@@ -16,9 +16,9 @@ import './countdetail.styles.css'
 const CountDetailPage = ({ history }) => {
         const dispatch = useDispatch();
 
-        const dailyCountData = useSelector(state => state.countData.dailyCount);
-        const userCountData = useSelector(state => state.countData.userCount);
-        const userCountByDayData = useSelector(state => state.countData.userCountByDay);
+        const dailyCountData = useSelector(state => state.CHG_countData.dailyCount);
+        const userCountData = useSelector(state => state.CHG_countData.userCount);
+        const userCountByDayData = useSelector(state => state.CHG_countData.userCountByDay);
 
     useEffect(() => {
         dispatch(CHG_requestDailyCountData())

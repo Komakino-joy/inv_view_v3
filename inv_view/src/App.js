@@ -1,16 +1,18 @@
 import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
-import HomePage from './pages/homepage/hompage';
-import Header from './components/Header/header.component.jsx';
-import ChgProgressPage from './pages/progresspage/chg-progresspage.component';
-import ChgShrinkPage from './pages/shrinkpage/chg-shrinkpage.component.jsx';
-import ChgCountDetailPage from './pages/countdetailpage/chg-countdetailpage.component';
-import ChgReportUploadPage from './pages/reportuploadpage/chg-reportuploadpage.component';
 
-import FscProgressPage from './pages/progresspage/fsc-progresspage.component';
-import FscShrinkPage from './pages/shrinkpage/fsc-shrinkpage.component.jsx';
-import FscCountDetailPage from './pages/countdetailpage/fsc.countdetailpage.component';
-import FscReportUploadPage from './pages/reportuploadpage/fsc-reportuploadpage.component';
+import HomePage from './pages/home-page/home-page';
+import Header from './components/Header/header.component.jsx';
+
+import ChgProgressPage from './pages/progress-page/chg-progress-page.component';
+import ChgShrinkPage from './pages/shrink-page/chg-shrink-page.component.jsx';
+import ChgCountDetailPage from './pages/count-detail-page/chg-count-detail-page.component';
+import ChgReportUploadPage from './pages/report-upload-page/chg-report-upload-page.component';
+
+import FscProgressPage from './pages/progress-page/fsc-progress-page.component';
+import FscShrinkPage from './pages/shrink-page/fsc-shrink-page.component.jsx';
+import FscCountDetailPage from './pages/count-detail-page/fsc.countdetailpage.component';
+import FscReportUploadPage from './pages/report-upload-page/fsc-report-upload-page.component';
 
 const App = () => {
 

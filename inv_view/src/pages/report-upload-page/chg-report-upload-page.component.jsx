@@ -9,7 +9,7 @@ import {
     ReportPageBody, ReportGridContainer, DailyEntryContainer,
     EmptyActiveContainer, TransitionalReportContainer,
     NotPutawayContainer, AdjustmentReportContainer, CycleCountReportContainer
-} from './reportuploadpage.styles';
+} from './report-upload-page.styles';
 
 
 const ReportUploadPage = ({history}) => {

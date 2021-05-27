@@ -7,34 +7,33 @@ import YearlyShrinkReport from '../../components/shrinkreports/yearlyshrink/year
 import Download from './export';
 
 import {
-    CHG_requestDailyShrinkData, 
-    CHG_requestWeeklyShrinkData, 
-    CHG_requestMonthlyShrinkData, 
-    CHG_requestYearlyShrinkData
+    FSC_requestDailyShrinkData, 
+    FSC_requestWeeklyShrinkData, 
+    FSC_requestMonthlyShrinkData, 
+    FSC_requestYearlyShrinkData
 } from '../../redux/shrinkpage/shrinkpage.actions'
 
-import './shrink.styles.css'
+import './shrink-page.styles.css'
 
 const ShrinkPage = ({ history }) => {
 
     const dispatch = useDispatch();
 
-    const dailyShrinkData = useSelector(state => state.CHG_shrinkData.dailyShrink);
-    const weeklyShrinkData = useSelector(state => state.CHG_shrinkData.weeklyShrink);
-    const monthlyShrinkData = useSelector(state => state.CHG_shrinkData.monthlyShrink);
-    const yearlyShrinkData = useSelector(state => state.CHG_shrinkData.yearlyShrink);
-
+    const dailyShrinkData = useSelector(state => state.FSC_shrinkData.dailyShrink);
+    const weeklyShrinkData = useSelector(state => state.FSC_shrinkData.weeklyShrink);
+    const monthlyShrinkData = useSelector(state => state.FSC_shrinkData.monthlyShrink);
+    const yearlyShrinkData = useSelector(state => state.FSC_shrinkData.yearlyShrink);
     useEffect(() => {
-        dispatch(CHG_requestDailyShrinkData());
-        dispatch(CHG_requestWeeklyShrinkData());
-        dispatch(CHG_requestMonthlyShrinkData());
-        dispatch(CHG_requestYearlyShrinkData());
+        dispatch(FSC_requestDailyShrinkData());
+        dispatch(FSC_requestWeeklyShrinkData());
+        dispatch(FSC_requestMonthlyShrinkData());
+        dispatch(FSC_requestYearlyShrinkData());
     }, [dispatch]);
 
     return (
         
         <div className='shrinkpage'>
-        <nav onClick = {() => history.push('/fnt-chg-progress')} >Progress View</nav>
+        <nav onClick = {() => history.push('/fnt-fsc-progress')} >Progress View</nav>
 
         <div id='shrink-page-wrapper'>
             <div className='download'>

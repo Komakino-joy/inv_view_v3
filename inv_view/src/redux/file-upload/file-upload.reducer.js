@@ -3,7 +3,6 @@ import FileUploadActionTypes from './file-upload.types';
 const INITIAL_STATE = {
     status: null,
     error: null,
-    loading: false,
 };
 
 const fileUploadReducer = (state=INITIAL_STATE, action) => {
@@ -17,14 +16,12 @@ const fileUploadReducer = (state=INITIAL_STATE, action) => {
         return {
             ...state,
             status: 'Success',
-            loading: false,
             error:null,
         }
     case FileUploadActionTypes.FILE_UPLOAD_FAILURE:
         return {
             ...state,
             status: 'Failure',
-            loading: false,
             error:action.payload,
         }
     

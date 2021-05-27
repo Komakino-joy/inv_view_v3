@@ -6,9 +6,9 @@ import CountsByUserByDay from '../../components/CountQuantityDetail/counts-by-us
 import Download from './export';
 
 import {
-    CHG_requestDailyCountData, 
-    CHG_requestUserCountData, 
-    CHG_requestUserCountByDay,
+    FSC_requestDailyCountData, 
+    FSC_requestUserCountData, 
+    FSC_requestUserCountByDay,
 } from '../../redux/countdetailpage/countdetailpage.actions'
 
 import './countdetail.styles.css'
@@ -16,20 +16,20 @@ import './countdetail.styles.css'
 const CountDetailPage = ({ history }) => {
         const dispatch = useDispatch();
 
-        const dailyCountData = useSelector(state => state.countData.CHG_dailyCount);
-        const userCountData = useSelector(state => state.countData.CHG_userCount);
-        const userCountByDayData = useSelector(state => state.countData.CHG_userCountByDay);
+        const dailyCountData = useSelector(state => state.FSC_countData.dailyCount);
+        const userCountData = useSelector(state => state.FSC_countData.userCount);
+        const userCountByDayData = useSelector(state => state.FSC_countData.userCountByDay);
 
     useEffect(() => {
-        dispatch(CHG_requestDailyCountData())
-        dispatch(CHG_requestUserCountData())
-        dispatch(CHG_requestUserCountByDay())
+        dispatch(FSC_requestDailyCountData())
+        dispatch(FSC_requestUserCountData())
+        dispatch(FSC_requestUserCountByDay())
     }, [dispatch]);
 
     return (
         
         <div className='countpage'>
-        <nav onClick = {() => history.push('/fnt-chg-progress')}>Back</nav>
+        <nav onClick = {() => history.push('/fnt-fsc-progress')}>Back</nav>
         <div id='count-page-wrapper'>
             <div className='download'>
                 <Download daily={dailyCountData} countsByUser={userCountData} countsByUserByDay={userCountByDayData}></Download>

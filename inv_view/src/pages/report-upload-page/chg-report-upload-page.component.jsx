@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import ReportUpload from '../../components/ReportUploads/report-uploads.components';
-import DailyEntry from '../../components/DailyEntry/daily-entry.component';
-import DailyEntryReportModal from '../../components/DailyEntryModal/daily-entry-report-modal.component';
+import DailyEntry from '../../components/DailyEntry/chg-daily-entry.component';
+import DailyEntryReportModal from '../../components/DailyEntryModal/chg-daily-entry-report-modal.component';
 
 import { 
     ReportPageBody, ReportGridContainer, DailyEntryContainer,
@@ -11,6 +11,10 @@ import {
     NotPutawayContainer, AdjustmentReportContainer, CycleCountReportContainer
 } from './report-upload-page.styles';
 
+import { CHG_API_URL } from '../../api/api';
+
+
+import { CHG_fileUploadStart } from '../../redux/file-upload/file-upload.actions';
 
 const ReportUploadPage = ({history}) => {
     
@@ -31,53 +35,68 @@ const ReportUploadPage = ({history}) => {
                     <EmptyActiveContainer className="empty-active-report">
                         <ReportUpload 
                             header={'Empty Active Report Upload'} 
+                            reportUrl={"https://chgcasciprod.logistics.fedex.com/sci/bi/?perspective=classicviewer&id=i8DE397AA8B774310BA1B7AEFE64063CC&isViewer=false&isNewFromModule=false&isNewFromPackage=false&isNewDataSetFromModule=false&isNewDataSetFromPackage=false&isTemplate=false&isDataset=false&UIProfile=Titan&cmProperties%5Bid%5D=i8DE397AA8B774310BA1B7AEFE64063CC&cmProperties%5BdefaultName%5D=Empty+Active+Location&cmProperties%5Btype%5D=report&cmProperties%5Bpermissions%5D%5B%5D=execute&cmProperties%5Bpermissions%5D%5B%5D=read&cmProperties%5Bpermissions%5D%5B%5D=setPolicy&cmProperties%5Bpermissions%5D%5B%5D=traverse&cmProperties%5Bpermissions%5D%5B%5D=write&rsFinalRunOptions%5Bformat%5D=HTML&rsFinalRunOptions%5Ba11y%5D=false&rsFinalRunOptions%5Bbidi%5D=false&rsFinalRunOptions%5BrunInAdvancedViewer%5D=false&rsFinalRunOptions%5BDownload%5D=false&rsFinalRunOptions%5Bprompt%5D=true&rsFinalRunOptions%5BisApplication%5D=false"}
                             uploadType={"empty-active-upload-header"}
                             apiRoute={"/excel/upload-empty-active-locations"}
-                            lastUpdatedUrl={"/empty-active-last-update"}
-                            lastUpdatedPostUrl={'/empty-active-last-update-post'}
+                            lastUpdatedUrl={"/data/empty-active-last-update"}
+                            lastUpdatedPostUrl={'/data/empty-active-last-update-post'}
+                            baseUrl={CHG_API_URL}
+                            dispatchFunction={CHG_fileUploadStart}
                         />
                     </EmptyActiveContainer>
                     <NotPutawayContainer className="not-putaway-report">
                         <ReportUpload 
-                            header={'Not Putaway Report Upload'} 
+                            header={'Pending Putaway'} 
+                            reportUrl={"https://chgcasciprod.logistics.fedex.com/sci/bi/?perspective=authoring&id=iBFD78D78656B4306A55E3196F7F5E536&isViewer=false&isNewFromModule=false&isNewFromPackage=false&isNewDataSetFromModule=false&isNewDataSetFromPackage=false&isTemplate=false&isDataset=false&UIProfile=Titan&cmProperties%5Bid%5D=iBFD78D78656B4306A55E3196F7F5E536&rsFinalRunOptions%5Bformat%5D=HTML&rsFinalRunOptions%5Ba11y%5D=false&rsFinalRunOptions%5Bbidi%5D=false&rsFinalRunOptions%5BrunInAdvancedViewer%5D=true&rsFinalRunOptions%5BDownload%5D=false&rsFinalRunOptions%5Bprompt%5D=true&rsFinalRunOptions%5BisApplication%5D=false"}
                             uploadType={"not-putaway-upload-header"} 
                             apiRoute={"/excel/upload-not-putaway"}
-                            lastUpdatedUrl={"/not-putaway-last-update"}
-                            lastUpdatedPostUrl={"/not-putaway-last-update-post"}
+                            lastUpdatedUrl={"/data/not-putaway-last-update"}
+                            lastUpdatedPostUrl={"/data/not-putaway-last-update-post"}
+                            baseUrl={CHG_API_URL}
+                            dispatchFunction={CHG_fileUploadStart}
                         />
                     </NotPutawayContainer>
                     <TransitionalReportContainer className="transitional-report">
                         <ReportUpload 
-                            header={'Transitional Inventory Report Upload'} 
+                            header={'Transitional Inventory'}
+                            reportUrl={"https://chgcasciprod.logistics.fedex.com/sci/bi/?perspective=classicviewer&id=i7C9A1537FEC54CF3A863DB34C1B48399&isViewer=false&isNewFromModule=false&isNewFromPackage=false&isNewDataSetFromModule=false&isNewDataSetFromPackage=false&isTemplate=false&isDataset=false&UIProfile=Titan&cmProperties%5Bid%5D=i7C9A1537FEC54CF3A863DB34C1B48399&cmProperties%5BdefaultName%5D=Transitional+Inventory&cmProperties%5Btype%5D=report&cmProperties%5Bpermissions%5D%5B%5D=execute&cmProperties%5Bpermissions%5D%5B%5D=read&cmProperties%5Bpermissions%5D%5B%5D=setPolicy&cmProperties%5Bpermissions%5D%5B%5D=traverse&cmProperties%5Bpermissions%5D%5B%5D=write&rsFinalRunOptions%5Bformat%5D=HTML&rsFinalRunOptions%5Ba11y%5D=false&rsFinalRunOptions%5Bbidi%5D=false&rsFinalRunOptions%5BrunInAdvancedViewer%5D=false&rsFinalRunOptions%5BDownload%5D=false&rsFinalRunOptions%5Bprompt%5D=true&rsFinalRunOptions%5BisApplication%5D=false"} 
                             uploadType={"transitional-upload-header"} 
                             apiRoute={'/excel/upload-transitional-inventory'}
-                            lastUpdatedUrl={"/transitional-last-update"}
-                            lastUpdatedPostUrl={"/transitional-last-update-post"}
+                            lastUpdatedUrl={"/data/transitional-last-update"}
+                            lastUpdatedPostUrl={"/data/transitional-last-update-post"}
+                            baseUrl={CHG_API_URL}
+                            dispatchFunction={CHG_fileUploadStart}
                         />
                     </TransitionalReportContainer>
                     <AdjustmentReportContainer className="adjustment-report" >
                         <ReportUpload 
-                            header={'Adjustment Report Upload'} 
+                            header={'Inventory Adjustment'} 
+                            reportUrl={"https://chgcasciprod.logistics.fedex.com/sci/bi/?perspective=classicviewer&id=iD240139527AA4A1D801C8CDDF9ED67C8&isViewer=false&isNewFromModule=false&isNewFromPackage=false&isNewDataSetFromModule=false&isNewDataSetFromPackage=false&isTemplate=false&isDataset=false&UIProfile=Titan&cmProperties%5Bid%5D=iD240139527AA4A1D801C8CDDF9ED67C8&cmProperties%5BdefaultName%5D=Inventory+Adjustment&cmProperties%5Btype%5D=report&cmProperties%5Bpermissions%5D%5B%5D=execute&cmProperties%5Bpermissions%5D%5B%5D=read&cmProperties%5Bpermissions%5D%5B%5D=setPolicy&cmProperties%5Bpermissions%5D%5B%5D=traverse&cmProperties%5Bpermissions%5D%5B%5D=write&rsFinalRunOptions%5Bformat%5D=HTML&rsFinalRunOptions%5Ba11y%5D=false&rsFinalRunOptions%5Bbidi%5D=false&rsFinalRunOptions%5BrunInAdvancedViewer%5D=false&rsFinalRunOptions%5BDownload%5D=false&rsFinalRunOptions%5Bprompt%5D=true&rsFinalRunOptions%5BisApplication%5D=false"}
                             dataTracked 
                             uploadType={"adjustment-data-upload-header"}
                             apiRoute={"/excel/upload-adjustments"}
-                            lastUpdatedUrl={"/adjustment-last-update"}
-                            lastUpdatedPostUrl={"/adjustment-last-update-post"}
-                            newestRecordUrl={"/adjustment-newest-record"}
-                            dupeCheck={"/adjustment-duplicate-check"}
-                            dupeDelete={"/adjustment-duplicate-delete"}
+                            lastUpdatedUrl={"/data/adjustment-last-update"}
+                            lastUpdatedPostUrl={"/data/adjustment-last-update-post"}
+                            newestRecordUrl={"/data/adjustment-newest-record"}
+                            dupeCheck={"/data/adjustment-duplicate-check"}
+                            dupeDelete={"/data/adjustment-duplicate-delete"}
+                            baseUrl={CHG_API_URL}
+                            dispatchFunction={CHG_fileUploadStart}
                         />
                     </AdjustmentReportContainer>
                     <CycleCountReportContainer className="cycle-count-report" >
                         <ReportUpload 
-                            header={'Cycle Count Report Upload'} 
+                            header={'Cycle Count'} 
+                            reportUrl={"https://chgcasciprod.logistics.fedex.com/sci/bi/?perspective=authoring&id=iAF16A8EA5E1F4644894E9646EC11F621&isViewer=false&isNewFromModule=false&isNewFromPackage=false&isNewDataSetFromModule=false&isNewDataSetFromPackage=false&isTemplate=false&isDataset=false&UIProfile=Titan&cmProperties%5Bid%5D=iAF16A8EA5E1F4644894E9646EC11F621&rsFinalRunOptions%5Bformat%5D=HTML&rsFinalRunOptions%5Ba11y%5D=false&rsFinalRunOptions%5Bbidi%5D=false&rsFinalRunOptions%5BrunInAdvancedViewer%5D=true&rsFinalRunOptions%5BDownload%5D=false&rsFinalRunOptions%5Bprompt%5D=true&rsFinalRunOptions%5BisApplication%5D=false"}
                             dataTracked uploadType={"cycle-count-upload-header"}
                             apiRoute={"/excel/upload-counts"}
-                            lastUpdatedUrl={"/cyclecount-last-update"}
-                            lastUpdatedPostUrl={"/cyclecount-last-update-post"}
-                            newestRecordUrl={"/cyclecount-newest-record"}
-                            dupeCheck={"/cyclecount-duplicate-check"}
-                            dupeDelete={"/cyclecount-duplicate-delete"}
+                            lastUpdatedUrl={"/data/cyclecount-last-update"}
+                            lastUpdatedPostUrl={"/data/cyclecount-last-update-post"}
+                            newestRecordUrl={"/data/cyclecount-newest-record"}
+                            dupeCheck={"/data/cyclecount-duplicate-check"}
+                            dupeDelete={"/data/cyclecount-duplicate-delete"}
+                            baseUrl={CHG_API_URL}
+                            dispatchFunction={CHG_fileUploadStart}
                         />
                     </CycleCountReportContainer>
 

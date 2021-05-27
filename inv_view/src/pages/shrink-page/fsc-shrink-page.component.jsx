@@ -15,7 +15,7 @@ import {
 
 import './shrink-page.styles.css'
 
-const ShrinkPage = ({ history }) => {
+const ShrinkPage = ({ history }) => {    
 
     const dispatch = useDispatch();
 
@@ -34,7 +34,6 @@ const ShrinkPage = ({ history }) => {
         
         <div className='shrinkpage'>
         <nav onClick = {() => history.push('/fnt-fsc-progress')} >Progress View</nav>
-
         <div id='shrink-page-wrapper'>
             <div className='download'>
                 <Download daily={dailyShrinkData} weekly={weeklyShrinkData} monthly={monthlyShrinkData} yearly={yearlyShrinkData}></Download>

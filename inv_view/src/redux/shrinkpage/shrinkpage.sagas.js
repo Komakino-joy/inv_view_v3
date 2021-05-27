@@ -122,19 +122,19 @@ export function* CHG_requestYearlyShrinkSaga(){
 };
 
 export function* FSC_requestDailyShrinkSaga(){
-    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_DAILY_SHRINK_DATA, FSC_getDailyShrink)
+    yield takeLatest(ShrinkPageActionTypes.FSC_DAILY_SHRINK_DATA_START, FSC_getDailyShrink)
 };
 
 export function* FSC_requestWeeklyShrinkSaga(){
-    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_WEEKLY_SHRINK_DATA, FSC_getWeeklyShrink)
+    yield takeLatest(ShrinkPageActionTypes.FSC_WEEKLY_SHRINK_DATA_START, FSC_getWeeklyShrink)
 };
 
 export function* FSC_requestMonthlyShrinkSaga(){
-    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_MONTHLY_SHRINK_DATA, FSC_getMonthlyShrink)
+    yield takeLatest(ShrinkPageActionTypes.FSC_MONTHLY_SHRINK_DATA_START, FSC_getMonthlyShrink)
 };
 
 export function* FSC_requestYearlyShrinkSaga(){
-    yield takeLatest(ShrinkPageActionTypes.FSC_REQUEST_YEARLY_SHRINK_DATA, FSC_getYearlyShrink)
+    yield takeLatest(ShrinkPageActionTypes.FSC_YEARLY_SHRINK_DATA_START, FSC_getYearlyShrink)
 };
 
 

@@ -93,7 +93,7 @@ export const FSC_requestMonthlyShrinkData = () => ({
 });
 
 export const FSC_receiveMonthlyShrinkData = (monthlyShrink) => ({
-    type: ShrinkPageActionTypes.CHG_MONTHLY_SHRINK_DATA_SUCCESS,  
+    type: ShrinkPageActionTypes.FSC_MONTHLY_SHRINK_DATA_SUCCESS,  
     payload: monthlyShrink,
 });
 

@@ -16,8 +16,8 @@ export const httpFileUpload = async(baseUrl, apiRoute, file) => {
     axios.post(`${baseUrl}${apiRoute}`, 
                 formData, 
                 {cancelToken: source.token})
-                .then(res => { alert(res.data.message) })
-                .catch(error => { alert(error)});
+                .then(res => { alert('Report Finished Uploading') })
+                .catch(error => { alert('Report Failed to upload')});
 };
 
 export const fetchData = (url, setStateFunction ) => {

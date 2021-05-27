@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 
-import HomePage from './pages/home-page/home-page';
+import HomePage from './pages/home-page/home-page.jsx';
 import Header from './components/Header/header.component.jsx';
 
 import ChgProgressPage from './pages/progress-page/chg-progress-page.component';
@@ -11,7 +11,7 @@ import ChgReportUploadPage from './pages/report-upload-page/chg-report-upload-pa
 
 import FscProgressPage from './pages/progress-page/fsc-progress-page.component';
 import FscShrinkPage from './pages/shrink-page/fsc-shrink-page.component.jsx';
-import FscCountDetailPage from './pages/count-detail-page/fsc.countdetailpage.component';
+import FscCountDetailPage from './pages/count-detail-page/fsc-count-detail-page.component';
 import FscReportUploadPage from './pages/report-upload-page/fsc-report-upload-page.component';
 
 const App = () => {

@@ -4,7 +4,7 @@ import { toggleDailyEntry } from '../../redux/modal/modal.actions';
 
 import axios from 'axios';
 
-import { FSC_API_URL } from '../../api/api';
+import { CHG_API_URL } from '../../api/api';
 
 import {DailyEntryHeader, DailyEntryContainer, AddRecord, Article,ViewAll,
     FieldSet, DateLabel, Input, ModalDate, LabelContainer, InputContainer, 
@@ -12,18 +12,18 @@ import {DailyEntryHeader, DailyEntryContainer, AddRecord, Article,ViewAll,
     } from './daily-entry.styles';
 import "react-datepicker/dist/react-datepicker.css";
 
-const FscDailyEntry = ({toggleDailyEntry}) => {
+const DailyEntry = ({toggleDailyEntry}) => {
     
     const [selectedDate, setSelectedDate] = useState(null);
-    const [onHand, setOnHand] = useState(null);
-    const [transferPr, setTransferPr] = useState(null);
-    const [returnPr, setReturnPr] = useState(null);
-    const [damages, setDamages] = useState(null);
-    const [latestDate, setLatestDate] = useState(null);
+    const [onHand, setOnHand] = useState('');
+    const [transferPr, setTransferPr] = useState('');
+    const [returnPr, setReturnPr] = useState('');
+    const [damages, setDamages] = useState('');
+    const [latestDate, setLatestDate] = useState('');
 
     // eslint-disable-next-line
     useEffect(async() => {
-        const maxDate = await axios.get(`${FSC_API_URL}fsc/data/daily-on-hand-max`);
+        const maxDate = await axios.get(`${CHG_API_URL}/data/daily-on-hand-max`);
         setLatestDate(maxDate.data);
     });
 
@@ -59,7 +59,7 @@ const FscDailyEntry = ({toggleDailyEntry}) => {
     const addRecord = async() => {
         await axios({
             method: 'post',
-            url: `${FSC_API_URL}fsc/data/daily-on-hand-update`,
+            url: `${CHG_API_URL}/data/daily-on-hand-update`,
             data: {
               date: selectedDate,
               on_hand: onHand,
@@ -69,7 +69,7 @@ const FscDailyEntry = ({toggleDailyEntry}) => {
             }
           });
             
-            alert("Entry Submitted !")
+            alert("Entry Submitted")
             resetFields()
         };
     return(
@@ -120,4 +120,4 @@ const mapDispatchToProps = dispatch => ({
     toggleDailyEntry  : () => dispatch(toggleDailyEntry()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FscDailyEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(DailyEntry);

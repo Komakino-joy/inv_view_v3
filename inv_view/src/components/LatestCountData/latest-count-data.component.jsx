@@ -1,4 +1,5 @@
-import React from 'react';
+import React  from 'react';
+import { useLocation } from 'react-router-dom';
 
 import {
     LatestEntryHeader, BreakdownContainer, BreakdownLabelContainer, 
@@ -7,10 +8,17 @@ import {
 
 const LatestCountData = ({ history, headerColor, latestCountData}) => {
 
+    const location = useLocation()
+
     return(
         
     <div>
-        <span onClick = {() => history.push(`/fnt-chg-count-data`)}>Details</span>
+        <span onClick = {
+            location.pathname.slice(0,8) === '/fnt-fsc' 
+            ? () => history.push(`/fnt-fsc-count-data`)
+            : () => history.push(`/fnt-chg-count-data`)
+        }
+        >Details</span>
         <LatestEntryHeader style={{backgroundColor: `${headerColor}`}}>Latest Count Data</LatestEntryHeader>
         <BreakdownContainer>
             <BreakdownLabelContainer>

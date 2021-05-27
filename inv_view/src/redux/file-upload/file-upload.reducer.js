@@ -5,20 +5,20 @@ const INITIAL_STATE = {
     error: null,
 };
 
-const fileUploadReducer = (state=INITIAL_STATE, action) => {
+export const CHG_fileUploadReducer = (state=INITIAL_STATE, action) => {
     switch(action.type) {
-    case FileUploadActionTypes.FILE_UPLOAD_START:
+    case FileUploadActionTypes.CHG_FILE_UPLOAD_START:
         return {
             ...state,
             loading: true,
         }
-    case FileUploadActionTypes.FILE_UPLOAD_SUCCESS:
+    case FileUploadActionTypes.CHG_FILE_UPLOAD_SUCCESS:
         return {
             ...state,
             status: 'Success',
             error:null,
         }
-    case FileUploadActionTypes.FILE_UPLOAD_FAILURE:
+    case FileUploadActionTypes.CHG_FILE_UPLOAD_FAILURE:
         return {
             ...state,
             status: 'Failure',
@@ -31,4 +31,31 @@ const fileUploadReducer = (state=INITIAL_STATE, action) => {
     };
 };
 
-export default fileUploadReducer;
+export const FSC_fileUploadReducer = (state=INITIAL_STATE, action) => {
+    switch(action.type) {
+    case FileUploadActionTypes.FSC_FILE_UPLOAD_START:
+        return {
+            ...state,
+            loading: true,
+        }
+    case FileUploadActionTypes.FSC_FILE_UPLOAD_SUCCESS:
+        return {
+            ...state,
+            status: 'Success',
+            error:null,
+        }
+    case FileUploadActionTypes.FSC_FILE_UPLOAD_FAILURE:
+        return {
+            ...state,
+            status: 'Failure',
+            error:action.payload,
+        }
+    
+    default: 
+        return state
+
+    };
+};
+
+
+

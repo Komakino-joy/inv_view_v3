@@ -61,7 +61,7 @@ fscDataRouter.get("/empty-locations-uncounted", progressView.handleGetEmptyNotCo
 fscDataRouter.get("/occupied-locations-counted", progressView.handleGetOccupiedCounted);
 fscDataRouter.get("/occupied-locations-uncounted", progressView.handleGetOccupiedNotCounted);
 fscDataRouter.get("/count-variances", progressView.handleGetCountVariances);
-fscDataRouter.get("/total-variance-sum", progressView.handleGetNeTotalVariance);
+fscDataRouter.get("/total-variance-sum", progressView.handleGetNetTotalVariance);
 fscDataRouter.get("/absolute-total-variance-sum", progressView.handleGetAbsTotalVariance);
 fscDataRouter.get("/total-expected-qty-sum", progressView.handleGetTotalExpectedQty);
 fscDataRouter.get("/damages", progressView.handleGetDamages);

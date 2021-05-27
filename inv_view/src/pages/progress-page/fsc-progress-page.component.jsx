@@ -127,6 +127,7 @@ function ProgressPage({ history }) {
 
 
   return (
+    
     <div>
         <nav onClick = {() => history.push('/fnt-fsc-shrink-data')}>Shrink Reports</nav>
         <nav className='secondary-nav' onClick = {() => history.push('/fnt-fsc-report-upload')}>Report Uploads</nav>

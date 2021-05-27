@@ -4,7 +4,7 @@ import { toggleDailyEntry } from '../../redux/modal/modal.actions';
 
 import axios from 'axios';
 
-import { CHG_API_URL } from '../../api/api';
+import { FSC_API_URL } from '../../api/api';
 
 import {DailyEntryHeader, DailyEntryContainer, AddRecord, Article,ViewAll,
     FieldSet, DateLabel, Input, ModalDate, LabelContainer, InputContainer, 
@@ -12,7 +12,7 @@ import {DailyEntryHeader, DailyEntryContainer, AddRecord, Article,ViewAll,
     } from './daily-entry.styles';
 import "react-datepicker/dist/react-datepicker.css";
 
-const DailyEntry = ({toggleDailyEntry}) => {
+const FscDailyEntry = ({toggleDailyEntry}) => {
     
     const [selectedDate, setSelectedDate] = useState(null);
     const [onHand, setOnHand] = useState('');
@@ -23,7 +23,7 @@ const DailyEntry = ({toggleDailyEntry}) => {
 
     // eslint-disable-next-line
     useEffect(async() => {
-        const maxDate = await axios.get(`${CHG_API_URL}chg/data/daily-on-hand-max`);
+        const maxDate = await axios.get(`${FSC_API_URL}/data/daily-on-hand-max`);
         setLatestDate(maxDate.data);
     });
 
@@ -59,7 +59,7 @@ const DailyEntry = ({toggleDailyEntry}) => {
     const addRecord = async() => {
         await axios({
             method: 'post',
-            url: `${CHG_API_URL}chg/data/daily-on-hand-update`,
+            url: `${FSC_API_URL}/data/daily-on-hand-update`,
             data: {
               date: selectedDate,
               on_hand: onHand,
@@ -69,7 +69,7 @@ const DailyEntry = ({toggleDailyEntry}) => {
             }
           });
             
-            alert("Entry Submitted !")
+            alert("Entry Submitted")
             resetFields()
         };
     return(
@@ -120,4 +120,4 @@ const mapDispatchToProps = dispatch => ({
     toggleDailyEntry  : () => dispatch(toggleDailyEntry()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DailyEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(FscDailyEntry);

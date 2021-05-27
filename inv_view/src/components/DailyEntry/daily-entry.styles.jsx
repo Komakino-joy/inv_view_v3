@@ -14,7 +14,7 @@ const dataLabel = css`
 export const DailyEntryHeader = styled.header`
     margin-top:.8em;
     padding: 5px;
-    text-align: center;
+    text-align: left;
     font-size: 20px;
     color: white;
     background-color: darkgrey;

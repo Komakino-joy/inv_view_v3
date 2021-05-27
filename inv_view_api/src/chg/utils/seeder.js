@@ -10,6 +10,19 @@ function isValidDate(d) {
   };
 
 const cycleCountColumns = (data, i) => {
+    // Numbers with commas (ex. 4,123) are being treated as strings 
+    // this causes an issue with uploading to db which drops the records
+    // the checks below will remove the comma and convert them to numbers.
+    if (typeof data[i]['Expected QTY'] === 'string'){
+        data[i]['Expected QTY'] = Number(data[i]['Expected QTY'].replace(',',''))
+    } 
+    if (typeof data[i]['Counted QTY'] === 'string'){
+        data[i]['Counted QTY'] = Number(data[i]['Counted QTY'].replace(',','')) 
+    } 
+    if (typeof data[i]['Variance QTY'] === 'string'){
+        data[i]['Variance QTY'] = Number(data[i]['Variance QTY'].replace(',','')) 
+    } 
+
     // check for invalid date, skip if the date is invalid
     if(isValidDate(new Date(data[i]['Counted Date/Time']))){
         Counts.create({
@@ -31,6 +44,13 @@ const cycleCountColumns = (data, i) => {
 };
 
 const invAdjustmentColumns = (data, i) => {
+    // Numbers with commas (ex. 4,123) are being treated as strings 
+    // this causes an issue with uploading to db which drops the records
+    // the checks below will remove the comma and convert them to numbers.
+    if (typeof data[i]['Qty'] === 'string'){
+        data[i]['Qty'] = Number(data[i]['Qty'].replace(',',''))
+    } 
+
     // check for invalid date, skip if the date is invalid
     if(isValidDate(new Date(data[i]['Date/Time']))){
         Adjustments.create({

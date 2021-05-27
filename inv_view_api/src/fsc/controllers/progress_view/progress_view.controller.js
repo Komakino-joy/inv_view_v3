@@ -9,7 +9,7 @@ const handleGetOccupiedCounted = (req, res) => {
         LEFT JOIN empty_active_locations 
         ON locn_hdr.dsp_locn = empty_active_locations.display_location) 
         LEFT JOIN counts
-        ON locn_hdr.dsp_locn=counts.location 
+        ON REGEXP_REPLACE(locn_hdr.dsp_locn,'[^0-9a-zA-Z]+','','g') = counts.location 
         WHERE (((empty_active_locations.display_location) IS Null) 
         AND ((counts.location) IS NOT Null)) GROUP BY locn_hdr.dsp_locn)  AS "Alias";
 `)
@@ -24,7 +24,7 @@ const handleGetOccupiedNotCounted = (req, res) => {
     FROM (locn_hdr 
         LEFT JOIN empty_active_locations 
         ON locn_hdr.dsp_locn = empty_active_locations.display_location) 
-        LEFT JOIN counts ON locn_hdr.dsp_locn = counts.location
+        LEFT JOIN counts ON REGEXP_REPLACE(locn_hdr.dsp_locn,'[^0-9a-zA-Z]+','','g') = counts.location
     GROUP BY empty_active_locations.display_location, counts.location
     HAVING (((empty_active_locations.display_location) Is Null) And ((counts.location) Is Null));
 `)
@@ -40,7 +40,7 @@ const handleGetEmptyCounted = (req, res) => {
         SELECT locn_hdr.dsp_locn 
         FROM locn_hdr 
         LEFT JOIN empty_active_locations ON locn_hdr.dsp_locn = empty_active_locations.display_location 
-        LEFT JOIN counts ON locn_hdr.dsp_locn = counts.location 
+        LEFT JOIN counts ON REGEXP_REPLACE(locn_hdr.dsp_locn,'[^0-9a-zA-Z]+','','g') = counts.location 
         WHERE (((empty_active_locations.display_location) IS NOT Null) 
         AND ((counts.location) Is Not Null)) 
         GROUP BY locn_hdr.dsp_locn)  AS foo;
@@ -57,7 +57,7 @@ const handleGetEmptyNotCounted = (req, res) => {
     locn_hdr 
     LEFT JOIN empty_active_locations 
     ON locn_hdr.dsp_locn = empty_active_locations.display_location 
-    LEFT JOIN counts ON locn_hdr.dsp_locn= counts.location
+    LEFT JOIN counts ON REGEXP_REPLACE(locn_hdr.dsp_locn,'[^0-9a-zA-Z]+','','g') = counts.location
     WHERE counts.location Is Null;
 `)
 .then(results => res.status(200).send(results.rows[0].empty_locations_uncounted))
@@ -85,17 +85,16 @@ const handleGetCountVariances = (req, res) => {
 const handleGetTotalExpectedQty = (req, res) => {
     knex_db.raw(`
     SELECT DISTINCT(SUM(counts.expected_qty)) AS "SumOfExpectedQTY"
-    FROM counts
-    WHERE location like '%SH%';
+    FROM counts;
 `)
 .then(results => res.status(200).send(results.rows[0].SumOfExpectedQTY))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
-const handleGetNeTotalVariance = (req, res) => {
+const handleGetNetTotalVariance = (req, res) => {
     knex_db.raw(`
     SELECT DISTINCT Sum(counts.variance_qty) AS "SumOfVarianceQTY"
-    FROM counts WHERE counts.location like '%SH%'; 
+    FROM counts; 
 `)
 .then(results => res.status(200).send(results.rows[0].SumOfVarianceQTY))
 .catch(error => res.status(400).send('Something went wrong.'));
@@ -104,8 +103,7 @@ const handleGetNeTotalVariance = (req, res) => {
 const handleGetAbsTotalVariance = (req, res) => {
     knex_db.raw(`
     SELECT DISTINCT Sum(Abs(counts.variance_qty)) AS "SumOfVarianceQTY"
-    FROM counts
-    WHERE counts.location Like '%SH%';
+    FROM counts;
 `)
 .then(results => res.status(200).send(results.rows[0].SumOfVarianceQTY))
 .catch(error => res.status(400).send('Something went wrong.'));
@@ -386,7 +384,7 @@ module.exports = {
  handleGetUniqueLocationsCounted,
  handleGetEmptyCounted,
  handleGetEmptyNotCounted,
- handleGetNeTotalVariance,
+ handleGetNetTotalVariance,
  handleGetNotPutawayZero,
  handleGetNotPutawayOne,
  handleGetNotPutawayTwo,

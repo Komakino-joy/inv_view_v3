@@ -10,8 +10,15 @@ import {
     FSC_countData
 } from './countdetailpage/countdetailpage.reducers';
 import modalState from './modal/modal.reducer';
-import { CHG_progressData } from './progress.page/progress.page.reducers';
-import fileUploadReducer from './file-upload/file-upload.reducer';
+import { 
+    CHG_progressData,
+    FSC_progressData
+ } from './progress.page/progress.page.reducers';
+import {
+    CHG_fileUploadReducer,
+    FSC_fileUploadReducer
+} from './file-upload/file-upload.reducer';
+
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from "redux-persist";
 
@@ -27,8 +34,9 @@ const rootReducer = combineReducers({
     FSC_countData,
     modalState,
     CHG_progressData,
-    // FSC_progressData,
-    fileUploadReducer,
+    FSC_progressData,
+    CHG_fileUploadReducer,
+    FSC_fileUploadReducer
 });
 
 

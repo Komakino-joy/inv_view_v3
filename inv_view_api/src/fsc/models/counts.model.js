@@ -16,22 +16,22 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       expected_qty: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },      
       expected_cost: {
-        type: Sequelize.STRING
+        type: Sequelize.DOUBLE
       },
       counted_qty: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       counted_cost: {
-        type: Sequelize.STRING
+        type: Sequelize.DOUBLE
       },
       variance_qty: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },      
       variance_cost: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DOUBLE
       },
       counted_dttm: {
         type: Sequelize.STRING

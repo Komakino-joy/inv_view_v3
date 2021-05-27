@@ -14,7 +14,7 @@ const Damages = ({ headerColor, damages }) => {
                 <label>Total Damages: </label>
             </div>
             <div className='breakdown-qty'>
-                <label>{damages ? damages : null}</label>
+                <label>{damages ? damages : 0}</label>
             </div>
         </div>
     </div>

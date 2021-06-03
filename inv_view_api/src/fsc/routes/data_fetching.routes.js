@@ -64,6 +64,7 @@ fscDataRouter.get("/count-variances", progressView.handleGetCountVariances);
 fscDataRouter.get("/total-variance-sum", progressView.handleGetNetTotalVariance);
 fscDataRouter.get("/absolute-total-variance-sum", progressView.handleGetAbsTotalVariance);
 fscDataRouter.get("/total-expected-qty-sum", progressView.handleGetTotalExpectedQty);
+fscDataRouter.get("/total-abs-expected-qty-sum", progressView.handleGetAbsTotalExpectedQty);
 fscDataRouter.get("/damages", progressView.handleGetDamages);
 fscDataRouter.get("/pr", progressView.handleGetProblemResolve);
 fscDataRouter.get("/not-putaway-0-day-count", progressView.handleGetNotPutawayZero);

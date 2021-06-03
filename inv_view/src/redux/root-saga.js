@@ -14,4 +14,4 @@ export default function* rootSaga() {
             call(fileUploadSagas),
         ]
     );
-}
+};

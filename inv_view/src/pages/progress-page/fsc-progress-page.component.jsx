@@ -17,7 +17,9 @@ import {
   FSC_requestEmptyLocationsCounted,
   FSC_requestEmptyLocationsUncounted,
   FSC_requestExpectedQty,
+  FSC_requestAbsExpectedQty,
   FSC_requestVarianceQty,
+  FSC_requestAbsVarianceQty,
   FSC_requestUniqueLocs,
   FSC_requestLocsWithVarianceCount,
   FSC_requestLatestCountData,
@@ -55,7 +57,9 @@ function ProgressPage({ history }) {
   const emptyLocsUncounted = useSelector(state => state.FSC_progressData.emptyLocUncounted);
   const locTotal  = occupiedLocsCounted + occupiedLocsUncounted + emptyLocsCounted + emptyLocsUncounted;
   const netExpected = useSelector(state => state.FSC_progressData.expectedQty);
+  const absExpected = useSelector(state => state.FSC_progressData.absExpectedQty);
   const netVariance = useSelector(state => state.FSC_progressData.varianceQty);
+  const absVariance = useSelector(state => state.FSC_progressData.absVarianceQty);
   const locsVisited = useSelector(state => state.FSC_progressData.uniqueLocsCounted);
   const totalVariances = useSelector(state => state.FSC_progressData.locsWithVarianceCount);
   const latestCountData = useSelector(state => state.FSC_progressData.latestCountData);
@@ -90,7 +94,9 @@ function ProgressPage({ history }) {
           dispatch(FSC_requestEmptyLocationsCounted());
           dispatch(FSC_requestEmptyLocationsUncounted());
           dispatch(FSC_requestExpectedQty());
+          dispatch(FSC_requestAbsExpectedQty());
           dispatch(FSC_requestVarianceQty());
+          dispatch(FSC_requestAbsVarianceQty());
           dispatch(FSC_requestOccupiedLocationsCounted());
           dispatch(FSC_requestEmptyLocationsCounted());
           dispatch(FSC_requestUniqueLocs());
@@ -149,6 +155,8 @@ function ProgressPage({ history }) {
             headerColor={headerColor}
             netExpected={netExpected}
             netVariance={netVariance}
+            absExpected={absExpected}
+            absVariance={absVariance}
          />
         </div>
 

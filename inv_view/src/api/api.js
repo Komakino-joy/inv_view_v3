@@ -151,9 +151,29 @@ export const httpFetchTotalExpectedQty = async(url) => {
     };
 };
 
+export const httpFetchAbsTotalExpectedQty = async(url) => {
+    try {
+        const response = await fetch(`${url}/data/total-abs-expected-qty-sum`);
+        const sum = await response.json();
+        return sum
+    } catch (error) {
+        return error;;
+    };
+};
+
 export const httpFetchTotalVarianceQty = async(url) => {
     try {
         const response = await fetch(`${url}/data/total-variance-sum`);
+        const sum = await response.json();
+        return sum
+    } catch (error) {
+        return error;;
+    };
+};
+
+export const httpFetchAbsTotalVarianceQty = async(url) => {
+    try {
+        const response = await fetch(`${url}/data/absolute-total-variance-sum`);
         const sum = await response.json();
         return sum
     } catch (error) {

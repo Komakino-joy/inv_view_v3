@@ -64,6 +64,7 @@ chgDataRouter.get("/count-variances", progressView.handleGetCountVariances);
 chgDataRouter.get("/total-variance-sum", progressView.handleGetNeTotalVariance);
 chgDataRouter.get("/absolute-total-variance-sum", progressView.handleGetAbsTotalVariance);
 chgDataRouter.get("/total-expected-qty-sum", progressView.handleGetTotalExpectedQty);
+chgDataRouter.get("/total-abs-expected-qty-sum", progressView.handleGetAbsTotalExpectedQty);
 chgDataRouter.get("/damages", progressView.handleGetDamages);
 chgDataRouter.get("/pr", progressView.handleGetProblemResolve);
 chgDataRouter.get("/not-putaway-0-day-count", progressView.handleGetNotPutawayZero);

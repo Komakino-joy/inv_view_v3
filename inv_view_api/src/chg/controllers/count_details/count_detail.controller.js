@@ -1,8 +1,7 @@
-const sequelize = require('../../models/index');
-const knex_db = require('../../models/knex.db');
+const knex_db = require('../../config/knex.db');
 
 const handleGetCountsByDay = (req, res) => {
-    sequelize.sequelize.query(`
+    knex_db.raw(`
     select 
     counted_dttm::date as counted_date_time, 
     count("id") as total_counts_performed, 
@@ -12,13 +11,13 @@ const handleGetCountsByDay = (req, res) => {
     sum(variance_qty) as total_variance_qty 
     from counts group by counted_dttm::date order by "counted_date_time";
 `)
-.then(results => res.status(200).send(results[1].rows))
+.then(results => res.status(200).send(results.rows))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 
 const handleGetCountsByUser = (req, res) => {
-        sequelize.sequelize.query(`
+        knex_db.raw(`
             SELECT 
                 counted_by AS username, 
                 COUNT((id)),
@@ -28,7 +27,7 @@ const handleGetCountsByUser = (req, res) => {
             GROUP BY counted_by 
             ORDER BY count desc;
         `)
-        .then(results => res.status(200).send(results[1].rows))
+        .then(results => res.status(200).send(results.rows))
         .catch(error => res.status(400).send('Something went wrong.'));
     };
   

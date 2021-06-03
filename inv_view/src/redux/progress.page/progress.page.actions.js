@@ -70,6 +70,21 @@ export const CHG_expectedQtyFailure = (error) => ({
     payload: error, 
 });
 
+
+export const CHG_requestAbsExpectedQty = () => ({
+    type: ProgressPageActionTypes.CHG_ABS_EXPECTED_QTY_START,
+});
+export const CHG_receiveAbsExpectedQty = (locations) => ({
+    type: ProgressPageActionTypes.CHG_ABS_EXPECTED_QTY_SUCCESS, 
+    payload: locations, 
+});
+
+export const CHG_absExpectedQtyFailure = (error) => ({
+    type: ProgressPageActionTypes.CHG_ABS_EXPECTED_QTY_FAILURE, 
+    payload: error, 
+});
+
+
 export const CHG_requestVarianceQty = () => ({
     type: ProgressPageActionTypes.CHG_VARIANCE_QTY_START,
 });
@@ -82,6 +97,21 @@ export const CHG_varianceQtyFailure = (error) => ({
     type: ProgressPageActionTypes.CHG_VARIANCE_QTY_FAILURE, 
     payload: error, 
 });
+
+
+export const CHG_requestAbsVarianceQty = () => ({
+    type: ProgressPageActionTypes.CHG_ABS_VARIANCE_QTY_START,
+});
+export const CHG_receiveAbsVarianceQty = (locations) => ({
+    type: ProgressPageActionTypes.CHG_ABS_VARIANCE_QTY_SUCCESS, 
+    payload: locations, 
+});
+
+export const CHG_absVarianceQtyFailure = (error) => ({
+    type: ProgressPageActionTypes.CHG_ABS_VARIANCE_QTY_FAILURE, 
+    payload: error, 
+});
+
 
 export const CHG_requestUniqueLocs = () => ({
     type: ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_START,
@@ -494,6 +524,21 @@ export const FSC_expectedQtyFailure = (error) => ({
     payload: error, 
 });
 
+
+export const FSC_requestAbsExpectedQty = () => ({
+    type: ProgressPageActionTypes.FSC_ABS_EXPECTED_QTY_START,
+});
+export const FSC_receiveAbsExpectedQty = (locations) => ({
+    type: ProgressPageActionTypes.FSC_ABS_EXPECTED_QTY_SUCCESS, 
+    payload: locations, 
+});
+
+export const FSC_absExpectedQtyFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_ABS_EXPECTED_QTY_FAILURE, 
+    payload: error, 
+});
+
+
 export const FSC_requestVarianceQty = () => ({
     type: ProgressPageActionTypes.FSC_VARIANCE_QTY_START,
 });
@@ -506,6 +551,21 @@ export const FSC_varianceQtyFailure = (error) => ({
     type: ProgressPageActionTypes.FSC_VARIANCE_QTY_FAILURE, 
     payload: error, 
 });
+
+
+export const FSC_requestAbsVarianceQty = () => ({
+    type: ProgressPageActionTypes.FSC_ABS_VARIANCE_QTY_START,
+});
+export const FSC_receiveAbsVarianceQty = (locations) => ({
+    type: ProgressPageActionTypes.FSC_ABS_VARIANCE_QTY_SUCCESS, 
+    payload: locations, 
+});
+
+export const FSC_absVarianceQtyFailure = (error) => ({
+    type: ProgressPageActionTypes.FSC_ABS_VARIANCE_QTY_FAILURE, 
+    payload: error, 
+});
+
 
 export const FSC_requestUniqueLocs = () => ({
     type: ProgressPageActionTypes.FSC_UNIQUE_LOCS_COUNTED_START,

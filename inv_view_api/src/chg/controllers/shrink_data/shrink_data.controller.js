@@ -1,4 +1,4 @@
-const knex_db = require('../../models/knex.db');
+const knex_db = require('../../config/knex.db');
 
 const handleGetDailyShrink = (req, res) => {
     knex_db.raw(`

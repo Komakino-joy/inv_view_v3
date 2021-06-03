@@ -10,7 +10,9 @@ import {
     httpFetchEmptyLocsCounted,
     httpFetchEmptyLocsUncounted,
     httpFetchTotalExpectedQty,
+    httpFetchAbsTotalExpectedQty,
     httpFetchTotalVarianceQty,
+    httpFetchAbsTotalVarianceQty,
     httpFetchUniqueLocsCounted,
     httpFetchTotalCountsWithVariance,
     httpFetchPR,
@@ -31,8 +33,12 @@ import {
     CHG_emptyLocationsUncountedFailure,
     CHG_receiveExpectedQty,
     CHG_expectedQtyFailure,
+    CHG_receiveAbsExpectedQty,
+    CHG_absExpectedQtyFailure,
     CHG_receivevarianceQty,
     CHG_varianceQtyFailure,
+    CHG_receiveAbsVarianceQty,
+    CHG_absVarianceQtyFailure,
     CHG_receiveUniqueLocs,
     CHG_uniqueLocsFailure,
     CHG_receiveLocsWithVarianceCount,
@@ -91,8 +97,12 @@ import {
     FSC_emptyLocationsUncountedFailure,
     FSC_receiveExpectedQty,
     FSC_expectedQtyFailure,
+    FSC_receiveAbsExpectedQty,
+    FSC_absExpectedQtyFailure,
     FSC_receivevarianceQty,
     FSC_varianceQtyFailure,
+    FSC_receiveAbsVarianceQty,
+    FSC_absVarianceQtyFailure,
     FSC_receiveUniqueLocs,
     FSC_uniqueLocsFailure,
     FSC_receiveLocsWithVarianceCount,
@@ -188,6 +198,16 @@ function* CHG_getExpectedQty(){
     }
 };
 
+function* CHG_getAbsExpectedQty(){
+    try{
+        const sum = yield httpFetchAbsTotalExpectedQty(`${CHG_API_URL}`);
+        yield put(CHG_receiveAbsExpectedQty(sum));
+    } catch (error) {
+        yield put(CHG_absExpectedQtyFailure(error));
+    }
+};
+
+
 function* CHG_getVarianceQty(){
     try{
         const sum = yield httpFetchTotalVarianceQty(`${CHG_API_URL}`);
@@ -212,6 +232,15 @@ function* CHG_getTotalCountsWithVariance(){
         yield put(CHG_receiveLocsWithVarianceCount(locationsCount));
     } catch (error) {
         yield put(CHG_locsWithVarianceCountFailure(error));
+    }
+};
+
+function* CHG_getAbsVarianceQty(){
+    try{
+        const sum = yield httpFetchAbsTotalVarianceQty(`${CHG_API_URL}`);
+        yield put(CHG_receiveAbsVarianceQty(sum));
+    } catch (error) {
+        yield put(CHG_absVarianceQtyFailure(error));
     }
 };
 
@@ -463,12 +492,30 @@ function* FSC_getExpectedQty(){
     }
 };
 
+function* FSC_getAbsExpectedQty(){
+    try{
+        const sum = yield httpFetchAbsTotalExpectedQty(`${FSC_API_URL}`);
+        yield put(FSC_receiveAbsExpectedQty(sum));
+    } catch (error) {
+        yield put(FSC_absExpectedQtyFailure(error));
+    }
+};
+
 function* FSC_getVarianceQty(){
     try{
         const sum = yield httpFetchTotalVarianceQty(`${FSC_API_URL}`);
         yield put(FSC_receivevarianceQty(sum));
     } catch (error) {
         yield put(FSC_varianceQtyFailure(error));
+    }
+};
+
+function* FSC_getAbsVarianceQty(){
+    try{
+        const sum = yield httpFetchAbsTotalVarianceQty(`${FSC_API_URL}`);
+        yield put(FSC_receiveAbsVarianceQty(sum));
+    } catch (error) {
+        yield put(FSC_absVarianceQtyFailure(error));
     }
 };
 
@@ -693,35 +740,44 @@ function* FSC_getLatestCountData(){
     }
 };
 
-function* CHG_requestOccupiedLocsSaga(){
+function* CHG_getOccupiedLocsSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_OCCUPIED_LOCS_COUNTED_START, CHG_getOccupiedLocsCounted)
 };
 
-function* CHG_requestOccupiedLocsUncountedSaga(){
+function* CHG_getOccupiedLocsUncountedSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_OCCUPIED_LOCS_UNCOUNTED_START, CHG_getOccupiedLocsUncounted)
 };
 
-function* CHG_requestEmptyLocsCountedSaga(){
+function* CHG_getEmptyLocsCountedSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_EMPTY_LOCS_COUNTED_START, CHG_getEmptyLocsCounted)
 };
 
-function* CHG_requestEmptyLocsUncountedSaga(){
+function* CHG_getEmptyLocsUncountedSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_EMPTY_LOCS_UNCOUNTED_START, CHG_getEmptyLocsUncounted)
 };
 
-function* CHG_requestExpectedQtySaga(){
+function* CHG_getExpectedQtySaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_EXPECTED_QTY_START, CHG_getExpectedQty)
 };
 
-function* CHG_requestVarianceQtySaga(){
+function* CHG_getAbsExpectedQtySaga(){
+    yield takeLatest(ProgressPageActionTypes.CHG_ABS_EXPECTED_QTY_START, CHG_getAbsExpectedQty)
+};
+
+function* CHG_getVarianceQtySaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_VARIANCE_QTY_START, CHG_getVarianceQty)
 };
 
-function* CHG_requestUniqueLocsCountedSaga(){
+function* CHG_getAbsVarianceQtySaga(){
+    yield takeLatest(ProgressPageActionTypes.CHG_ABS_VARIANCE_QTY_START, CHG_getAbsVarianceQty)
+};
+
+
+function* CHG_getUniqueLocsCountedSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_START, CHG_getUniqueLocsCounted)
 };
 
-function* CHG_requestTotalCountsWithVarianceSaga(){
+function* CHG_getTotalCountsWithVarianceSaga(){
     yield takeLatest(ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_START, CHG_getTotalCountsWithVariance)
 };
 
@@ -813,35 +869,43 @@ function* CHG_getLatestCountDataSaga() {
     yield takeLatest(ProgressPageActionTypes.CHG_LATEST_COUNT_DATA_START, CHG_getLatestCountData)
 };
 
-function* FSC_requestOccupiedLocsSaga(){
+function* FSC_getOccupiedLocsSaga(){
     yield takeLatest(ProgressPageActionTypes.FSC_OCCUPIED_LOCS_COUNTED_START, FSC_getOccupiedLocsCounted)
 };
 
-function* FSC_requestOccupiedLocsUncountedSaga(){
+function* FSC_getOccupiedLocsUncountedSaga(){
     yield takeLatest(ProgressPageActionTypes.FSC_OCCUPIED_LOCS_UNCOUNTED_START, FSC_getOccupiedLocsUncounted)
 };
 
-function* FSC_requestEmptyLocsCountedSaga(){
+function* FSC_getEmptyLocsCountedSaga(){
     yield takeLatest(ProgressPageActionTypes.FSC_EMPTY_LOCS_COUNTED_START, FSC_getEmptyLocsCounted)
 };
 
-function* FSC_requestEmptyLocsUncountedSaga(){
+function* FSC_getEmptyLocsUncountedSaga(){
     yield takeLatest(ProgressPageActionTypes.FSC_EMPTY_LOCS_UNCOUNTED_START, FSC_getEmptyLocsUncounted)
 };
 
-function* FSC_requestExpectedQtySaga(){
+function* FSC_getExpectedQtySaga(){
     yield takeLatest(ProgressPageActionTypes.FSC_EXPECTED_QTY_START, FSC_getExpectedQty)
 };
 
-function* FSC_requestVarianceQtySaga(){
+function* FSC_getAbsExpectedQtySaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_ABS_EXPECTED_QTY_START, FSC_getAbsExpectedQty)
+};
+
+function* FSC_getVarianceQtySaga(){
     yield takeLatest(ProgressPageActionTypes.FSC_VARIANCE_QTY_START, FSC_getVarianceQty)
 };
 
-function* FSC_requestUniqueLocsCountedSaga(){
+function* FSC_getAbsVarianceQtySaga(){
+    yield takeLatest(ProgressPageActionTypes.FSC_ABS_VARIANCE_QTY_START, FSC_getAbsVarianceQty)
+};
+
+function* FSC_getUniqueLocsCountedSaga(){
     yield takeLatest(ProgressPageActionTypes.FSC_UNIQUE_LOCS_COUNTED_START, FSC_getUniqueLocsCounted)
 };
 
-function* FSC_requestTotalCountsWithVarianceSaga(){
+function* FSC_getTotalCountsWithVarianceSaga(){
     yield takeLatest(ProgressPageActionTypes.FSC_TOTAL_COUNTS_WITH_VARIANCE_START, FSC_getTotalCountsWithVariance)
 };
 
@@ -936,14 +1000,16 @@ function* FSC_getLatestCountDataSaga() {
 
 export function* progressPageSagas(){
     yield all([
-        call(CHG_requestOccupiedLocsSaga),
-        call(CHG_requestOccupiedLocsUncountedSaga),
-        call(CHG_requestEmptyLocsCountedSaga),
-        call(CHG_requestEmptyLocsUncountedSaga),
-        call(CHG_requestExpectedQtySaga),
-        call(CHG_requestVarianceQtySaga),
-        call(CHG_requestUniqueLocsCountedSaga),
-        call(CHG_requestTotalCountsWithVarianceSaga),
+        call(CHG_getOccupiedLocsSaga),
+        call(CHG_getOccupiedLocsUncountedSaga),
+        call(CHG_getEmptyLocsCountedSaga),
+        call(CHG_getEmptyLocsUncountedSaga),
+        call(CHG_getExpectedQtySaga),
+        call(CHG_getAbsExpectedQtySaga),
+        call(CHG_getVarianceQtySaga),
+        call(CHG_getAbsVarianceQtySaga),
+        call(CHG_getUniqueLocsCountedSaga),
+        call(CHG_getTotalCountsWithVarianceSaga),
         call(CHG_getPrSaga),
         call(CHG_getDmgSaga),
         call(CHG_getNotPutAway0DaySaga),
@@ -966,14 +1032,16 @@ export function* progressPageSagas(){
         call(CHG_getTransitionalOver7DaySaga),
         call(CHG_getTransitionalTotalSaga),
         call(CHG_getLatestCountDataSaga),
-        call(FSC_requestOccupiedLocsSaga),
-        call(FSC_requestOccupiedLocsUncountedSaga),
-        call(FSC_requestEmptyLocsCountedSaga),
-        call(FSC_requestEmptyLocsUncountedSaga),
-        call(FSC_requestExpectedQtySaga),
-        call(FSC_requestVarianceQtySaga),
-        call(FSC_requestUniqueLocsCountedSaga),
-        call(FSC_requestTotalCountsWithVarianceSaga),
+        call(FSC_getOccupiedLocsSaga),
+        call(FSC_getOccupiedLocsUncountedSaga),
+        call(FSC_getEmptyLocsCountedSaga),
+        call(FSC_getEmptyLocsUncountedSaga),
+        call(FSC_getExpectedQtySaga),
+        call(FSC_getAbsExpectedQtySaga),
+        call(FSC_getVarianceQtySaga),
+        call(FSC_getAbsVarianceQtySaga),
+        call(FSC_getUniqueLocsCountedSaga),
+        call(FSC_getTotalCountsWithVarianceSaga),
         call(FSC_getPrSaga),
         call(FSC_getDmgSaga),
         call(FSC_getNotPutAway0DaySaga),

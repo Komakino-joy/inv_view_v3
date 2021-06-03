@@ -6,7 +6,9 @@ const INITIAL_STATE = {
     emptyLocCounted: 0,
     emptyLocUncounted: 0,
     expectedQty: 0,
+    absExpectedQty: 0,
     varianceQty: 0,
+    absVarianceQty: 0,
     uniqueLocsCounted: 0,
     locsWithVarianceCount: 0,
     pr: 0,
@@ -71,12 +73,28 @@ export const CHG_progressData = (state = INITIAL_STATE, action) => {
                 error: null,
             };
 
+
+        case ProgressPageActionTypes.CHG_ABS_EXPECTED_QTY_SUCCESS:
+            return {
+                ...state, 
+                absExpectedQty : action.payload,
+                error: null,
+            };
+
         case ProgressPageActionTypes.CHG_VARIANCE_QTY_SUCCESS:
             return {
                 ...state, 
                 varianceQty : action.payload,
                 error: null,
             };
+
+        case ProgressPageActionTypes.CHG_ABS_VARIANCE_QTY_SUCCESS:
+            return {
+                ...state, 
+                absVarianceQty : action.payload,
+                error: null,
+            };
+    
 
         case ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_SUCCESS:
             return {
@@ -251,6 +269,7 @@ export const CHG_progressData = (state = INITIAL_STATE, action) => {
         case ProgressPageActionTypes.CHG_EMPTY_LOCS_COUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_EMPTY_LOCS_UNCOUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_EXPECTED_QTY_FAILURE:
+        case ProgressPageActionTypes.CHG_ABS_EXPECTED_QTY_FAILURE:
         case ProgressPageActionTypes.CHG_VARIANCE_QTY_FAILURE:
         case ProgressPageActionTypes.CHG_UNIQUE_LOCS_COUNTED_FAILURE:
         case ProgressPageActionTypes.CHG_TOTAL_COUNTS_WITH_VARIANCE_FAILURE:
@@ -320,10 +339,24 @@ export const FSC_progressData = (state = INITIAL_STATE, action) => {
                 error: null,
             };
 
+        case ProgressPageActionTypes.FSC_ABS_EXPECTED_QTY_SUCCESS:
+        return {
+            ...state, 
+            absExpectedQty : action.payload,
+            error: null,
+        };
+
         case ProgressPageActionTypes.FSC_VARIANCE_QTY_SUCCESS:
             return {
                 ...state, 
                 varianceQty : action.payload,
+                error: null,
+            };
+            
+        case ProgressPageActionTypes.FSC_ABS_VARIANCE_QTY_SUCCESS:
+            return {
+                ...state, 
+                absVarianceQty : action.payload,
                 error: null,
             };
 
@@ -500,7 +533,9 @@ export const FSC_progressData = (state = INITIAL_STATE, action) => {
         case ProgressPageActionTypes.FSC_EMPTY_LOCS_COUNTED_FAILURE:
         case ProgressPageActionTypes.FSC_EMPTY_LOCS_UNCOUNTED_FAILURE:
         case ProgressPageActionTypes.FSC_EXPECTED_QTY_FAILURE:
+        case ProgressPageActionTypes.FSC_ABS_EXPECTED_QTY_FAILURE:
         case ProgressPageActionTypes.FSC_VARIANCE_QTY_FAILURE:
+        case ProgressPageActionTypes.FSC_ABS_VARIANCE_QTY_FAILURE:
         case ProgressPageActionTypes.FSC_UNIQUE_LOCS_COUNTED_FAILURE:
         case ProgressPageActionTypes.FSC_TOTAL_COUNTS_WITH_VARIANCE_FAILURE:
         case ProgressPageActionTypes.FSC_PR_FAILURE:

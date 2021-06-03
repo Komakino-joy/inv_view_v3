@@ -1,7 +1,7 @@
-const sequelize = require('../../models/index');
+const db = require('../../config/knex.db');
 
 const handleGetDuplicateCounts = (req, res) => {
-  sequelize.sequelize.query(`
+  db.raw(`
       SELECT 
       COUNT(a.*)
         FROM(
@@ -21,39 +21,39 @@ const handleGetDuplicateCounts = (req, res) => {
             counts.counted_dttm
         HAVING (((Count(*))>1))) a; 
     `)
-.then(results => res.status(200).send(results[1].rows[0].count))
+.then(results => res.status(200).send(results.rows[0].count))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 
 const handleGetLastUpdate= (req, res) => {
-  sequelize.sequelize.query(`
+  db.raw(`
       SELECT last_updated_dttm
       FROM update_history
       WHERE type = 'count';
     `)
-.then(results => res.status(200).send(results[1].rows[0].last_updated_dttm))
+.then(results => res.status(200).send(results.rows[0].last_updated_dttm))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleGetLatestCount= (req, res) => {
-  sequelize.sequelize.query(`
+  db.raw(`
     SELECT MAX (counted_dttm) FROM counts;
     `)
-.then(results => res.status(200).send(results[1].rows[0].max))
+.then(results => res.status(200).send(results.rows[0].max))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handlePostLastUpdate= (req, res) => {
-  sequelize.sequelize.query(`
+  db.raw(`
       UPDATE update_history SET last_updated_dttm = NOW() WHERE type='count';
     `)
-.then(results => res.status(200).send(results[1].command))
+.then(results => res.status(200).send(results.command))
 .catch(error => res.status(400).send('Something went wrong.'));
 };
 
 const handleDeleteDuplicates= (req, res) => {
-  sequelize.sequelize.query(`
+  db.raw(`
     DELETE 
       FROM counts
       WHERE "id" 
@@ -67,7 +67,7 @@ const handleDeleteDuplicates= (req, res) => {
       counts.counted_by,
       counts.counted_dttm); 
     `)
-.then(results => res.status(200).send(results[1].command))
+.then(results => res.status(200).send(results.command))
 .catch(error => res.status(400).send(error));
 };
 

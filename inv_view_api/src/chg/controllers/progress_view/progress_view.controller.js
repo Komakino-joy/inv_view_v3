@@ -1,5 +1,5 @@
 
-const knex_db = require('../../models/knex.db');
+const knex_db = require('../../config/knex.db');
 
 const handleGetOccupiedCounted = (req, res) => {
     knex_db.raw(`
@@ -87,6 +87,15 @@ const handleGetTotalExpectedQty = (req, res) => {
     SELECT DISTINCT(SUM(counts.expected_qty)) AS "SumOfExpectedQTY"
     FROM counts
     WHERE location like '%SH%';
+`)
+.then(results => res.status(200).send(results.rows[0].SumOfExpectedQTY))
+.catch(error => res.status(400).send('Something went wrong.'));
+};
+
+const handleGetAbsTotalExpectedQty = (req, res) => {
+    knex_db.raw(`
+	SELECT DISTINCT(SUM(ABS(counts.expected_qty))) AS "SumOfExpectedQTY"
+    FROM counts;
 `)
 .then(results => res.status(200).send(results.rows[0].SumOfExpectedQTY))
 .catch(error => res.status(400).send('Something went wrong.'));
@@ -408,6 +417,7 @@ module.exports = {
  handleGetDamages,
  handleGetProblemResolve,
  handleGetNotPutawayTotal,
+ handleGetAbsTotalExpectedQty,
  handleGetTotalExpectedQty,
  handleGetTransitionalTotal,
  handleGetLatestCountData

@@ -5,8 +5,17 @@ import './count-qty-overview.styles.css';
 
 const CountQtyOverview = ({ headerColor, ...props }) => {
     const netQtyCounted = props.netExpected + props.netVariance;
-    const netAccuracy =  ((1-(Math.abs(props.netVariance) / props.netExpected)) * 100).toFixed(2);
-    const absAccuracy =  ((1-(Math.abs(props.netVariance) / Math.abs(props.netExpected))) * 100).toFixed(2);
+
+    const absQtyCounted = props.absExpected + props.absVariance;
+
+    const netAccuracy =  props.netExpected > netQtyCounted
+                         ? ((1 - (props.netExpected - netQtyCounted) / props.netExpected) * 100).toFixed(2)
+                         : ((1 - (netQtyCounted - props.netExpected) / props.netExpected) * 100).toFixed(2);
+
+    const absAccuracy =  props.absExpected > absQtyCounted
+                         ? ((1 - (props.absExpected - absQtyCounted) / props.absExpected) * 100).toFixed(2)
+                         : ((1 - (absQtyCounted - props.absExpected) / props.absExpected) * 100).toFixed(2);
+
     const goal = 99.50;
    
         return (
@@ -30,9 +39,9 @@ const CountQtyOverview = ({ headerColor, ...props }) => {
                         </div>
                         <div className='breakdown-qty'>
                             <p>Absolute</p>
-                            <label>{Math.abs(props.netExpected)}</label>
-                            <label>{Math.abs(props.netVariance)}</label>
-                            <label>{netQtyCounted}</label>
+                            <label>{props.absExpected}</label>
+                            <label>{props.absVariance}</label>
+                            <label>{absQtyCounted}</label>
                         </div>
                         </>
                         ):(

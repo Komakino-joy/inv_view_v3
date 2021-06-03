@@ -17,7 +17,9 @@ import {
   CHG_requestEmptyLocationsCounted,
   CHG_requestEmptyLocationsUncounted,
   CHG_requestExpectedQty,
+  CHG_requestAbsExpectedQty,
   CHG_requestVarianceQty,
+  CHG_requestAbsVarianceQty,
   CHG_requestUniqueLocs,
   CHG_requestLocsWithVarianceCount,
   CHG_requestLatestCountData,
@@ -55,7 +57,9 @@ function ProgressPage({ history }) {
   const emptyLocsUncounted = useSelector(state => state.CHG_progressData.emptyLocUncounted);
   const locTotal  = occupiedLocsCounted + occupiedLocsUncounted + emptyLocsCounted + emptyLocsUncounted;
   const netExpected = useSelector(state => state.CHG_progressData.expectedQty);
+  const absExpected = useSelector(state => state.CHG_progressData.absExpectedQty);
   const netVariance = useSelector(state => state.CHG_progressData.varianceQty);
+  const absVariance = useSelector(state => state.CHG_progressData.absVarianceQty);
   const locsVisited = useSelector(state => state.CHG_progressData.uniqueLocsCounted);
   const totalVariances = useSelector(state => state.CHG_progressData.locsWithVarianceCount);
   const latestCountData = useSelector(state => state.CHG_progressData.latestCountData);
@@ -90,7 +94,9 @@ function ProgressPage({ history }) {
           dispatch(CHG_requestEmptyLocationsCounted());
           dispatch(CHG_requestEmptyLocationsUncounted());
           dispatch(CHG_requestExpectedQty());
+          dispatch(CHG_requestAbsExpectedQty());
           dispatch(CHG_requestVarianceQty());
+          dispatch(CHG_requestAbsVarianceQty());
           dispatch(CHG_requestOccupiedLocationsCounted());
           dispatch(CHG_requestEmptyLocationsCounted());
           dispatch(CHG_requestUniqueLocs());
@@ -147,7 +153,9 @@ function ProgressPage({ history }) {
          <CountQtyOverview 
             headerColor={headerColor}
             netExpected={netExpected}
+            absExpected={absExpected}
             netVariance={netVariance}
+            absVariance={absVariance}
          />
         </div> 
 

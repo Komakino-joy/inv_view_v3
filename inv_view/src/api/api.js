@@ -1,8 +1,8 @@
 import axios from 'axios';
 const source = axios.CancelToken.source();
 
-export const CHG_API_URL = 'http://localhost:5051/chg';
-export const FSC_API_URL = 'http://localhost:5050/fsc';
+export const CHG_API_URL = '/chg';
+export const FSC_API_URL = '/fsc';
 
 
 export const httpFileUpload = async(baseUrl, apiRoute, file) => {
@@ -251,4 +251,5 @@ export const httpLatestCountData = async(url) => {
         return error;
     };
 };
+
 

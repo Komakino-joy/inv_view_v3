@@ -81,6 +81,7 @@ function ProgressPage({ history }) {
   const transitionalSixDay = useSelector(state => state.CHG_progressData.transitional6);
   const transitionalSevenDay = useSelector(state => state.CHG_progressData.transitional7);
   const transitionalOverSevenDay = useSelector(state => state.CHG_progressData.transitionalOver7);
+  const transitionalTotal = useSelector(state => state.CHG_progressData.transitionalTotal);
   const problemResolve = useSelector(state => state.CHG_progressData.pr)
   const damages = useSelector(state => state.CHG_progressData.damages.damage);
   const headerColor = '#472f91';
@@ -208,6 +209,7 @@ function ProgressPage({ history }) {
             sixDay = {transitionalSixDay}
             sevenDay = {transitionalSevenDay}
             overSevenDay = {transitionalOverSevenDay} 
+            transitionalTotal = {transitionalTotal}
             />
         </div> 
 
@@ -217,13 +219,14 @@ function ProgressPage({ history }) {
             problemResolve={problemResolve}
             />
         </div> 
-
+`       
         <div className='damage' >
           <Damages 
             headerColor={headerColor}
             damages={damages} 
             />
-        </div> 
+        </div>
+
     </div>
     </div>
   );

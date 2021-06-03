@@ -81,6 +81,7 @@ function ProgressPage({ history }) {
   const transitionalSixDay = useSelector(state => state.FSC_progressData.transitional6);
   const transitionalSevenDay = useSelector(state => state.FSC_progressData.transitional7);
   const transitionalOverSevenDay = useSelector(state => state.FSC_progressData.transitionalOver7);
+  const transitionalTotal = useSelector(state => state.FSC_progressData.transitionalTotal);
   const problemResolve = useSelector(state => state.FSC_progressData.pr)
   const damages = useSelector(state => state.FSC_progressData.damages.damage);
   const headerColor = 'rgb(49, 49, 49)';
@@ -209,6 +210,7 @@ function ProgressPage({ history }) {
             sixDay = {transitionalSixDay}
             sevenDay = {transitionalSevenDay}
             overSevenDay = {transitionalOverSevenDay} 
+            transitionalTotal = {transitionalTotal}
             />
         </div>
 

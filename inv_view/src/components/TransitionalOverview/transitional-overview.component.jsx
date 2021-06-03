@@ -23,6 +23,7 @@ const TransitionalOverview = ({ headerColor, ...props }) => {
                 <label className='txt-label'>7 Days old: </label>
                 <label className='txt-label'>Over 7 Days old: </label>
             </div>
+            
             <div className='breakdown-qty'>
                 <p>SKU Count</p>
                 <label>{props.currentDay ? props.currentDay[0].countOfArticle : 0}</label>
@@ -53,10 +54,10 @@ const TransitionalOverview = ({ headerColor, ...props }) => {
                 <label className='txt-label'>Total: </label>
             </div>
             <div className='totals-qty'>
-                <label className='total'>{props.total ? props.total[0].countOfArticle : 0}</label>
+                <label className='total'>{props.transitionalTotal ? props.transitionalTotal[0].countOfArticle : 0}</label>
             </div>
             <div className='totals-qty'>
-                <label className='total'>{props.total ? props.total[0].onHandQty : 0}</label>
+                <label className='total'>{props.transitionalTotal ? props.transitionalTotal[0].onHandQty : 0}</label>
             </div>
         </div>
 

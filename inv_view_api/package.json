@@ -5,6 +5,7 @@
   "scripts": {
     "chg-server": "nodemon --max-old-space-size=5096 src/chg/chg-server.js",
     "fsc-server": "nodemon src/fsc/fsc-server.js",
+    "cluster": "pm2 start src/server.js -i 4",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

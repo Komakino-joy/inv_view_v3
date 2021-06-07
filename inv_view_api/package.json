@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Breakdowns and reports of local inventory",
   "scripts": {
-    "chg-server": "nodemon --max-old-space-size=5096 src/chg/chg-server.js",
-    "fsc-server": "nodemon src/fsc/fsc-server.js",
+    "dev-server": "nodemon --max-old-space-size=5096 src/chg/chg-server.js",
     "cluster": "pm2 start src/server.js -i 4",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

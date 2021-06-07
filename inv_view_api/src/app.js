@@ -15,7 +15,9 @@ app.use(helmet());
 //preprocessor
 app.use(express.json({ limit: '500mb' }));
 app.use(express.urlencoded({ limit: '500mb', extended: true }));
-app.use(express.static(path.join(__dirname, '..', 'public', 'build')));
+
+app.use(express.static(path.join(__dirname, '..', '..', 'inv_view', 'build')));
+
 
 app.use('/chg/data', chgDataRouter);
 app.use('/chg/excel', chgFileRouter);
@@ -24,7 +26,7 @@ app.use('/fsc/data', fscDataRouter);
 app.use('/fsc/excel', fscFileRouter);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..' , 'public', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', '..', 'inv_view', 'build', 'index.html'));
 });
 
 module.exports = app;

@@ -17,7 +17,7 @@ import { FSC_fileUploadStart } from '../../redux/file-upload/file-upload.actions
 
 const ReportUploadPage = ({history}) => {
     
-    const seenDailyEntryReport = useSelector(state => state.modalState.seenDailyEntry);
+    const seenDailyEntryReport = useSelector(state => state.FSC_modalState.seenDailyEntry);
 
     return(
         <div>

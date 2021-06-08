@@ -1,6 +1,7 @@
 const sequelize = require('../../../models/fsc_models/index');
 
 const handleGetDailyOnHand= (req, res) => {
+    
   sequelize.sequelize.query(`
         select * from on_hand_inventory_by_day order by date_recorded;
     `)

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import { toggleDailyEntry } from '../../redux/modal/modal.actions';
+import { FSC_toggleDailyEntry } from '../../redux/modal/modal.actions';
 
 import axios from 'axios';
 
@@ -12,7 +12,7 @@ import {DailyEntryHeader, DailyEntryContainer, AddRecord, Article,ViewAll,
     } from './daily-entry.styles';
 import "react-datepicker/dist/react-datepicker.css";
 
-const FscDailyEntry = ({toggleDailyEntry}) => {
+const FscDailyEntry = ({FSC_toggleDailyEntry}) => {
     
     const [selectedDate, setSelectedDate] = useState(null);
     const [onHand, setOnHand] = useState('');
@@ -76,7 +76,7 @@ const FscDailyEntry = ({toggleDailyEntry}) => {
         <>
         <DailyEntryHeader>Daily Entry</DailyEntryHeader>
             <DailyEntryContainer>
-            <ViewAll onClick={toggleDailyEntry} >View All Entries</ViewAll>
+            <ViewAll onClick={FSC_toggleDailyEntry} >View All Entries</ViewAll>
             <Article>
                 <div action="sign-up_submit" method="get" acceptCharset="utf-8">
                   <FieldSet>
@@ -113,11 +113,11 @@ const FscDailyEntry = ({toggleDailyEntry}) => {
 };
 
 const mapStateToProps = (state) => ({
-    seenDailyEntryReport : state.modalState.seenDailyEntry
+    seenDailyEntryReport : state.FSC_modalState.seenDailyEntry
 });
 
 const mapDispatchToProps = dispatch => ({
-    toggleDailyEntry  : () => dispatch(toggleDailyEntry()),
+    FSC_toggleDailyEntry  : () => dispatch(FSC_toggleDailyEntry()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FscDailyEntry);

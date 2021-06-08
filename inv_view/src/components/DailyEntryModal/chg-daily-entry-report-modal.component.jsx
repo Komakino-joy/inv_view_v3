@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import { toggleDailyEntry } from '../../redux/modal/modal.actions';
+import { CHG_toggleDailyEntry } from '../../redux/modal/modal.actions';
 
 import axios from 'axios';
 
@@ -12,7 +12,7 @@ import './tabulator.table.css';
 
 import { Header, ModalMain, ModalContent, CloseButton } from './daily-entry-report-modal.styles';
 
-const DailyEntryReportModal = ({toggleDailyEntry}) => {
+const DailyEntryReportModal = ({CHG_toggleDailyEntry}) => {
 
     const [data, setData] = useState([]);
 
@@ -25,12 +25,12 @@ const DailyEntryReportModal = ({toggleDailyEntry}) => {
     const removeRow = {
         title: "Remove?",
         field: "remove",
-        align: "center",
+        hozAlign: "center",
         formatter: reactFormatter(
         <RemoveButton
             onSelect={(id) => {
             axios.delete(
-                `${CHG_API_URL}chg/data//delete-daily-on-hand`,
+                `${CHG_API_URL}/data/delete-daily-on-hand`,
                 {
                 data: {
                     id: id
@@ -44,7 +44,7 @@ const DailyEntryReportModal = ({toggleDailyEntry}) => {
 
     // eslint-disable-next-line
     useEffect(async() => {
-        const getData = await axios.get(`${CHG_API_URL}chg/data/daily-on-hand-by-day`)
+        const getData = await axios.get(`${CHG_API_URL}/data/daily-on-hand-by-day`)
         setData(getData.data)
     },[])
 
@@ -63,7 +63,7 @@ const DailyEntryReportModal = ({toggleDailyEntry}) => {
         <>
         <ModalMain>
             <ModalContent>
-            <CloseButton onClick={toggleDailyEntry}>CLOSE</CloseButton>
+            <CloseButton onClick={CHG_toggleDailyEntry}>CLOSE</CloseButton>
             <Header>Daily Entry Report</Header>
                 <ReactTabulator columns={columns} data={data}/>
             </ModalContent>
@@ -73,11 +73,11 @@ const DailyEntryReportModal = ({toggleDailyEntry}) => {
 } 
 
 const mapStateToProps = (state) => ({
-    seenDailyEntryReport : state.modalState.seenDailyEntry
+    seenDailyEntryReport : state.CHG_modalState.seenDailyEntry
 })
 
 const mapDispatchToProps = dispatch => ({
-    toggleDailyEntry  : () => dispatch(toggleDailyEntry()),
+    CHG_toggleDailyEntry  : () => dispatch(CHG_toggleDailyEntry()),
 });
 
 

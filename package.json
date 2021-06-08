@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "chegg-server": "nodemon inv_view_api/src/chg/chg-server",
     "server": "npm run cluster --prefix inv_view_api",
-    "fulfillment-server": "nodemon inv_view_api/src/fsc/fsc-server",
+    "client": "npm start --prefix inv_view",
     "deploy": "npm run build --prefix inv_view && npm run cluster --prefix inv_view_api",
-    "dev": "concurrently \"npm run chegg-server\" \"npm run fulfillment-server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",

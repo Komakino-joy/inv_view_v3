@@ -36,8 +36,8 @@ export const ModalMain = styled.div`
 export const ModalContent = styled.div`
     position: absolute;
     top: 5%;
-    height: 80%;
-    width: 50%;
+    height: 80vh;
+    width: 50vw;
     min-width: 646px;
     padding-bottom: 2em;
     background-color: white;

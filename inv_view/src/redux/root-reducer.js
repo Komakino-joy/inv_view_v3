@@ -9,7 +9,10 @@ import {
     CHG_countData,
     FSC_countData
 } from './countdetailpage/countdetailpage.reducers';
-import modalState from './modal/modal.reducer';
+import {
+    CHG_modalState,
+    FSC_modalState
+} from './modal/modal.reducer';
 import { 
     CHG_progressData,
     FSC_progressData
@@ -32,7 +35,8 @@ const rootReducer = combineReducers({
     FSC_shrinkData,
     CHG_countData,
     FSC_countData,
-    modalState,
+    CHG_modalState,
+    FSC_modalState,
     CHG_progressData,
     FSC_progressData,
     CHG_fileUploadReducer,

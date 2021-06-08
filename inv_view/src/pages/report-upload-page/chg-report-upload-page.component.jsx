@@ -18,7 +18,7 @@ import { CHG_fileUploadStart } from '../../redux/file-upload/file-upload.actions
 
 const ReportUploadPage = ({history}) => {
     
-    const seenDailyEntryReport = useSelector(state => state.modalState.seenDailyEntry);
+    const seenDailyEntryReport = useSelector(state => state.CHG_modalState.seenDailyEntry);
 
     return(
         <div>

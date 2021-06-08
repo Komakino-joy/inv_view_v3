@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import { toggleDailyEntry } from '../../redux/modal/modal.actions';
+import { FSC_toggleDailyEntry } from '../../redux/modal/modal.actions';
 
 import axios from 'axios';
 
@@ -12,7 +12,7 @@ import './tabulator.table.css';
 
 import { Header, ModalMain, ModalContent, CloseButton } from './daily-entry-report-modal.styles';
 
-const FscDailyEntryReportModal = ({toggleDailyEntry}) => {
+const FscDailyEntryReportModal = ({FSC_toggleDailyEntry}) => {
 
     const [data, setData] = useState([]);
 
@@ -25,12 +25,12 @@ const FscDailyEntryReportModal = ({toggleDailyEntry}) => {
     const removeRow = {
         title: "Remove?",
         field: "remove",
-        align: "center",
+        hozAlign: "center",
         formatter: reactFormatter(
         <RemoveButton
             onSelect={(id) => {
             axios.delete(
-                `${FSC_API_URL}fsc/data//delete-daily-on-hand`,
+                `${FSC_API_URL}/data/delete-daily-on-hand`,
                 {
                 data: {
                     id: id
@@ -44,7 +44,8 @@ const FscDailyEntryReportModal = ({toggleDailyEntry}) => {
 
     // eslint-disable-next-line
     useEffect(async() => {
-        const getData = await axios.get(`${FSC_API_URL}fsc/data/daily-on-hand-by-day`)
+        const getData = await axios.get(`${FSC_API_URL}/data/daily-on-hand-by-day`)
+        console.log(getData.data)
         setData(getData.data)
     },[])
 
@@ -63,7 +64,7 @@ const FscDailyEntryReportModal = ({toggleDailyEntry}) => {
         <>
         <ModalMain>
             <ModalContent>
-            <CloseButton onClick={toggleDailyEntry}>CLOSE</CloseButton>
+            <CloseButton onClick={FSC_toggleDailyEntry}>CLOSE</CloseButton>
             <Header>Daily Entry Report</Header>
                 <ReactTabulator columns={columns} data={data}/>
             </ModalContent>
@@ -73,11 +74,11 @@ const FscDailyEntryReportModal = ({toggleDailyEntry}) => {
 } 
 
 const mapStateToProps = (state) => ({
-    seenDailyEntryReport : state.modalState.seenDailyEntry
+    seenDailyEntryReport : state.FSC_modalState.seenDailyEntry
 })
 
 const mapDispatchToProps = dispatch => ({
-    toggleDailyEntry  : () => dispatch(toggleDailyEntry()),
+    FSC_toggleDailyEntry  : () => dispatch(FSC_toggleDailyEntry()),
 });
 
 

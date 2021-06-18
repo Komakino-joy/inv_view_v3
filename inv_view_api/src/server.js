@@ -1,7 +1,8 @@
 const http = require('http');
 const app = require('./app');
+const dotenv = require('../../vars.env')
 
-const PORT =  54863;
+const PORT = process.env.PORT || 54863;
 const server = http.createServer(app);
 
 global.__basedir = __dirname + "/..";

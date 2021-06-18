@@ -33,7 +33,7 @@ export const FulfillmentButton = styled.button`
     ${buttonStyles}
 `
 
-export const CheggButton = styled.button`
+export const DedicatedClientButton = styled.button`
     ${buttonStyles}
 `
 

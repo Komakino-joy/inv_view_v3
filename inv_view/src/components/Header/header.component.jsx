@@ -20,7 +20,7 @@ const Header = () => {
         <header className={businessUnit === '/fnt-chg' ? 'chg-page-header' : 'fsc-page-header'} >
              
             {
-                businessUnit === '/fnt-chg' ? 'Chegg Inventory View'
+                businessUnit === '/fnt-chg' ? 'DedicatedClient Inventory View'
                 : 'Fulfillment Inventory View'
             }
             <img 

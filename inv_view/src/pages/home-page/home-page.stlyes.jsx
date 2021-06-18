@@ -29,7 +29,7 @@ const buttonStyles = css`
     }
 `
 
-export const FulfillmentButton = styled.button`
+export const MultiClientButton = styled.button`
     ${buttonStyles}
 `
 

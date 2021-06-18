@@ -1,11 +1,10 @@
 import React from 'react';
 
-import fulfillmentIcon from '../../images/box.svg';
-import bookIcon from '../../images/book.svg';
+import boxIcon from '../../images/box.svg';
 
 import { 
     HomePageBody,
-    FulfillmentButton,
+    MultiClientButton,
     DedicatedClientButton,
     Image
  } from './home-page.stlyes';
@@ -13,8 +12,8 @@ import {
 const HomePage = ({ history }) => {
     return (
         <HomePageBody>
-            <FulfillmentButton onClick = {() => history.push('/fnt-fsc-progress')}> <Image src={fulfillmentIcon} alt="box" />Fulfillment</FulfillmentButton>
-            <DedicatedClientButton onClick = {() => history.push('/fnt-chg-progress')}><Image src={bookIcon} alt="box" />DedicatedClient</DedicatedClientButton>
+            <MultiClientButton onClick = {() => history.push('/fnt-fsc-progress')}> <Image src={boxIcon} alt="box" />Multi Client</MultiClientButton>
+            <DedicatedClientButton onClick = {() => history.push('/fnt-chg-progress')}><Image src={boxIcon} alt="box" />Dedicated Client</DedicatedClientButton>
         </HomePageBody>
     )
 };
